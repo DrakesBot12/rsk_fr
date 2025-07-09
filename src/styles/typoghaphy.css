@@ -1,0 +1,56 @@
+:root {
+    --font-family: 'Manrope', sans-serif;
+}
+
+html, body {
+    font-size: 16px;
+    font-family: var(--font-family);
+}
+
+h1 {
+    font: 700 2.625rem/122% var(--font-family);
+}
+
+h2 {
+    font: 700 2.125rem var(--font-family);
+}
+
+h3 {
+    font: 600 1.75rem var(--font-family);
+}
+
+h4 {
+    font: 500 1.5rem var(--font-family);
+}
+
+h5 {
+    font: 500 1.25rem var(--font-family);
+}
+
+h6 {
+    font: 500 1rem var(--font-family);
+}
+
+p, input {
+    font: 400 0.75rem var(--font-family);
+
+    &.big {
+        font: 400 0.875rem var(--font-family);
+    }
+
+    &.small {
+        font: 400 0.625rem var(--font-family);
+    }
+}
+
+a, button, span {
+    font: 600 0.75rem var(--font-family);
+
+    &.big {
+        font: 500 0.875rem var(--font-family);
+    }
+
+    &.small {
+        font: 600 0.625rem var(--font-family);
+    }
+}
