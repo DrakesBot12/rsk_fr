@@ -3,9 +3,9 @@ import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import TransitionWrapper from '@/components/layout/TransitionWrapper';
 
-import IndexPage from '@/components/features/profile/index';
-import SettingsPage from '@/components/features/profile/settings';
-import FolderPage from '@/components/features/profile/workfolder';
+import IndexPage from '@/components/pages/profile/index';
+import SettingsPage from '@/components/pages/profile/settings';
+import FolderPage from '@/components/pages/profile/workfolder';
 
 export default function ProfilePage() {
     const [ pageKey, setPageKey ] = useState("profile")

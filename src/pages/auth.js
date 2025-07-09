@@ -9,10 +9,10 @@ import Button from '@/components/ui/Button';
 import Switcher from '@/components/ui/Switcher';
 import Layout from '@/components/layout/Layout';
 
-import RegStage0 from '@/components/features/auth/reg/Stage0';
-import RegStage1 from '@/components/features/auth/reg/Stage1';
-import LoginStage0 from '@/components/features/auth/login/Stage0';
-import LoginStage1 from '@/components/features/auth/login/Stage1';
+import RegStage0 from '@/components/pages/auth/reg/Stage0';
+import RegStage1 from '@/components/pages/auth/reg/Stage1';
+import LoginStage0 from '@/components/pages/auth/login/Stage0';
+import LoginStage1 from '@/components/pages/auth/login/Stage1';
 
 import { Header } from '@/components/layout/Header';
 

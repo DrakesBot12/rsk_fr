@@ -3,10 +3,10 @@ import { useState } from 'react';
 import TransitionWrapper from '@/components/layout/TransitionWrapper';
 
 import Layout from '@/components/layout/Layout';
-import IndexPage from '@/components/features/tools';
-import TrainerPage from '@/components/features/tools/trainer';
-import HistoryPage from '@/components/features/tools/history';
-import SettingsPage from '@/components/features/tools/settings';
+import IndexPage from '@/components/pages/tools';
+import TrainerPage from '@/components/pages/tools/trainer';
+import HistoryPage from '@/components/pages/tools/history';
+import SettingsPage from '@/components/pages/tools/settings';
 
 export default function MayakOkoPage() {
     const [ pageKey, setPageKey ] = useState("mayakOko")

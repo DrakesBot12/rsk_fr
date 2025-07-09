@@ -3,7 +3,7 @@ import { getUserData } from '@/utils/auth';
 
 import { Header } from '@/components/layout/Header';
 import Button from '@/components/ui/Button';
-import Folder from '@/components/features/public/Folder';
+import Folder from '@/components/pages/public/Folder';
 
 import NotifyIcon from '@/assets/general/notify.svg'
 import SettsIcon from '@/assets/general/setts.svg'

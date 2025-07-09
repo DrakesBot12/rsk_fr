@@ -8,7 +8,7 @@ import CopyIcon from '@/assets/general/copy.svg';
 
 import Button from "@/components/ui/Button";
 import Switcher from '@/components/ui/Switcher';
-import Block from "@/components/features/public/Block";
+import Block from "@/components/pages/public/Block";
 
 export default function HistoryPage({ goTo }) {
     const [type, setType] = useState('text');

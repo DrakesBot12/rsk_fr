@@ -6,14 +6,14 @@ import Button from '@/components/ui/Button';
 import { getUserData } from '@/utils/auth';
 
 import { Header } from '@/components/layout/Header';
-import { Card } from '@/components/features/public/Card';
+import { Card } from '@/components/pages/public/Card';
 
 import Setts from '@/assets/general/setts.svg'
 import Notify from '@/assets/general/notify.svg'
 import LinkIcon from '@/assets/general/link.svg'
 
-import Block from '@/components/features/public/Block';
-import Folder from '@/components/features/public/Folder';
+import Block from '@/components/pages/public/Block';
+import Folder from '@/components/pages/public/Folder';
 
 export default function SettingsPage({ goTo }) {
     const [userData, setUserData] = useState(null);

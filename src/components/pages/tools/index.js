@@ -14,7 +14,7 @@ import RandomIcon from '@/assets/general/random.svg';
 import Input from '@/components/ui/Input';
 import Button from "@/components/ui/Button";
 import Switcher from '@/components/ui/Switcher';
-import Block from '@/components/features/public/Block';
+import Block from '@/components/pages/public/Block';
 
 export default function IndexPage({ goTo }) {
     const fieldsList = [
