@@ -1,7 +1,7 @@
 import Image from "next/image";
 import FolderIcon from '@/assets/general/folder.svg'
 
-export default function WorkFolder({ projects, works, exp, min, ...props }) {
+export default function Folder({ projects, works, exp, min, ...props }) {
     return (
         <a className={`workfolder-wrapper col-span-4 cursor-pointer group ${min ? 'aspect-video' : 'aspect-square'}`} {...props}>
             <div className="workfolder-back">
