@@ -56,8 +56,8 @@ export default function Switcher({
     const [tab, setTab] = useState('works')
 
     <Switcher value={tab} onChange={setTab}>
-        <a value="works">Дела</a>
-        <a value="projects">Проекты</a>
+        <span value="works">Дела</span>
+        <span value="projects">Проекты</span>
     </Switcher>
 */}
 
@@ -65,7 +65,7 @@ export default function Switcher({
     Uncontrolled-режим (работает без value/onChange)
 
     <Switcher>
-        <a value="works">Дела</a>
-        <a value="projects">Проекты</a>
+        <span value="works">Дела</span>
+        <span value="projects">Проекты</span>
     </Switcher>
 */}
