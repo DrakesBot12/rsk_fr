@@ -1,5 +1,7 @@
 import React, { Children, cloneElement } from 'react';
 
+export default 'TEST-DEFAULT';
+
 export function Switcher({ big, small, className = '', children, value, onChange }) {
     const classes = `switcher ${big ? 'big' : small ? 'small' : ''} ${className}`;
 

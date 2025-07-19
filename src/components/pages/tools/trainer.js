@@ -12,7 +12,7 @@ import RandomIcon from '@/assets/general/random.svg';
 
 import Input from '@/components/ui/Input';
 import Button from "@/components/ui/Button";
-import Switcher from '@/components/ui/Switcher';
+import { Switcher, Option } from '@/components/ui/Switcher';
 import Block from "@/components/other/Block";
 
 export default function TrainerPage({ goTo }) {
@@ -37,15 +37,15 @@ export default function TrainerPage({ goTo }) {
                         <div className="flex flex-col gap-[1.25rem]">
                             <div className="flex flex-col gap-[1rem]">
                                 <Switcher value={type} onChange={setType} className='!w-full'>
-                                    <span value="text">Текст</span>
-                                    <span value="audio">Аудио</span>
-                                    <span value="visual">Визуал</span>
-                                    <span value="interactive">Интерактив</span>
-                                    <span value="data">Данные</span>
+                                    <Option value="text">Текст</Option>
+                                    <Option value="audio">Аудио</Option>
+                                    <Option value="visual">Визуал</Option>
+                                    <Option value="interactive">Интерактив</Option>
+                                    <Option value="data">Данные</Option>
                                 </Switcher>
                                 <Switcher value={visualType} onChange={setVisualType} className={`!w-full ${type === 'visual' ? 'flex' : '!hidden'}`}>
-                                    <span value="visual-static">Статика</span>
-                                    <span value="visual-dynamic">Динамика</span>
+                                    <Option value="visual-static">Статика</Option>
+                                    <Option value="visual-dynamic">Динамика</Option>
                                 </Switcher>
                             </div>
                             <div className="flex flex-col gap-[0.5rem]">
@@ -113,12 +113,12 @@ export default function TrainerPage({ goTo }) {
                         </div>
                         <div className="flex gap-[0.5rem]">
                             <Switcher value={userType} onChange={setUserType} className="!w-full">
-                                <span value="student">Студент</span>
-                                <span value="teacher">Преподаватель</span>
+                                <Option value="student">Студент</Option>
+                                <Option value="teacher">Преподаватель</Option>
                             </Switcher>
                             <Switcher value={who} onChange={setWho} className="!w-full">
-                                <span value="i">Я</span>
-                                <span value="we">Мы</span>
+                                <Option value="i">Я</Option>
+                                <Option value="we">Мы</Option>
                             </Switcher>
                         </div>
                         <div className="flex flex-col gap-[0.75rem]">

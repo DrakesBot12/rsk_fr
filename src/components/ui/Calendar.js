@@ -1,5 +1,5 @@
-import Switcher from '@/components/ui/Switcher'
-import { useState } from 'react'
+import { Switcher, Option } from '@/components/ui/Switcher';
+import { useState } from 'react';
 
 export default function Calendar() {
     const [tab, setTab] = useState('works')
@@ -14,8 +14,8 @@ export default function Calendar() {
                     <h6>Календарь активности</h6>
                 </div>
                 <Switcher value={tab} onChange={setTab}>
-                    <a value="works">Дела</a>
-                    <a value="projects">Проекты</a>
+                    <Option value="works">Дела</Option>
+                    <Option value="projects">Проекты</Option>
                 </Switcher>
             </div>
             <section className="calendar">
