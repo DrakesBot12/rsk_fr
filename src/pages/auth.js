@@ -6,7 +6,7 @@ import { isAuthorized, saveUserData } from '@/utils/auth';
 import Notify from '@/assets/general/notify.svg';
 
 import Button from '@/components/ui/Button';
-import Switcher from '@/components/ui/Switcher';
+import { Switcher, Option } from '@/components/ui/Switcher';
 import Layout from '@/components/layout/Layout';
 
 import RegStage0 from '@/components/pages/auth/reg/Stage0';
@@ -114,8 +114,8 @@ export default function AuthPage() {
                         setStep(0);
                     }}
                 >
-                    <span tabIndex={0} role="button" value="login">Вход</span>
-                    <span tabIndex={1} role="button" value="register">Регистрация</span>
+                    <Option tabIndex={0} role="button" value="login">Вход</Option>
+                    <Option tabIndex={1} role="button" value="register">Регистрация</Option>
                 </Switcher>
 
                 <Button icon><Notify /></Button>
