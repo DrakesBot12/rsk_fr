@@ -1,8 +1,6 @@
 import React, { Children, cloneElement } from 'react';
 
-export default 'TEST-DEFAULT';
-
-export function Switcher({ big, small, className = '', children, value, onChange }) {
+export default function Switcher({ big, small, className = '', children, value, onChange }) {
     const classes = `switcher ${big ? 'big' : small ? 'small' : ''} ${className}`;
 
     const modifiedChildren = Children.map(children, child =>
