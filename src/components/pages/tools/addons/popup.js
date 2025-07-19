@@ -14,7 +14,7 @@ export default function Buffer({ onClose, onInsert, buffer, currentField }) {
                     <div className="flex flex-col gap-[1.5rem] items-center w-[80%]">
                         <div className="flex flex-col gap-[0.5rem] items-center">
                             <h3>Буфер</h3>
-                            <p className="text-(--color-gray-black)">Буфер пуст. Добавьте элементы с помощью кнопки "+" или откройте буфер для генерации шаблонов</p>
+                            <p className="text-(--color-gray-black)">{`Буфер пуст. Добавьте элементы с помощью кнопки "+" или откройте буфер для генерации шаблонов`}</p>
                         </div>
                         <Button inverted className="!w-[60%]" onClick={onClose}>Вернуться назад</Button>
                     </div>

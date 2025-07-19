@@ -46,7 +46,7 @@ export default function AuthPage() {
 
     useEffect(() => {
         if (isAuthorized()) router.push('/profile');
-      }, []);      
+      }, [router]);
 
     const getDirection = () => (authType === 'register' ? 1 : -1);
 
@@ -54,12 +54,11 @@ export default function AuthPage() {
         saveUserData(data);
         setStep(1);
     };
-      
 
     const handleNext = (data) => {
         handleSaveUserData(data);
     };
-      
+
     const handleSave = (extraData) => {
         saveUserData(extraData);
     };
