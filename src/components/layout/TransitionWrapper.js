@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
 export default function TransitionWrapper({ currentKey, children }) {
-    const [isAnimating, setIsAnimating] = useState(true);
+    const [isAnimating, setIsAnimating] = useState(false);
 
     const variants = {
         initial: () => ({
@@ -21,10 +21,7 @@ export default function TransitionWrapper({ currentKey, children }) {
     };
 
     return (
-            <AnimatePresence
-                mode="sync"
-                onExitComplete={() => setIsAnimating(false)}
-            >
+            <AnimatePresence mode="sync">
                 <motion.div
                     key={currentKey}
                     initial="initial"

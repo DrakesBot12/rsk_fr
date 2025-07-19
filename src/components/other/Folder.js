@@ -14,7 +14,7 @@ export default function Folder({ projects, works, exp, min, ...props }) {
                     <div className="folder-heading">
                         <h4>Рабочая папка</h4>
                         {min ? '' : (
-                            <span>Дела участника</span>
+                            <span className="link">Дела участника</span>
                         )}
                     </div>
                     <div className="folder-footer">
@@ -23,8 +23,8 @@ export default function Folder({ projects, works, exp, min, ...props }) {
                             <p className="big">проекта</p>
                         </div>
                         <div className={`folder-footer-right ${min ? '!text-(--color-gray-black)' : ''}`}>
-                            <span>{ works } дел</span>
-                            <span>{ exp } баллов</span>
+                            <span className="link">{ works } дел</span>
+                            <span className="link">{ exp } баллов</span>
                         </div>
                     </div>
                 </div>

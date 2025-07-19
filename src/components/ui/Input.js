@@ -1,4 +1,3 @@
-// components/Input.jsx
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 
@@ -175,8 +174,7 @@ export default function Input({
                         <div
                             className="dropdown"
                             style={{
-                                transition:
-                                    "opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1)",
+                                transition: "opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1)",
                                 opacity: showDropdown ? 1 : 0,
                                 transform: showDropdown ? "translateY(0)" : "translateY(-10px)",
                             }}

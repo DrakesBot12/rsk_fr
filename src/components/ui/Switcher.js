@@ -1,45 +1,16 @@
-import React, { Children, cloneElement, useState } from 'react';
+import React, { Children, cloneElement } from 'react';
 
-export default function Switcher({ 
-    big, 
-    small, 
-    className = '', 
-    children, 
-    value: controlledValue, 
-    onChange 
-}) {
-    // Если value не передан, используем внутренний state
-    const isControlled = controlledValue !== undefined;
-    const [uncontrolledValue, setUncontrolledValue] = useState(() => {
-        // По умолчанию берем value первого ребенка, если есть
-        const firstChild = Children.toArray(children)[0];
-        return firstChild?.props?.value || firstChild?.key || undefined;
-    });
-    const value = isControlled ? controlledValue : uncontrolledValue;
-
+export function Switcher({ big, small, className = '', children, value, onChange }) {
     const classes = `switcher ${big ? 'big' : small ? 'small' : ''} ${className}`;
 
-    const handleOptionClick = (optionValue) => {
-        if (!isControlled) {
-            setUncontrolledValue(optionValue);
-        }
-        if (onChange) {
-            onChange(optionValue);
-        }
-    };
-
-    const modifiedChildren = Children.map(children, (child) => {
-        // Проверяем, что child - элемент React
-        if (!React.isValidElement(child)) return child;
-
-        // Определяем значение опции
-        const optionValue = child.props.value || child.key;
-
-        return cloneElement(child, {
-            className: `option ${value === optionValue ? 'active' : ''}`,
-            onClick: () => handleOptionClick(optionValue)
-        });
-    });
+    const modifiedChildren = Children.map(children, child =>
+        React.isValidElement(child) ?
+        cloneElement(child, {
+            className: `${value === (child.props.value ?? child.key) ? 'active' : ''}`,
+            onClick: () => onChange?.(child.props.value ?? child.key)
+        })
+        : child
+    );
 
     return (
         <div className={classes}>
@@ -48,24 +19,24 @@ export default function Switcher({
     )
 }
 
-
+export function Option({ children, value, className = '', ...props }) {
+    return (
+        <span value={value} className={`link option ${className}`} {...props}>
+            {children}
+        </span>
+    );
+}
 
 {/*
-    Controlled-режим
+    Пример использования:
     
-    const [tab, setTab] = useState('works')
+    import { Switcher, Option } from '@/components/ui/Switcher';
+    
+    const [activeTab, setActiveTab] = useState('works')
 
-    <Switcher value={tab} onChange={setTab}>
-        <span value="works">Дела</span>
-        <span value="projects">Проекты</span>
-    </Switcher>
-*/}
-
-{/*
-    Uncontrolled-режим (работает без value/onChange)
-
-    <Switcher>
-        <span value="works">Дела</span>
-        <span value="projects">Проекты</span>
+    <Switcher value={activeTab} onChange={setActiveTab}>
+        <Option value="works">Работы</Option>
+        <Option value="projects">Проекты</Option>
+        <Option value="tasks">Задачи</Option>
     </Switcher>
 */}

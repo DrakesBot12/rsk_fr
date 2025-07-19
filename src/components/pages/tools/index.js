@@ -13,8 +13,8 @@ import RandomIcon from '@/assets/general/random.svg';
 
 import Input from '@/components/ui/Input';
 import Button from "@/components/ui/Button";
-import Switcher from '@/components/ui/Switcher';
-import Block from '@/components/pages/public/Block';
+import { Switcher, Option } from '@/components/ui/Switcher';
+import Block from '@/components/other/Block';
 
 export default function IndexPage({ goTo }) {
     const fieldsList = [
@@ -628,7 +628,7 @@ export default function IndexPage({ goTo }) {
                     <form className="flex flex-col h-full justify-between" onSubmit={e => e.preventDefault()}>
                         <div className="flex flex-col gap-[1.25rem]">
                             <div className="flex flex-col gap-[0.5rem]">
-                                <span className="big">Цели и целевая направленность</span>
+                                <span className="link big">Цели и целевая направленность</span>
                                 {fieldsList.slice(0, 4).map(f => (
                                     <div key={f.code} className="group flex w-full gap-[0.5rem]">
                                         <Input className="w-full" placeholder={f.label}
@@ -640,7 +640,7 @@ export default function IndexPage({ goTo }) {
                                 ))}
                             </div>
                             <div className="flex flex-col gap-[0.5rem]">
-                                <span className="big">Условия реализации и параметры оформления</span>
+                                <span className="link big">Условия реализации и параметры оформления</span>
                                 {fieldsList.slice(4).map(f => (
                                     <div key={f.code} className="group flex w-full gap-[0.5rem]">
                                         <Input className="w-full" placeholder={f.label}
@@ -664,15 +664,15 @@ export default function IndexPage({ goTo }) {
                                 {defaultTypes.map(t => {
                                     const label = t.label || t.key;
                                     return (
-                                        <span key={t.key} value={t.key}>
+                                        <Option key={t.key} value={t.key}>
                                             {label.charAt(0).toUpperCase() + label.slice(1)}
-                                        </span>
+                                        </Option>
                                     );
                                 })}
                             </Switcher>
                             <Switcher value={visualType} onChange={setVisualType} className={`!w-full ${type === 'visual' ? 'flex' : '!hidden'}`}>
-                                <span value="visual-static">Статика</span>
-                                <span value="visual-dynamic">Динамика</span>
+                                <Option value="visual-static">Статика</Option>
+                                <Option value="visual-dynamic">Динамика</Option>
                             </Switcher>
                         </div>
                     </div>

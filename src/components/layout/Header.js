@@ -1,9 +1,5 @@
 export function Header({ children }) {
-    return (
-        <header>
-            { children }
-        </header>
-    );
+    return <header>{ children }</header>
 }
 
 Header.Heading = function Heading({ children, className }) {

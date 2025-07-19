@@ -13,7 +13,7 @@ import RandomIcon from '@/assets/general/random.svg';
 import Input from '@/components/ui/Input';
 import Button from "@/components/ui/Button";
 import Switcher from '@/components/ui/Switcher';
-import Block from "@/components/pages/public/Block";
+import Block from "@/components/other/Block";
 
 export default function TrainerPage({ goTo }) {
     const [visualType, setVisualType] = useState('visual-static');
