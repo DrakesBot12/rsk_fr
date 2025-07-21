@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import Input from '@/components/ui/Input/Input';
 
 import Yandex from '@/assets/general/yandex.svg';
 import VK from '@/assets/general/vk.svg';

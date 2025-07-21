@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
-import Input from '@/components/ui/Input';
+import Input from '@/components/ui/Input/Input';
 import { Switcher, Option } from '@/components/ui/Switcher';
 
 import Yandex from '@/assets/general/yandex.svg';

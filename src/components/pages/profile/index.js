@@ -12,7 +12,6 @@ import Setts from '@/assets/general/setts.svg'
 import Notify from '@/assets/general/notify.svg'
 import LinkIcon from '@/assets/general/link.svg'
 
-import Block from '@/components/other/Block';
 import Folder from '@/components/other/Folder';
 import Calendar from '@/components/ui/Calendar';
 
@@ -59,22 +58,20 @@ export default function ProfileIndexPage({ goTo }) {
                     </Card.Footer>
                 </Card>
                 <div className='col-span-4 h-fit'>
-                    <Block>
-                        <>
-                            <h6 className='text-(--color-gray-black)'>Организация и команда</h6>
-                            <div className='flex flex-col gap-[0.75rem]'>
-                                <div className='group cursor-pointer flex items-center justify-between w-full'>
-                                    <a className='flex-1'>Московский государственный университет имени М.В.Ломоносова</a>
-                                    <LinkIcon className="stroke-(--color-gray-white) group-hover:stroke-black" style={{ transition: "stroke .3s ease-in-out" }} />    
-                                </div>
-                                <hr className='w-full border-solid border-[1.5px] border-(--color-gray-plus)' />
-                                <div className='group cursor-pointer flex items-center justify-between w-full'>
-                                    <a className='flex-1'>Союз Самых Смелых Решений (СССР)</a>
-                                    <LinkIcon className="stroke-(--color-gray-white) group-hover:stroke-black" style={{ transition: "stroke .3s ease-in-out" }} />    
-                                </div>
+                    <div className='block-wrapper col-span-4'>
+                        <h6 className='text-(--color-gray-black)'>Организация и команда</h6>
+                        <div className='flex flex-col gap-[0.75rem]'>
+                            <div className='group cursor-pointer flex items-center justify-between w-full'>
+                                <a className='flex-1'>Московский государственный университет имени М.В.Ломоносова</a>
+                                <LinkIcon className="stroke-(--color-gray-white) group-hover:stroke-black" style={{ transition: "stroke .3s ease-in-out" }} />    
                             </div>
-                        </>
-                    </Block>
+                            <hr className='w-full border-solid border-[1.5px] border-(--color-gray-plus)' />
+                            <div className='group cursor-pointer flex items-center justify-between w-full'>
+                                <a className='flex-1'>Союз Самых Смелых Решений (СССР)</a>
+                                <LinkIcon className="stroke-(--color-gray-white) group-hover:stroke-black" style={{ transition: "stroke .3s ease-in-out" }} />    
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <Folder projects="2" works="12" exp="100" onClick={() => goTo('workfolder')} />
                 <Calendar />

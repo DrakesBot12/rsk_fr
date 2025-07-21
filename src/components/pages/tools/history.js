@@ -8,7 +8,6 @@ import CopyIcon from '@/assets/general/copy.svg';
 
 import Button from "@/components/ui/Button";
 import { Switcher, Option } from '@/components/ui/Switcher';
-import Block from "@/components/other/Block";
 
 export default function HistoryPage({ goTo }) {
     const [type, setType] = useState('text');
@@ -40,43 +39,43 @@ export default function HistoryPage({ goTo }) {
                             </Switcher>
                         </div>
                     </div>
-                    <div className='flex flex-col gap-[1.6rem] items-center w-[70%]'>
+                    <section className='flex flex-col gap-[1.6rem] items-center w-[70%]'>
                         <h3>История</h3>
                         <div className='flex flex-col gap-[0.75rem]'>
-                            <div className='flex flex-col gap-[0.25rem]'>
+                            <article className='flex flex-col gap-[0.25rem]'>
                                 <span className='link big'>История создания запросов</span>
                                 <p className='small text-(--color-gray-black)'>Здесь отображается история промтов по выбранной выше категории</p>
-                            </div>
-                            <Block>
+                            </article>
+                            <article className='block-wrapper col-span-4'>
                                 <p className='line-clamp-3'>Представь, что ты копирайтер, создающий продающие тексты для digital-сфер и ты известен тем, что отлично справляешься с глубокая аналитика, подтверждённая авторитетными источниками. Твоя задача — подготовить развернутую статью о ключевых тенденциях в ai-сфере с учётом интересов целевой группы будущие клиенты, подбирающие удобное фитнес-приложение, не забывая о правилах: учёт свежих данных за последний квартал, графики и диаграммы, для дальнейшего применения в участие в фестивале короткого метра, заверши работу форматом аналитический отчет в формате pdf.</p>
                                 <div className='flex items-center'>
                                     <span className='link text-(--color-gray-black) w-full'>12.06.2025</span>
                                     <Button inverted className="!w-fit"><CopyIcon /></Button>
                                 </div>
-                            </Block>
-                            <Block>
+                            </article>
+                            <article  className='block-wrapper col-span-4'>
                                 <p className='line-clamp-3'>Представь, что ты копирайтер, создающий продающие тексты для digital-сфер и ты известен тем, что отлично справляешься с глубокая аналитика, подтверждённая авторитетными источниками. Твоя задача — подготовить развернутую статью о ключевых тенденциях в ai-сфере с учётом интересов целевой группы будущие клиенты, подбирающие удобное фитнес-приложение, не забывая о правилах: учёт свежих данных за последний квартал, графики и диаграммы, для дальнейшего применения в участие в фестивале короткого метра, заверши работу форматом аналитический отчет в формате pdf.</p>
                                 <div className='flex items-center'>
                                     <span className='link text-(--color-gray-black) w-full'>12.06.2025</span>
                                     <Button inverted className="!w-fit"><CopyIcon /></Button>
                                 </div>
-                            </Block>
-                            <Block>
+                            </article>
+                            <article className='block-wrapper col-span-4'>
                                 <p className='line-clamp-3'>Представь, что ты копирайтер, создающий продающие тексты для digital-сфер и ты известен тем, что отлично справляешься с глубокая аналитика, подтверждённая авторитетными источниками. Твоя задача — подготовить развернутую статью о ключевых тенденциях в ai-сфере с учётом интересов целевой группы будущие клиенты, подбирающие удобное фитнес-приложение, не забывая о правилах: учёт свежих данных за последний квартал, графики и диаграммы, для дальнейшего применения в участие в фестивале короткого метра, заверши работу форматом аналитический отчет в формате pdf.</p>
                                 <div className='flex items-center'>
                                     <span className='link text-(--color-gray-black) w-full'>12.06.2025</span>
                                     <Button inverted className="!w-fit"><CopyIcon /></Button>
                                 </div>
-                            </Block>
-                            <Block>
+                            </article>
+                            <article className='block-wrapper col-span-4'>
                                 <p className='line-clamp-3'>Представь, что ты копирайтер, создающий продающие тексты для digital-сфер и ты известен тем, что отлично справляешься с глубокая аналитика, подтверждённая авторитетными источниками. Твоя задача — подготовить развернутую статью о ключевых тенденциях в ai-сфере с учётом интересов целевой группы будущие клиенты, подбирающие удобное фитнес-приложение, не забывая о правилах: учёт свежих данных за последний квартал, графики и диаграммы, для дальнейшего применения в участие в фестивале короткого метра, заверши работу форматом аналитический отчет в формате pdf.</p>
                                 <div className='flex items-center'>
                                     <span className='link text-(--color-gray-black) w-full'>12.06.2025</span>
                                     <Button inverted className="!w-fit"><CopyIcon /></Button>
                                 </div>
-                            </Block>
+                            </article>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
         </>

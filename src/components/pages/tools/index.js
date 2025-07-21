@@ -11,10 +11,9 @@ import Plusicon from '@/assets/general/plus.svg';
 import SettsIcon from '@/assets/general/setts.svg';
 import RandomIcon from '@/assets/general/random.svg';
 
-import Input from '@/components/ui/Input';
+import Input from '@/components/ui/Input/Input';
 import Button from "@/components/ui/Button";
 import { Switcher, Option } from '@/components/ui/Switcher';
-import Block from '@/components/other/Block';
 
 export default function IndexPage({ goTo }) {
     const fieldsList = [
@@ -624,7 +623,7 @@ export default function IndexPage({ goTo }) {
             </Header>
 
             <div className='hero relative'>
-                <Block className="col-span-6 !h-full">
+                <div className="block-wrapper col-span-6 !h-full">
                     <form className="flex flex-col h-full justify-between" onSubmit={e => e.preventDefault()}>
                         <div className="flex flex-col gap-[1.25rem]">
                             <div className="flex flex-col gap-[0.5rem]">
@@ -654,7 +653,7 @@ export default function IndexPage({ goTo }) {
                         </div>
                         <Button className="blue" type="button" onClick={createPrompt}>Создать&nbsp;запрос</Button>
                     </form>
-                </Block>
+                </div>
 
                 <div className="flex flex-col justify-between col-span-6 h-full">
                     <div className="flex flex-col gap-[1rem]">
@@ -678,10 +677,10 @@ export default function IndexPage({ goTo }) {
                     </div>
 
                     <div className='flex flex-col gap-[1rem]'>
-                        <Block>
+                        <div className='block-wrapper col-span-4'>
                             <h6 className='text-(--color-gray-black)'>Ваш промт</h6>
                             <p>{prompt || 'Заполните поля и нажмите "Создать запрос"'}</p>
-                        </Block>
+                        </div>
 
                         <div className='flex flex-col gap-[0.5rem]'>
                             <div className='flex gap-[0.5rem]'>

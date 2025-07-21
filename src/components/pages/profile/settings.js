@@ -10,10 +10,6 @@ import { Card } from '@/components/ui/Card';
 
 import Setts from '@/assets/general/setts.svg'
 import Notify from '@/assets/general/notify.svg'
-import LinkIcon from '@/assets/general/link.svg'
-
-import Block from '@/components/other/Block';
-import Folder from '@/components/other/Folder';
 
 export default function SettingsPage({ goTo }) {
     const [userData, setUserData] = useState(null);

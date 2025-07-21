@@ -5,7 +5,7 @@ import TimeIcon from '@/assets/general/time.svg';
 import SettsIcon from '@/assets/general/setts.svg';
 
 import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
+import Input from "@/components/ui/Input/Input";
 
 export default function SettingsPage({ goTo }) {
     const tokenUsageFromBackend = 70;
