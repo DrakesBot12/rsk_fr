@@ -4,6 +4,8 @@ import Image from "next/image";
 import ImageIcon from "@/assets/general/image.svg";
 
 export default function Input({
+    big,
+    small,
     placeholder = "",
     type = "",
     children,
@@ -202,14 +204,14 @@ export default function Input({
     return (
         <div className={`input-wrapper ${className}`}>
             <input
-                type={["password", "email"].includes(type) ? type : "text"}
+                type={["password", "email"].includes(type) ? type : type}
                 placeholder={placeholder}
                 value={inputValue}
                 onChange={(e) => handleChange(e.target.value)}
                 autoComplete={getAutocomplete()}
                 name={name}
                 required={required}
-                className="w-full"
+                className={`w-full ${big ? 'big' : small ? 'small' : ''}`}
                 {...props}
             />
             {children}

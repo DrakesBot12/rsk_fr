@@ -1,55 +1,4 @@
-meter {
-    width: 100%;
-    height: 8px;
-    appearance: none;
-    border: none;
-    border-radius: 100px;
-    
-    &::-webkit-meter-bar {
-        border-radius: 100px;
-    }
-
-    &.range-low::-webkit-meter-bar {
-        background: var(--color-red-noise);
-    }
-
-    &.range-mid::-webkit-meter-bar {
-        background: var(--color-orange-noise);
-    }
-
-    &.range-high::-webkit-meter-bar {
-        background: var(--color-green-noise);
-    }
-
-    &::-webkit-meter-optimum-value {
-        background: var(--color-green);
-    }
-
-    &::-webkit-meter-suboptimum-value {
-        background: var(--color-orange);
-    }
-
-    &::-webkit-meter-even-less-good-value {
-        background: var(--color-red);
-    }
-}
-
-.range-low {
-    color: var(--color-red);
-}
-
-.range-mid {
-    color: var(--color-orange);
-}
-
-.range-high {
-    color: var(--color-green);
-}
-
-.root-layout {
-    display: flex;
-    min-height: 100vh;
-}
+.root-layout { display: flex; min-height: 100vh; }
 
 main {
     flex: 1;
@@ -187,6 +136,16 @@ button {
     }
 }
 
+meter {
+    width: 100%;
+    height: 8px;
+    border-radius: 100px;
+    
+    &::-webkit-meter-bar {
+        border-radius: 100px;
+    }
+}
+
 .switcher {
     gap: 0.25rem;
     display: flex;
@@ -264,7 +223,52 @@ button {
         }        
     }
 
+    &:has(input[type='radio'], input[type='checkbox']) {
+        border: none;
+        gap: .625rem;
+        display: flex;
+        border-radius: 0;
+        flex-direction: row;
+        align-items: center;
 
+        input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            width: 1.5rem;
+            padding: .5rem;
+            aspect-ratio: 1;
+            appearance: none;
+            position: relative;
+            border-radius: 6.25rem;
+
+            &[type='checkbox'] {
+                border-radius: .375rem;
+
+                &:checked::after {
+                    background: url("data:image/svg+xml,%3Csvg%20width%3D'16'%20height%3D'16'%20viewBox%3D'0%200%2016%2016'%20fill%3D'none'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M13.3334%204L6.00008%2011.3333L2.66675%208'%20stroke%3D'white'%20stroke-width%3D'1.33333'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'/%3E%3C/svg%3E") center/contain no-repeat;
+                }
+            }
+
+            &:checked::after {
+                border-radius: 6.25rem;
+                display: block;
+                width: 100%;
+                aspect-ratio: 1;
+            }
+
+            &.big, &:checked.big {
+                width: 2rem;
+                padding: .5rem;
+            }
+
+            &.small, &:checked.small {
+                width: 1rem;
+                padding: .25rem;
+            }
+        }
+    }
 }
 
 .image-upload-wrapper {

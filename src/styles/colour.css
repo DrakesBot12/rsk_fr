@@ -127,10 +127,19 @@ button {
             box-shadow: 0px 4px 16px -2px #EBEDF040;
         }
 
-        &.roundeful {
+        &.auth {
             background: transparent;
             color: var(--color-black);
             border: solid 1.5px var(--color-gray-plus);
+
+            &:hover {
+                border-color: var(--color-gray-plus-50);
+                background: var(--color-gray-plus-50);
+            }
+        }
+
+        &.roundeful {
+            border-radius: 6.25rem;
         }
     }
 
@@ -153,6 +162,35 @@ button {
         &:hover {
             box-shadow: 0px 4px 16px -2px #3A6BFF40;
         }
+    }
+}
+
+meter {
+    border: none;
+    appearance: none;
+
+    &.range-low::-webkit-meter-bar {
+        background: var(--color-red-noise);
+    }
+
+    &.range-mid::-webkit-meter-bar {
+        background: var(--color-orange-noise);
+    }
+
+    &.range-high::-webkit-meter-bar {
+        background: var(--color-green-noise);
+    }
+
+    &::-webkit-meter-optimum-value {
+        background: var(--color-green);
+    }
+
+    &::-webkit-meter-suboptimum-value {
+        background: var(--color-orange);
+    }
+
+    &::-webkit-meter-even-less-good-value {
+        background: var(--color-red);
     }
 }
 
@@ -190,6 +228,38 @@ button {
 
         input::placeholder {
             color: var(--color-gray-white);
+        }
+    }
+
+    &:has(input[type='radio'], input[type='checkbox']) {
+        &:has(input:active), &:has(input:focus) {
+            border: none;
+        }
+
+        input {
+            cursor: pointer;
+            background: var(--color-gray-plus-50);
+            transition: all .3s ease-in-out;
+
+            &:checked {
+                background: var(--color-black);
+                padding: .375rem;
+
+                &::after {
+                    content: '';
+                    background: var(--color-white);
+                }
+                
+                &:hover {
+                    background: var(--color-black);
+                    box-shadow: 0px 4px 16px -2px #08090A40;
+                }
+            }
+
+            &:hover {
+                background: var(--color-gray-plus);
+                box-shadow: 0px 4px 16px -2px #EBEDF040;
+            }
         }
     }
 

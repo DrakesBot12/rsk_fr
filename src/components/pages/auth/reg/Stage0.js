@@ -64,13 +64,13 @@ export default function RegStage0({
             >
                 {[
                     { name: 'login', placeholder: 'Логин', type: 'text', tabIndex: 1 },
-                    { name: 'password', placeholder: 'Пароль', type: 'password', tabIndex: 3 },
-                    { name: 'email', placeholder: 'Почта', type: 'email', tabIndex: 2 },
-                    { name: 'confirmPassword', placeholder: 'Подтвердите пароль', type: 'password', tabIndex: 4 },
-                ].map(({ name, placeholder, type, tabIndex }) => (
+                    { name: 'password', placeholder: 'Пароль', type: 'password', autocomplete: 'new-password' , tabIndex: 3 },
+                    { name: 'email', placeholder: 'Почта', type: 'email', autocomplete: 'email', tabIndex: 2 },
+                    { name: 'confirmPassword', placeholder: 'Подтвердите пароль', autocomplete: 'new-password', type: 'password', tabIndex: 4 },
+                ].map(({ name, placeholder, type, tabIndex, autocomplete }) => (
                     <Input 
                         key={name} name={name} type={type} placeholder={placeholder} value={formData[name] || ''}
-                        onChange={handleInputChange} tabIndex={tabIndex} required
+                        autoComplete={autocomplete} onChange={handleInputChange} tabIndex={tabIndex} required
                     />
                 ))}
             </form>
@@ -86,6 +86,10 @@ export default function RegStage0({
                     <Button inverted>Яндекс ID <Yandex /></Button>
                     <Button inverted>ВК ID <VK /></Button>
                 </div>
+            </div>
+            <div className='flex flex-col gap-[.5rem]'>
+                <Input type="checkbox" small autoComplete='off' name="POPD" id="POPD"><span className='text'>Я даю согласие на <span className='link'>обработку персональных данных</span></span></Input>
+                <Input type="checkbox" small autoComplete='off' name="TOTUA" id="TOTUA"><span className='text'>Я принимаю <span className='link'>условия пользовательского соглашения</span></span></Input>
             </div>
         </motion.div>
     );

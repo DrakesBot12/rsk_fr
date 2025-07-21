@@ -47,12 +47,14 @@ export default function LoginStage0({
             <form 
                 id="login" 
                 className="w-full grid grid-cols-1 grid-rows-2 gap-[0.75rem]" 
+                autoComplete='on'
                 onSubmit={handleSubmit}
             >
                 <Input 
                     type="text" 
                     name="login" 
                     placeholder="Логин" 
+                    autoComplete='username'
                     required 
                     value={form.login}
                     onChange={handleChange} 
@@ -60,6 +62,7 @@ export default function LoginStage0({
                 <Input 
                     type="password" 
                     name="password" 
+                    autoComplete="current-password"
                     placeholder="Пароль" 
                     required 
                     value={form.password}
@@ -74,7 +77,7 @@ export default function LoginStage0({
                 </div>
                 <span 
                     onClick={onForgotPassword} 
-                    className="small w-full flex text-(--color-gray-black) cursor-pointer hover:text-(--color-gray-white) justify-center"
+                    className="link small w-full flex text-(--color-gray-black) cursor-pointer hover:text-(--color-gray-white) transition justify-center"
                 >
                     Забыли пароль?
                 </span>

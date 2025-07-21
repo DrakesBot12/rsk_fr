@@ -99,7 +99,7 @@ export default function Aside() {
                 <Button
                     inverted
                     roundeful
-                    className={`${isCollapsed ? '!p-[1rem]' : ''}`}
+                    className={`auth ${isCollapsed ? '!p-[1rem]' : ''}`}
                     onClick={() => router.push('/auth')}
                 >
                     <AnimatePresence mode="wait">
