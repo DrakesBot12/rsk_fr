@@ -9,9 +9,9 @@ export default function Case({ cases = [] }) {
         <div className="flex flex-col justify-between h-full">
             <div className="flex flex-col gap-[1rem] !w-full">
                 <Switcher className="!w-full" value={caseType} onChange={setCaseType}>
-                    <span value="all">Все</span>
-                    <span value="projects">Проекты</span>
-                    <span value="case">Дела</span>
+                    <Option value="all">Все</Option>
+                    <Option value="projects">Проекты</Option>
+                    <Option value="case">Дела</Option>
                 </Switcher>
                 <div className="flex flex-col gap-[.75rem]">
                     {caseType === 'all' && (cases.map((card, idx) => (
