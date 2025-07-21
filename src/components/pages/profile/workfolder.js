@@ -3,8 +3,8 @@ import { getUserData } from '@/utils/auth';
 
 import { Header } from '@/components/layout/Header';
 import Button from '@/components/ui/Button';
-import Folder from '@/components/pages/public/Folder';
-import Case from '@/components/pages/public/Case';
+import Folder from '@/components/other/Folder';
+import Case from '@/components/ui/Case';
 
 import NotifyIcon from '@/assets/general/notify.svg';
 import SettsIcon from '@/assets/general/setts.svg';
