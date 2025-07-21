@@ -1,7 +1,6 @@
 import { useState } from "react";
-import Switcher from "@/components/ui/Switcher";
-import Block from "./Block";
 import Tags from "@/components/ui/Tags";
+import { Switcher, Option } from "@/components/ui/Switcher";
 
 export default function Case({ cases = [] }) {
     const [caseType, setCaseType] = useState('all')
@@ -16,41 +15,41 @@ export default function Case({ cases = [] }) {
                 </Switcher>
                 <div className="flex flex-col gap-[.75rem]">
                     {caseType === 'all' && (cases.map((card, idx) => (
-                        <Block key={idx}>
+                        <div className="block-wrapper col-span-4" key={idx}>
                             <h6>{card.name}</h6>
                             <p className="text-(--color-gray-black)">{card.desc}</p>
                             <div className="flex flex-wrap gap-[.5rem]">
                                 <Tags tags={card.tags} />
                             </div>
-                        </Block>
+                        </div>
                     )))}
                     {caseType === 'projects' && (cases.filter(card => card.tags.some(tag => tag.name ===  "Проект")).map((card, idx) => (
-                        <Block key={idx}>
+                        <div className="block-wrapper col-span-4" key={idx}>
                             <h6>{card.name}</h6>
                             <p className="text-(--color-gray-black)">{card.desc}</p>
                             <div className="flex flex-wrap gap-[.5rem]">
                                 <Tags tags={card.tags} />
                             </div>
-                        </Block>
+                        </div>
                     )))}
                     {caseType === 'case' && (cases.filter(card => card.tags.some(tag => tag.name ===  "Дело")).map((card, idx) => (
-                        <Block key={idx}>
+                        <div className="block-wrapper col-span-4" key={idx}>
                             <h6>{card.name}</h6>
                             <p className="text-(--color-gray-black)">{card.desc}</p>
                             <div className="flex flex-wrap gap-[.5rem]">
                                 <Tags tags={card.tags} />
                             </div>
-                        </Block>
+                        </div>
                     )))}
                 </div>
             </div>
             <Switcher className="!w-full" value={opt} onChange={setOpt}>
-                <span value="opt1">1</span>
-                <span value="opt2">2</span>
-                <span value="opt3">3</span>
-                <span value="opt4">4</span>
-                <span value="opt5">5</span>
-                <span value="next">&gt;</span>    
+                <Option value="opt1">1</Option>
+                <Option value="opt2">2</Option>
+                <Option value="opt3">3</Option>
+                <Option value="opt4">4</Option>
+                <Option value="opt5">5</Option>
+                <Option value="next">&gt;</Option>
             </Switcher>
         </div>
     )
