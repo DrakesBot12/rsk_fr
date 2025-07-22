@@ -1,0 +1,7 @@
+* text=auto
+
+README.md merge=ous
+.gitignore merge=ours
+.gitattributes merge=ours
+package.json merge=ours
+package-lock.json merge=ours
