@@ -189,13 +189,14 @@ meter {
     }
 }
 
-.input-wrapper {
+.input-wrapper, .textarea-wrapper {
     display: flex;
     border-radius: 0.75rem;
     flex-direction: column;
 
-    input {
+    input, textarea {
         width: 100%;
+        resize: none;
         padding: 0.75rem 0.875rem;
     }
 
@@ -302,7 +303,7 @@ meter {
             height: 100%;
             position: absolute;
 
-            a {
+            div {
                 width: 40px;
                 height: 40px;
                 right: 0.75rem;

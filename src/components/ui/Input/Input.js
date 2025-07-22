@@ -50,7 +50,7 @@ export default function Input({
 //     children,
 //     accept = "image/*",
 //     className = "",
-//     dataFrom = "/data/regions.txt",
+//     src = "/data/regions.txt",
 //     onImageChange,
 //     value: controlledValue,
 //     onChange,
@@ -77,7 +77,7 @@ export default function Input({
 //     // Fetch regions from file
 //     useEffect(() => {
 //         if (type === "dropdown") {
-//             fetch(dataFrom)
+//             fetch(src)
 //                 .then((res) => res.text())
 //                 .then((text) => {
 //                     const lines = text
@@ -88,7 +88,7 @@ export default function Input({
 //                 })
 //                 .catch((err) => console.error("Failed to load regions:", err));
 //         }
-//     }, [type, dataFrom]);
+//     }, [type, src]);
 
 //     // Filter dropdown items
 //     useEffect(() => {

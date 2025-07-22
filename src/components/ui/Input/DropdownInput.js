@@ -4,7 +4,7 @@ import { useDropdownFilter } from "./helpers";
 export default function DropdownInput({
     value: controlledValue,
     onChange,
-    dataFrom = "/data/regions.txt",
+    src = "/data/regions.txt",
     ...props
 }) {
     const dropdownRef = useRef(null);
@@ -15,7 +15,7 @@ export default function DropdownInput({
         handleInput,
         handleSelect,
         setShowDropdown,
-    } = useDropdownFilter(controlledValue, onChange, dataFrom);
+    } = useDropdownFilter(controlledValue, onChange, src);
 
     // закрываем по клику вне
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function DropdownInput({
     }, [setShowDropdown]);
 
     return (
-        <div ref={dropdownRef} className="w-full">
+        <div className={`input-wrapper relative w-full ${showDropdown ? " input-wrapper--dropdown-open" : ""}`} ref={dropdownRef}>
             <input
                 type="text"
                 value={value}
@@ -37,20 +37,22 @@ export default function DropdownInput({
                 {...props}
             />
             {showDropdown && (
-                <div
-                    className="dropdown"
-                    style={{
-                        transition:
-                            "opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1)",
-                        opacity: showDropdown ? 1 : 0,
-                        transform: showDropdown ? "translateY(0)" : "translateY(-10px)",
-                    }}
-                >
-                    {filtered.map((item) => (
-                        <p key={item} onClick={() => handleSelect(item)} className="cursor-pointer hover:bg-gray-100 px-2 py-1">
-                            {item}
-                        </p>
-                    ))}
+                <div className="dropdown-wrapper">
+                    <div
+                        className="dropdown"
+                        style={{
+                            transition:
+                                "opacity 0.25s cubic-bezier(.4,0,.2,1), transform 0.25s cubic-bezier(.4,0,.2,1)",
+                            opacity: showDropdown ? 1 : 0,
+                            transform: showDropdown ? "translateY(0)" : "translateY(-10px)",
+                        }}
+                    >
+                        {filtered.map((item) => (
+                            <p key={item} onClick={() => handleSelect(item)} className="cursor-pointer hover:bg-gray-100 px-2 py-1">
+                                {item}
+                            </p>
+                        ))}
+                    </div>
                 </div>
             )}
         </div>

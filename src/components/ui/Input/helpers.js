@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useDropdownFilter(controlledValue, onChange, dataFrom) {
+export function useDropdownFilter(controlledValue, onChange, src) {
     const [value, setValue] = useState(controlledValue || "");
     const [regions, setRegions] = useState([]);
     const [filtered, setFiltered] = useState([]);
@@ -13,14 +13,14 @@ export function useDropdownFilter(controlledValue, onChange, dataFrom) {
 
     // fetch regions
     useEffect(() => {
-        fetch(dataFrom).then((res) => res.text())
+        fetch(src).then((res) => res.text())
             .then((text) => {
                 setRegions(
                     text.split("\n").map((l) => l.trim()).filter(Boolean)
                 );
             })
             .catch((err) => console.error("Failed to load regions:", err));
-    }, [dataFrom]);
+    }, [src]);
 
     // filter
     useEffect(() => {

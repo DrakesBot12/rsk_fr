@@ -6,12 +6,12 @@ import Button from '@/components/ui/Button';
 import { getUserData } from '@/utils/auth';
 
 import { Header } from '@/components/layout/Header';
-import { Card } from '@/components/ui/Card';
 
 import Setts from '@/assets/general/setts.svg';
 import Notify from '@/assets/general/notify.svg';
 
 import Input from '@/components/ui/Input/Input';
+import Textarea from '@/components/ui/Textarea';
 
 export default function SettingsPage({ goTo }) {
     const [userData, setUserData] = useState(null);
@@ -29,7 +29,7 @@ export default function SettingsPage({ goTo }) {
             <Header>
                 <Header.Heading>
                     {userData.firstName && userData.lastName ? `${userData.firstName} ${userData.lastName}` : 'Незаполнено'}
-                    / Настройки
+                    <span className='text-(--color-gray-black)'>/</span> Настройки
                 </Header.Heading>
                 <Button icon active onClick={() => goTo('index')}><Setts /></Button>
                 <Button icon><Notify /></Button>
@@ -38,28 +38,22 @@ export default function SettingsPage({ goTo }) {
                 <div className='flex flex-col gap-[.75rem]'>
                     <h6>Основные данные</h6>
                     <div className='flex gap-[.75rem]'>
-                        <Input type="image" className='w-[50%] aspect-square'/>
-                        <div>
-                            <Input type="text" id="LastName" name="LastName" placeholder="Введите фамилию" required/>
-                            <Input type="text" id="name" name="name" placeholder="Введите имя" required/>
-                            <Input type="text" id="surname" name="surname" placeholder="Введите отчество"/>  
+                        <Input type="image" className='h-1/2 aspect-square'/>
+                        <div className='flex flex-col gap-[.5rem] flex-1'>
+                            <Input type="text" id="FamilyName" name="FamilyName" autoComplete="family-name" placeholder="Введите фамилию" required/>
+                            <Input type="text" id="name" name="name" autoComplete="given-name" placeholder="Введите имя" required/>
+                            <Input type="text" id="surname" name="surname" autoComplete="additional-name" placeholder="Введите отчество"/>  
                         </div>
                     </div>
-                    <textarea name="about" id="about" maxlength="100" minlength="0" placeholder="расскажите о себе"></textarea>
-                    <input type="text" name="skill" id="skill"  list="skilll" placeholder='город' multiple/>
-                    <datalist id="skilll">
-                        <option value="Белгород"></option>
-                        <option value="Москва"></option>
-                        <option value="Воронеж"></option>
-                        <option value="Курск"></option>
-                    </datalist>
+                    <Textarea inverted id="about" name="about" autoComplete="off" rows={2} placeholder="Расскажите о себе кратко" />
+                    <Input type="dropdown" id="region" name="region" autoComplete="address-level1" src="/data/regions.txt" placeholder="Москва" />
                 </div>
                 
                 <div className='flex flex-col gap-[1.25rem]'>
                     <h6>Организация и команда</h6>
                     <div className='flex flex-col gap-[.75rem]'>
-                        <Input id="univers" name="univers" placeholder="Московский государственный университет имени М.В.Ломоносова" autocomplete="off" disabled/>
-                        <Input id="teames" name="teames" placeholder="Союз Самых Смелых Решений (СССР)" autocomplete="off" disabled/>
+                        <Input id="univers" name="univers" placeholder="Московский государственный университет имени М.В.Ломоносова" autocomplete="off" readOnly />
+                        <Input id="teames" name="teames" placeholder="Союз Самых Смелых Решений (СССР)" autocomplete="off" readOnly />
                     </div>
                 </div>
                 

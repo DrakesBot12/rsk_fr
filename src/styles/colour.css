@@ -213,22 +213,25 @@ meter {
     }
 }
 
-.input-wrapper {
+.input-wrapper, .textarea-wrapper {
     color: var(--color-black);
     background: transparent;
     border: solid 1.5px var(--color-gray-plus-50);
     transition: border .3s ease-in-out;
 
-    &:has(input:disabled) {
+    &.inverted {
+        color: var(--color-gray-black);
+        background: var(--color-gray-plus-50);
+    }
+
+    &:has(:is(input, textarea):disabled) {
         border: solid 1.5px var(--color-white-gray);
 
-        input {
-            cursor: not-allowed;
-        }
-
-        input::placeholder {
+        :is(input, textarea)::placeholder {
             color: var(--color-gray-white);
         }
+
+        input, textarea { cursor: not-allowed; }
     }
 
     &:has(input[type='radio'], input[type='checkbox']) {
@@ -263,13 +266,13 @@ meter {
         }
     }
 
-    &:has(input:active), &:has(input:focus) {
-        border: solid 1.5px var(--color-gray-plus);
+    input, textarea {
+        &:read-only { cursor: default; }
+        &::placeholder { color: var(--color-gray-black); }
+        &:is(:active, :focus, :focus-visible) { outline: none; }
     }
-
-    input::placeholder {
-        color: var(--color-gray-black);
-    }
+    
+    &:has(:is(input, textarea):is(:active, :focus, :focus-visible)) { border: solid 1.5px var(--color-gray-plus); }
 
     &.input-wrapper--dropdown-open {
         border-bottom-left-radius: 0 !important;
@@ -308,7 +311,7 @@ meter {
         }
 
         div {
-            a {
+            div {
                 background: #ffffff99;
                 backdrop-filter: blur(8px);
                 transition: background .3s ease-in-out;
