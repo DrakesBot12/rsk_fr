@@ -45,6 +45,7 @@ Case.Tab = function Tab({ children, tab = "" }) {
 
 
 {/*
+
 import Case from '@/components/ui/Case';
 
 const [caseType, setCaseType] = useState('all');
@@ -60,4 +61,5 @@ const [caseType, setCaseType] = useState('all');
     <Case.Tab tab="cases"> Показывается только на табе 'cases' </Case.Tab>
     <Case.Tab> Показывается на всех табах </Case.Tab>
 </Case>
+
 */}
