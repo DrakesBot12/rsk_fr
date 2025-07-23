@@ -36,9 +36,28 @@ Case.Tab = function Tab({ children, tab = "" }) {
     const value = useContext(CaseValueContext);
 
     // Если tab не указан — всегда показываем
-    if (!tab) return <div>{children}</div>;
+    if (!tab) return { children };
     // Если tab совпадает с value — показываем
-    if (tab === value) return <div>{children}</div>;
+    if (tab === value) return { children };
     // В остальных случаях ничего не рендерим
     return null;
 }
+
+
+{/*
+import Case from '@/components/ui/Case';
+
+const [caseType, setCaseType] = useState('all');
+
+<Case tabs={[ 
+        { name: 'all', label: 'Отображаемое имя таба' },
+        { name: 'projects', label: 'Отображаемое имя таба' },
+        { name: 'cases', label: 'Отображаемое имя таба' } 
+    ]} value={caseType} onChange={setCaseType}
+>
+    <Case.Tab tab="all"> Показывается только на табе 'all'< /Case.Tab>
+    <Case.Tab tab="projects"> Показывается только на табе 'projects' </Case.Tab>
+    <Case.Tab tab="cases"> Показывается только на табе 'cases' </Case.Tab>
+    <Case.Tab> Показывается на всех табах </Case.Tab>
+</Case>
+*/}
