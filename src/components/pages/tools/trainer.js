@@ -36,15 +36,15 @@ export default function TrainerPage({ goTo }) {
                         <div className="flex flex-col gap-[1.25rem]">
                             <div className="flex flex-col gap-[1rem]">
                                 <Switcher value={type} onChange={setType} className='!w-full'>
-                                    <Option value="text">Текст</Option>
-                                    <Option value="audio">Аудио</Option>
-                                    <Option value="visual">Визуал</Option>
-                                    <Option value="interactive">Интерактив</Option>
-                                    <Option value="data">Данные</Option>
+                                    <Switcher.Option value="text">Текст</Switcher.Option>
+                                    <Switcher.Option value="audio">Аудио</Switcher.Option>
+                                    <Switcher.Option value="visual">Визуал</Switcher.Option>
+                                    <Switcher.Option value="interactive">Интерактив</Switcher.Option>
+                                    <Switcher.Option value="data">Данные</Switcher.Option>
                                 </Switcher>
                                 <Switcher value={visualType} onChange={setVisualType} className={`!w-full ${type === 'visual' ? 'flex' : '!hidden'}`}>
-                                    <Option value="visual-static">Статика</Option>
-                                    <Option value="visual-dynamic">Динамика</Option>
+                                    <Switcher.Option value="visual-static">Статика</Switcher.Option>
+                                    <Switcher.Option value="visual-dynamic">Динамика</Switcher.Option>
                                 </Switcher>
                             </div>
                             <div className="flex flex-col gap-[0.5rem]">

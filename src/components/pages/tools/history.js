@@ -34,8 +34,8 @@ export default function HistoryPage({ goTo }) {
                                 <Switcher.Option value="data">Данные</Switcher.Option>
                             </Switcher>
                             <Switcher value={visualType} onChange={setVisualType} className={`!w-full ${type === 'visual' ? 'flex' : '!hidden'}`}>
-                                <Option value="visual-static">Статика</Option>
-                                <Option value="visual-dynamic">Динамика</Option>
+                                <Switcher.Option value="visual-static">Статика</Switcher.Option>
+                                <Switcher.Option value="visual-dynamic">Динамика</Switcher.Option>
                             </Switcher>
                         </div>
                     </div>
