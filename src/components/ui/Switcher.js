@@ -1,6 +1,6 @@
 import React, { Children, cloneElement } from 'react';
 
-export function Switcher({ big, small, className = '', children, value, onChange }) {
+export default function Switcher({ big, small, className = '', children, value, onChange }) {
     const classes = `switcher ${big ? 'big' : small ? 'small' : ''} ${className}`;
 
     const modifiedChildren = Children.map(children, child =>
@@ -19,7 +19,7 @@ export function Switcher({ big, small, className = '', children, value, onChange
     )
 }
 
-export function Option({ children, value, className = '', ...props }) {
+Switcher.Option = function Option({ children, value, className = '', ...props }) {
     return (
         <span value={value} className={`link option ${className}`} {...props}>
             {children}
@@ -30,13 +30,13 @@ export function Option({ children, value, className = '', ...props }) {
 {/*
     Пример использования:
     
-    import { Switcher, Option } from '@/components/ui/Switcher';
+    import Switcher from '@/components/ui/Switcher';
     
-    const [activeTab, setActiveTab] = useState('works')
+    const [activeTab, setActiveTab] = useState('works');
 
     <Switcher value={activeTab} onChange={setActiveTab}>
-        <Option value="works">Работы</Option>
-        <Option value="projects">Проекты</Option>
-        <Option value="tasks">Задачи</Option>
+        <Switcher.Option value="works">Работы</Switcher.Option>
+        <Switcher.Option value="projects">Проекты</Switcher.Option>
+        <Switcher.Option value="tasks">Задачи</Switcher.Option>
     </Switcher>
 */}

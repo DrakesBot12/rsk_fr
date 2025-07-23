@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Header } from "@/components/layout/Header";
+import Header from "@/components/layout/Header";
 
 import Buffer from './addons/popup';
 
@@ -13,7 +13,7 @@ import RandomIcon from '@/assets/general/random.svg';
 
 import Input from '@/components/ui/Input/Input';
 import Button from "@/components/ui/Button";
-import { Switcher, Option } from '@/components/ui/Switcher';
+import Switcher from '@/components/ui/Switcher';
 
 export default function IndexPage({ goTo }) {
     const fieldsList = [
@@ -663,15 +663,15 @@ export default function IndexPage({ goTo }) {
                                 {defaultTypes.map(t => {
                                     const label = t.label || t.key;
                                     return (
-                                        <Option key={t.key} value={t.key}>
+                                        <Switcher.Option key={t.key} value={t.key}>
                                             {label.charAt(0).toUpperCase() + label.slice(1)}
-                                        </Option>
+                                        </Switcher.Option>
                                     );
                                 })}
                             </Switcher>
                             <Switcher value={visualType} onChange={setVisualType} className={`!w-full ${type === 'visual' ? 'flex' : '!hidden'}`}>
-                                <Option value="visual-static">Статика</Option>
-                                <Option value="visual-dynamic">Динамика</Option>
+                                <Switcher.Option value="visual-static">Статика</Switcher.Option>
+                                <Switcher.Option value="visual-dynamic">Динамика</Switcher.Option>
                             </Switcher>
                         </div>
                     </div>

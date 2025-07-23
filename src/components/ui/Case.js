@@ -1,56 +1,44 @@
-import { useState } from "react";
-import Tags from "@/components/ui/Tags";
-import { Switcher, Option } from "@/components/ui/Switcher";
+import React, { useState, createContext, useContext } from "react";
 
-export default function Case({ cases = [] }) {
-    const [caseType, setCaseType] = useState('all')
-    const [opt, setOpt] = useState('opt1')
+import Switcher from "@/components/ui/Switcher";
+const CaseValueContext = createContext();
+
+export default function Case({ value, onChange, children, tabs }) {
+    const [opt, setOpt] = useState('opt1');
+    
     return (
         <div className="flex flex-col justify-between h-full">
             <div className="flex flex-col gap-[1rem] !w-full">
-                <Switcher className="!w-full" value={caseType} onChange={setCaseType}>
-                    <Option value="all">Все</Option>
-                    <Option value="projects">Проекты</Option>
-                    <Option value="case">Дела</Option>
-                </Switcher>
+                {tabs && 
+                    <Switcher className="!w-full" value={value} onChange={onChange}>
+                        {tabs.map(tab => <Switcher.Option value={tab.name}>{tab.label}</Switcher.Option>)}
+                    </Switcher>
+                }
                 <div className="flex flex-col gap-[.75rem]">
-                    {caseType === 'all' && (cases.map((card, idx) => (
-                        <div className="block-wrapper col-span-4" key={idx}>
-                            <h6>{card.name}</h6>
-                            <p className="text-(--color-gray-black)">{card.desc}</p>
-                            <div className="flex flex-wrap gap-[.5rem]">
-                                <Tags tags={card.tags} />
-                            </div>
-                        </div>
-                    )))}
-                    {caseType === 'projects' && (cases.filter(card => card.tags.some(tag => tag.name ===  "Проект")).map((card, idx) => (
-                        <div className="block-wrapper col-span-4" key={idx}>
-                            <h6>{card.name}</h6>
-                            <p className="text-(--color-gray-black)">{card.desc}</p>
-                            <div className="flex flex-wrap gap-[.5rem]">
-                                <Tags tags={card.tags} />
-                            </div>
-                        </div>
-                    )))}
-                    {caseType === 'case' && (cases.filter(card => card.tags.some(tag => tag.name ===  "Дело")).map((card, idx) => (
-                        <div className="block-wrapper col-span-4" key={idx}>
-                            <h6>{card.name}</h6>
-                            <p className="text-(--color-gray-black)">{card.desc}</p>
-                            <div className="flex flex-wrap gap-[.5rem]">
-                                <Tags tags={card.tags} />
-                            </div>
-                        </div>
-                    )))}
+                    <CaseValueContext.Provider value={value}>
+                        {children}
+                    </CaseValueContext.Provider>
                 </div>
             </div>
             <Switcher className="!w-full" value={opt} onChange={setOpt}>
-                <Option value="opt1">1</Option>
-                <Option value="opt2">2</Option>
-                <Option value="opt3">3</Option>
-                <Option value="opt4">4</Option>
-                <Option value="opt5">5</Option>
-                <Option value="next">&gt;</Option>
+                <Switcher.Option value="opt1">1</Switcher.Option>
+                <Switcher.Option value="opt2">2</Switcher.Option>
+                <Switcher.Option value="opt3">3</Switcher.Option>
+                <Switcher.Option value="opt4">4</Switcher.Option>
+                <Switcher.Option value="opt5">5</Switcher.Option>
+                <Switcher.Option value="next">&gt;</Switcher.Option>
             </Switcher>
         </div>
     )
+}
+
+Case.Tab = function Tab({ children, tab = "" }) {
+    const value = useContext(CaseValueContext);
+
+    // Если tab не указан — всегда показываем
+    if (!tab) return <div>{children}</div>;
+    // Если tab совпадает с value — показываем
+    if (tab === value) return <div>{children}</div>;
+    // В остальных случаях ничего не рендерим
+    return null;
 }

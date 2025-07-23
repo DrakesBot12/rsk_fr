@@ -5,7 +5,7 @@ export default function Folder({ projects, works, exp, min, ...props }) {
     return (
         <a className={`workfolder-wrapper col-span-4 cursor-pointer group ${min ? 'aspect-video' : 'aspect-square'}`} {...props}>
             <div className="workfolder-back">
-                <Image priority={true} src="/workfolder.png" width={500} height={500} alt="workfolder" className="w-full h-full object-cover blur-[8px]" />
+                <Image priority={true} src="/images/workfolder.png" width={500} height={500} alt="workfolder" className="w-full h-full object-cover blur-[8px]" />
                 {min ? ('') : ( <FolderIcon className="group-hover:stroke-(--color-white)" /> )}
             </div>
             <div className={`workfolder`}>
@@ -13,9 +13,7 @@ export default function Folder({ projects, works, exp, min, ...props }) {
                 <div className='folder'>
                     <div className="folder-heading">
                         <h4>Рабочая папка</h4>
-                        {min ? '' : (
-                            <span className="link">Дела участника</span>
-                        )}
+                        {min && <span className="link">Дела участника</span>}
                     </div>
                     <div className="folder-footer">
                         <div className={`folder-footer-left ${min ? '!text-(--color-gray-black)' : ''}`}>

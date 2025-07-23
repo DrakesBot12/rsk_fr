@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import Input from '@/components/ui/Input/Input';
-import { Switcher, Option } from '@/components/ui/Switcher';
+import Switcher from '@/components/ui/Switcher';
 
 import Yandex from '@/assets/general/yandex.svg';
 import VK from '@/assets/general/vk.svg';
@@ -54,8 +54,8 @@ export default function RegStage0({
                 value={userType} 
                 onChange={setUserType}
             >
-                <Option value="student">Студент</Option>
-                <Option value="teacher">Преподаватель</Option>
+                <Switcher.Option value="student">Студент</Switcher.Option>
+                <Switcher.Option value="teacher">Преподаватель</Switcher.Option>
             </Switcher>
             <form
                 id="registration"

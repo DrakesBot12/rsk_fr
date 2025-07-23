@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Header } from "@/components/layout/Header";
+import Header from "@/components/layout/Header";
 
 import TimeIcon from '@/assets/general/time.svg';
 import SettsIcon from '@/assets/general/setts.svg';

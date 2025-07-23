@@ -6,7 +6,7 @@ import { isAuthorized, saveUserData } from '@/utils/auth';
 import Notify from '@/assets/general/notify.svg';
 
 import Button from '@/components/ui/Button';
-import { Switcher, Option } from '@/components/ui/Switcher';
+import Switcher from '@/components/ui/Switcher';
 import Layout from '@/components/layout/Layout';
 
 import RegStage0 from '@/components/pages/auth/reg/Stage0';
@@ -14,7 +14,7 @@ import RegStage1 from '@/components/pages/auth/reg/Stage1';
 import LoginStage0 from '@/components/pages/auth/login/Stage0';
 import LoginStage1 from '@/components/pages/auth/login/Stage1';
 
-import { Header } from '@/components/layout/Header';
+import Header from '@/components/layout/Header';
 
 const pageVariants = {
     initial: (direction) => ({
@@ -114,8 +114,8 @@ export default function AuthPage() {
                         setStep(0);
                     }}
                 >
-                    <Option tabIndex={0} role="button" value="login">Вход</Option>
-                    <Option tabIndex={1} role="button" value="register">Регистрация</Option>
+                    <Switcher.Option tabIndex={0} role="button" value="login">Вход</Switcher.Option>
+                    <Switcher.Option tabIndex={1} role="button" value="register">Регистрация</Switcher.Option>
                 </Switcher>
 
                 <Button icon><Notify /></Button>

@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button';
 
 import { getUserData } from '@/utils/auth';
 
-import { Header } from '@/components/layout/Header';
+import Header from '@/components/layout/Header';
 
 import Setts from '@/assets/general/setts.svg';
 import Notify from '@/assets/general/notify.svg';
@@ -31,7 +31,7 @@ export default function SettingsPage({ goTo }) {
                     {userData.firstName && userData.lastName ? `${userData.firstName} ${userData.lastName}` : 'Незаполнено'}
                     <span className='text-(--color-gray-black)'>/</span> Настройки
                 </Header.Heading>
-                <Button icon active onClick={() => goTo('index')}><Setts /></Button>
+                <Button icon active onClick={() => goTo('profile')}><Setts /></Button>
                 <Button icon><Notify /></Button>
             </Header>
             <div className='hero' style={{gridTemplateColumns: "repeat(3, 1fr)"}}>

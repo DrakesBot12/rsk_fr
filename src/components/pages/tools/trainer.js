@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Header } from "@/components/layout/Header";
+import Header from "@/components/layout/Header";
 
 import InfoIcon from '@/assets/general/info.svg';
 import LinkIcon from '@/assets/general/link.svg';
@@ -12,7 +12,7 @@ import RandomIcon from '@/assets/general/random.svg';
 
 import Input from '@/components/ui/Input/Input';
 import Button from "@/components/ui/Button";
-import { Switcher, Option } from '@/components/ui/Switcher';
+import Switcher from '@/components/ui/Switcher';
 
 export default function TrainerPage({ goTo }) {
     const [visualType, setVisualType] = useState('visual-static');
@@ -112,12 +112,12 @@ export default function TrainerPage({ goTo }) {
                         </div>
                         <div className="flex gap-[0.5rem]">
                             <Switcher value={userType} onChange={setUserType} className="!w-full">
-                                <Option value="student">Студент</Option>
-                                <Option value="teacher">Преподаватель</Option>
+                                <Switcher.Option value="student">Студент</Switcher.Option>
+                                <Switcher.Option value="teacher">Преподаватель</Switcher.Option>
                             </Switcher>
                             <Switcher value={who} onChange={setWho} className="!w-full">
-                                <Option value="i">Я</Option>
-                                <Option value="we">Мы</Option>
+                                <Switcher.Option value="i">Я</Switcher.Option>
+                                <Switcher.Option value="we">Мы</Switcher.Option>
                             </Switcher>
                         </div>
                         <div className="flex flex-col gap-[0.75rem]">

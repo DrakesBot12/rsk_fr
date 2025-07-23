@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-import { Header } from "@/components/layout/Header";
+import Header from "@/components/layout/Header";
 
 import TimeIcon from '@/assets/general/time.svg';
 import SettsIcon from '@/assets/general/setts.svg';
 import CopyIcon from '@/assets/general/copy.svg';
 
 import Button from "@/components/ui/Button";
-import { Switcher, Option } from '@/components/ui/Switcher';
+import Switcher from '@/components/ui/Switcher';
 
 export default function HistoryPage({ goTo }) {
     const [type, setType] = useState('text');
@@ -27,11 +27,11 @@ export default function HistoryPage({ goTo }) {
                     <div className="flex flex-col gap-[1rem] w-full">
                         <div className="flex flex-col gap-[0.5rem]">
                             <Switcher value={type} onChange={setType} className='!w-full'>
-                                <Option value="text">Текст</Option>
-                                <Option value="audio">Аудио</Option>
-                                <Option value="visual">Визуал</Option>
-                                <Option value="interactive">Интерактив</Option>
-                                <Option value="data">Данные</Option>
+                                <Switcher.Option value="text">Текст</Switcher.Option>
+                                <Switcher.Option value="audio">Аудио</Switcher.Option>
+                                <Switcher.Option value="visual">Визуал</Switcher.Option>
+                                <Switcher.Option value="interactive">Интерактив</Switcher.Option>
+                                <Switcher.Option value="data">Данные</Switcher.Option>
                             </Switcher>
                             <Switcher value={visualType} onChange={setVisualType} className={`!w-full ${type === 'visual' ? 'flex' : '!hidden'}`}>
                                 <Option value="visual-static">Статика</Option>
