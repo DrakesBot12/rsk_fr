@@ -11,7 +11,7 @@ export default function Case({ value, onChange, children, tabs }) {
             <div className="flex flex-col gap-[1rem] !w-full">
                 {tabs && 
                     <Switcher className="!w-full" value={value} onChange={onChange}>
-                        {tabs.map(tab => <Switcher.Option value={tab.name}>{tab.label}</Switcher.Option>)}
+                        {tabs.map((tab, idx) => <Switcher.Option key={idx} value={tab.name}>{tab.label}</Switcher.Option>)}
                     </Switcher>
                 }
                 <div className="flex flex-col gap-[.75rem]">
