@@ -36,9 +36,9 @@ Case.Tab = function Tab({ children, tab = "" }) {
     const value = useContext(CaseValueContext);
 
     // Если tab не указан — всегда показываем
-    if (!tab) return { children };
+    if (!tab) return children;
     // Если tab совпадает с value — показываем
-    if (tab === value) return { children };
+    if (tab === value) return children;
     // В остальных случаях ничего не рендерим
     return null;
 }
