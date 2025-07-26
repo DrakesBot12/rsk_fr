@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function TransitionWrapper({ currentKey, children }) {
     const [isAnimating, setIsAnimating] = useState(false);

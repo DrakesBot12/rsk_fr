@@ -8,7 +8,7 @@ import SettingsPage from '@/components/pages/profile/settings';
 import FolderPage from '@/components/pages/profile/workfolder';
 
 export default function ProfilePage() {
-    const [ pageKey, setPageKey ] = useState("profile")
+    const [pageKey, setPageKey] = useState("profile")
 
     const goTo = (pageName) => {
         setPageKey(pageName);

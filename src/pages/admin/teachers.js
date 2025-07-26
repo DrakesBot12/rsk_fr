@@ -1,7 +1,8 @@
 import Layout from "@/components/layout/Layout";
 import Header from "@/components/layout/Header";
+
 import Button from "@/components/ui/Button";
-import Notify from '@/assets/general/notify.svg';
+
 import Zapret from  "@/assets/general/zapret.svg";
 import NeZapret from  "@/assets/general/neZapret.svg";
 
@@ -32,4 +33,6 @@ export default function Home() {
                 </div>
 
             </div>
-        </Layout>)}
+        </Layout>
+    )
+}

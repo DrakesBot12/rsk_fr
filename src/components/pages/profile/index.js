@@ -24,7 +24,7 @@ export default function ProfileIndexPage({ goTo }) {
         setHydrated(true);
     }, []);
 
-    if (!hydrated || !userData) return null; // Не рендерим до полной инициализации
+    if (!hydrated || !userData) return null;
 
     return (
         <>

@@ -1,11 +1,13 @@
-import Header from "@/components/layout/Header";
-import Layout from "@/components/layout/Layout";
-import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input/Input";
-import Search from "@/assets/general/search.svg";
-import Case from "@/components/ui/Case";
 import { useState } from "react";
 
+import Header from "@/components/layout/Header";
+import Layout from "@/components/layout/Layout";
+
+import Button from "@/components/ui/Button";
+import Case from "@/components/ui/Case";
+import Input from "@/components/ui/Input/Input";
+
+import Search from "@/assets/general/search.svg";
 
 export default function Home() {
     const [caseType, setCaseType] = useState('all'); 
@@ -24,5 +26,5 @@ export default function Home() {
                 <Case value={caseType} onChange={setCaseType}></Case>
             </div>
         </Layout>
-        )
-    }
+    )
+}
