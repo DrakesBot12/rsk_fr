@@ -58,6 +58,95 @@ const cases = [
             { name: "3 балла", color: "blue", icon: "coin" },
             { name: "Дело", color: "green" }
         ]
+    },
+    // Новые кейсы для теста пагинации
+    {
+        name: "Сделать домашку по математике",
+        desc: "Решить задачи из учебника",
+        tags: [
+            { name: "5 баллов", color: "blue", icon: "coin" },
+            { name: "Дело", color: "green" }
+        ]
+    },
+    {
+        name: "Погулять с собакой",
+        desc: "Вечерняя прогулка в парке",
+        tags: [
+            { name: "1 балл", color: "blue", icon: "coin" },
+            { name: "Дело", color: "green" }
+        ]
+    },
+    {
+        name: "Сделать проект по информатике",
+        desc: "Разработка сайта для школы",
+        tags: [
+            { name: "12 баллов", color: "blue", icon: "coin" },
+            { name: "Проект", color: "green" }
+        ]
+    },
+    {
+        name: "Посмотреть обучающее видео",
+        desc: "Видео по React.js",
+        tags: [
+            { name: "2 балла", color: "blue", icon: "coin" },
+            { name: "Дело", color: "green" }
+        ]
+    },
+    {
+        name: "Сделать зарядку",
+        desc: "Утренняя разминка",
+        tags: [
+            { name: "1 балл", color: "blue", icon: "coin" },
+            { name: "Дело", color: "green" }
+        ]
+    },
+    {
+        name: "Прочитать книгу",
+        desc: "Глава из художественной литературы",
+        tags: [
+            { name: "4 балла", color: "blue", icon: "coin" },
+            { name: "Дело", color: "green" }
+        ]
+    },
+    {
+        name: "Сделать лабораторную по физике",
+        desc: "Эксперимент с электричеством",
+        tags: [
+            { name: "9 баллов", color: "blue", icon: "coin" },
+            { name: "Проект", color: "green" }
+        ]
+    },
+    {
+        name: "Сходить в магазин",
+        desc: "Купить продукты на неделю",
+        tags: [
+            { name: "2 балла", color: "blue", icon: "coin" },
+            { name: "Дело", color: "green" }
+        ]
+    },
+    {
+        name: "Сделать презентацию по истории",
+        desc: "Подготовить слайды для доклада",
+        tags: [
+            { name: "6 баллов", color: "blue", icon: "coin" },
+            { name: "Проект", color: "green" }
+        ]
+    },
+    {
+        name: "Убраться на рабочем столе",
+        desc: "Разложить бумаги и канцелярию",
+        tags: [
+            { name: "2 балла", color: "blue", icon: "coin" },
+            { name: "Дело", color: "green" }
+        ]
+    },
+    {
+        name: "Сделать пост в блог",
+        desc: "Написать статью о программировании",
+        tags: [
+            { name: "7 баллов", color: "blue", icon: "coin" },
+            { name: "Проект", color: "green" }
+        ]
     }
 ];
 
@@ -93,12 +182,12 @@ export default function WorkFolderPage({ goTo }) {
                     <h4>Дела участника</h4>
                     <Case tabs={[ 
                             { name: 'all', label: 'Всё' },
-                            { name: 'projects', label: 'Ничего' },
-                            { name: 'cases', label: 'Для' } 
-                        ]} value={caseType} onChange={setCaseType}
+                            { name: 'projects', label: 'Проекты' },
+                            { name: 'cases', label: 'Дела' } 
+                        ]} value={caseType} onChange={setCaseType} perPage={3}
                     >
                         <Case.Tab tab="all">
-                            {caseType === 'all' && (cases.map((card, idx) => (
+                            {cases.map((card, idx) => (
                                 <div className="block-wrapper col-span-4" key={idx}>
                                     <h6>{card.name}</h6>
                                     <p className="text-(--color-gray-black)">{card.desc}</p>
@@ -106,10 +195,10 @@ export default function WorkFolderPage({ goTo }) {
                                         <Tags tags={card.tags} />
                                     </div>
                                 </div>
-                            )))}
+                            ))}
                         </Case.Tab>
                         <Case.Tab tab="projects">
-                            {caseType === 'projects' && (cases.filter(card => card.tags.some(tag => tag.name ===  "Проект")).map((card, idx) => (
+                            {cases.filter(card => card.tags.some(tag => tag.name ===  "Проект")).map((card, idx) => (
                                 <div className="block-wrapper col-span-4" key={idx}>
                                     <h6>{card.name}</h6>
                                     <p className="text-(--color-gray-black)">{card.desc}</p>
@@ -117,10 +206,10 @@ export default function WorkFolderPage({ goTo }) {
                                         <Tags tags={card.tags} />
                                     </div>
                                 </div>
-                            )))}
+                            ))}
                         </Case.Tab>
                         <Case.Tab tab="cases">
-                            {caseType === 'cases' && (cases.filter(card => card.tags.some(tag => tag.name ===  "Дело")).map((card, idx) => (
+                            {cases.filter(card => card.tags.some(tag => tag.name ===  "Дело")).map((card, idx) => (
                                 <div className="block-wrapper col-span-4" key={idx}>
                                     <h6>{card.name}</h6>
                                     <p className="text-(--color-gray-black)">{card.desc}</p>
@@ -128,9 +217,8 @@ export default function WorkFolderPage({ goTo }) {
                                         <Tags tags={card.tags} />
                                     </div>
                                 </div>
-                            )))}
+                            ))}
                         </Case.Tab>
-                        <Case.Tab>УРА РАБОТАЕТ</Case.Tab>
                    </Case>
                 </div>
             </div>

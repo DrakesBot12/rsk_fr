@@ -6,8 +6,12 @@ export default function Switcher({ big, small, className = '', children, value, 
     const modifiedChildren = Children.map(children, child =>
         React.isValidElement(child) ?
         cloneElement(child, {
-            className: `${value === (child.props.value ?? child.key) ? 'active' : ''}`,
-            onClick: () => onChange?.(child.props.value ?? child.key)
+            className: `${value === (child.props.value ?? child.key) ? 'active' : ''} ${child.props.className ?? ''}`,
+            onClick: child.props.disabled
+                ? undefined
+                : child.props.onClick
+                    ? child.props.onClick
+                    : () => onChange?.(child.props.value ?? child.key)
         })
         : child
     );
@@ -19,9 +23,15 @@ export default function Switcher({ big, small, className = '', children, value, 
     )
 }
 
-Switcher.Option = function Option({ children, value, className = '', ...props }) {
+Switcher.Option = function Option({ children, value, className = '', disabled, onClick, ...props }) {
     return (
-        <span value={value} className={`link option ${className}`} {...props}>
+        <span
+            value={value}
+            className={`link option ${className} ${disabled ? 'disabled' : ''}`}
+            {...props}
+            onClick={disabled ? undefined : onClick}
+            aria-disabled={disabled}
+        >
             {children}
         </span>
     );
