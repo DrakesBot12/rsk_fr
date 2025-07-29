@@ -184,7 +184,7 @@ export default function WorkFolderPage({ goTo }) {
                             { name: 'all', label: 'Всё' },
                             { name: 'projects', label: 'Проекты' },
                             { name: 'cases', label: 'Дела' } 
-                        ]} value={caseType} onChange={setCaseType} perPage={3}
+                        ]} value={caseType} onChange={setCaseType} perPage={3} className="h-full gap-[1rem]"
                     >
                         <Case.Tab tab="all">
                             {cases.map((card, idx) => (

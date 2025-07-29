@@ -109,15 +109,6 @@ button {
         box-shadow: 0px 4px 16px -2px #08090A40;
     }
 
-    &[disabled] {
-        color: var(--color-gray-white);
-        background: var(--color-gray-plus-50);
-
-        &:hover {
-            box-shadow: none;
-        }
-    }
-
     &.inverted {
         color: var(--color-black);
         background: var(--color-gray-plus-50);
@@ -162,6 +153,13 @@ button {
         &:hover {
             box-shadow: 0px 4px 16px -2px #3A6BFF40;
         }
+    }
+
+    &[disabled] {
+        color: var(--color-gray-white);
+        background: var(--color-gray-plus-50);
+
+        &:hover { box-shadow: none; }
     }
 }
 

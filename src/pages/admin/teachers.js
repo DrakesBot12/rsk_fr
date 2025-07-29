@@ -7,7 +7,7 @@ import Zapret from  "@/assets/general/zapret.svg";
 import NeZapret from  "@/assets/general/neZapret.svg";
 
 
-export default function Home() {
+export default function AdminTeachers() {
     return (
         <Layout>
             <Header>

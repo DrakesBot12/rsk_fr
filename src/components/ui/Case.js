@@ -4,7 +4,7 @@ import Switcher from "@/components/ui/Switcher";
 
 const CaseValueContext = createContext();
 
-export default function Case({ value, onChange, children, tabs, pages = 5, perPage = 3, ...rest }) {
+export default function Case({ value, onChange, children, tabs, pages = 5, perPage = 3, ...props }) {
     // Защита от некорректных значений perPage и pages
     const safePerPage = typeof perPage === 'number' && perPage > 0 ? perPage : 1;
     const safePages = typeof pages === 'number' && pages > 0 ? pages : 5;
@@ -87,37 +87,37 @@ export default function Case({ value, onChange, children, tabs, pages = 5, perPa
     );
 
     return (
-        <div className="flex flex-col gap-[1rem] h-full !w-full" {...rest}>
+        <div className={`flex flex-col ${props.className}`}>
             {tabs && tabs.length > 0 &&
                 <Switcher className="!w-full" value={value} onChange={onChange}>
                     {tabs.map((tab, idx) => <Switcher.Option key={idx} value={tab.name}>{tab.label}</Switcher.Option>)}
                 </Switcher>
             }
-            <div className="flex flex-col h-full justify-between">
-                {!tabs || tabs.length === 0 ? (
-                    <div className="flex flex-col-reverse gap-[.75rem]">
-                        {Array.isArray(tabContent) && totalPages > 1 && renderPagination()}
+            {!tabs || tabs.length === 0 ? (
+                <>
+                    <div className={`flex flex-col gap-[.75rem] ${props.classChildren}`}>
                         {Array.isArray(paginated) && paginated.length === 0 ? (
                             <div className="text-center text-(--color-gray-black)">Нет данных</div>
                         ) : (
                             Array.isArray(paginated) ? paginated : paginated
                         )}
                     </div>
-                ) : (
-                    <>
-                        <div className="flex flex-col gap-[.75rem]">
-                            <CaseValueContext.Provider value={value}>
-                                {Array.isArray(paginated) && paginated.length === 0 ? (
-                                    <div className="text-center text-(--color-gray-black)">Нет данных</div>
-                                ) : (
-                                    Array.isArray(paginated) ? paginated : paginated
-                                )}
-                            </CaseValueContext.Provider>
-                        </div>
-                        {Array.isArray(tabContent) && totalPages > 1 && renderPagination()}
-                    </>
-                )}
-            </div>
+                    {Array.isArray(tabContent) && totalPages > 1 && renderPagination()}
+                </>
+            ) : (
+                <div className="flex flex-col justify-between h-full">
+                    <div className={`flex flex-col gap-[.75rem] ${props.classChildren}`}>
+                        <CaseValueContext.Provider value={value}>
+                            {Array.isArray(paginated) && paginated.length === 0 ? (
+                                <div className="text-center text-(--color-gray-black)">Нет данных</div>
+                            ) : (
+                                Array.isArray(paginated) ? paginated : paginated
+                            )}
+                        </CaseValueContext.Provider>
+                    </div>
+                    {Array.isArray(tabContent) && totalPages > 1 && renderPagination()}
+                </div>
+            )}
         </div>
     )
 }
