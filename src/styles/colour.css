@@ -161,6 +161,16 @@ button {
 
         &:hover { box-shadow: none; }
     }
+
+    &.reject-button:hover {
+        background: var(--color-red-noise);
+        color: var(--color-red);
+    }
+
+    &.approve-button:hover {
+        background: var(--color-green-noise);
+        color: var(--color-green);
+    }
 }
 
 meter {
