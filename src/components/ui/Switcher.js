@@ -28,9 +28,9 @@ Switcher.Option = function Option({ children, value, className = '', disabled, o
         <span
             value={value}
             className={`link option ${className} ${disabled ? 'disabled' : ''}`}
-            {...props}
             onClick={disabled ? undefined : onClick}
             aria-disabled={disabled}
+            {...props}
         >
             {children}
         </span>

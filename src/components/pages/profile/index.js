@@ -59,7 +59,7 @@ export default function ProfileIndexPage({ goTo }) {
                 </Card>
                 <div className='col-span-4 h-fit'>
                     <div className='block-wrapper col-span-4'>
-                        <h6 className='text-(--color-gray-black)'>Организация и команда</h6>
+                        <h6>Организация и команда</h6>
                         <div className='flex flex-col gap-[0.75rem]'>
                             <div className='group cursor-pointer flex items-center justify-between w-full'>
                                 <a className='flex-1'>Московский государственный университет имени М.В.Ломоносова</a>
@@ -74,7 +74,6 @@ export default function ProfileIndexPage({ goTo }) {
                     </div>
                 </div>
                 <Folder projects="2" works="12" exp="100" onClick={() => goTo('workfolder')} />
-                <Calendar />
             </div>
         </>
     )

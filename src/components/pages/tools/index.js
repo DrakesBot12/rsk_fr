@@ -678,7 +678,7 @@ export default function IndexPage({ goTo }) {
 
                     <div className='flex flex-col gap-[1rem]'>
                         <div className='block-wrapper col-span-4'>
-                            <h6 className='text-(--color-gray-black)'>Ваш промт</h6>
+                            <h6>Ваш промт</h6>
                             <p>{prompt || 'Заполните поля и нажмите "Создать запрос"'}</p>
                         </div>
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import FolderIcon from '@/assets/general/folder.svg'
 
-export default function Folder({ projects, works, exp, min, ...props }) {
+export default function Folder({ projects, cases, coins, min, ...props }) {
     return (
         <a className={`workfolder-wrapper col-span-4 cursor-pointer group ${min ? 'aspect-video' : 'aspect-square'}`} {...props}>
             <div className="workfolder-back">
@@ -21,8 +21,8 @@ export default function Folder({ projects, works, exp, min, ...props }) {
                             <p className="big">проекта</p>
                         </div>
                         <div className={`folder-footer-right ${min ? '!text-(--color-gray-black)' : ''}`}>
-                            <span className="link">{ works } дел</span>
-                            <span className="link">{ exp } баллов</span>
+                            <span className="link">{ cases } дел</span>
+                            <span className="link">{ coins } баллов</span>
                         </div>
                     </div>
                 </div>

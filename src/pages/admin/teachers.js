@@ -5,7 +5,6 @@ import Button from "@/components/ui/Button";
 
 import Zapret from  "@/assets/general/zapret.svg";
 import NeZapret from  "@/assets/general/neZapret.svg";
-
 import Imagimagi from "@/assets/general/image.svg";
 
 const teachers = [
@@ -33,7 +32,7 @@ export default function AdminTeachers() {
                 <Header.Heading>Преподаватели</Header.Heading>
             </Header>
             <div className="hero items-center justify-center">
-                <div className="flex flex-col col-start-3 col-end-9 h-full gap-[.75rem]">
+                <div className="flex flex-col col-start-4 col-end-10 h-full gap-[.75rem]">
                     <div className="gap-[0.625rem] bg-(--color-white-gray) flex items-center justify-center rounded-[.625rem] px-[.875rem] py-[.5rem]">
                         <div className="h-[1.25rem] aspect-square rounded-full bg-(--color-gray-plus-50)"></div>
                         <span className="link">Ожидают подтверждения</span>
@@ -46,9 +45,9 @@ export default function AdminTeachers() {
                                     <span className="flex items-center link small gap-[.5rem]">{teacher.name}</span>
                                 </div>
                             <div className="flex justify-end gap-[0.5rem]">
-                                <Button inverted roundeful small className="!w-fit reject-button">Отклонить <Zapret/></Button>
-                                <Button inverted roundeful small className="!w-fit approve-button">Подтвердить <NeZapret/></Button>
-                                <Button inverted roundeful small className="!w-fit">Открыть</Button>
+                                <Button inverted roundeful className="!w-fit reject-button">Отклонить <Zapret/></Button>
+                                <Button inverted roundeful className="!w-fit approve-button">Подтвердить <NeZapret/></Button>
+                                <Button inverted roundeful className="!w-fit">Открыть</Button>
                             </div>
                         </div>
                     ))}

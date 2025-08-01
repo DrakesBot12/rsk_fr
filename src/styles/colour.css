@@ -169,7 +169,7 @@ button {
 
     &.approve-button:hover {
         background: var(--color-green-noise);
-        color: var(--color-green);
+        color: var(--color-green-peace);
     }
 }
 
@@ -202,6 +202,10 @@ meter {
     }
 }
 
+hr {
+    border: 1.5px solid var(--color-gray-plus);
+}
+
 .switcher {
     background: var(--color-gray-plus-50);
 
@@ -217,6 +221,11 @@ meter {
         &.active {
             color: var(--color-black);
             background: var(--color-white);
+        }
+
+        &.option.disabled {
+            cursor: not-allowed;
+            color: var(--color-gray-white)
         }
     }
 }
@@ -401,6 +410,10 @@ meter {
 
 .block-wrapper {
     background: var(--color-white-gray);
+
+    h6 {
+        color: var(--color-gray-black);
+    }
 }
 
 .activity-calendar {
