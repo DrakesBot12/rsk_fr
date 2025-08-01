@@ -1,8 +1,11 @@
+import { useRouter } from 'next/router';
+
 import Header from "@/components/layout/Header";
 import Button from "@/components/ui/Button";
 import Notify from '@/assets/general/notify.svg';
 
 export default function OrganNotFound() {
+    const router = useRouter();
     return (
         <>
             <Header>
