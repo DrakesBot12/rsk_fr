@@ -11,7 +11,7 @@ import Switcher from "@/components/ui/Switcher";
 import Notify from '@/assets/general/notify.svg';
 
 export default function Createteam() {
-    const [teamType, setTeamType] = useState('student') // teacher
+    const [teamType, setTeamType] = useState('student'); // teacher
 
     return (
         <Layout>
