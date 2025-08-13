@@ -65,7 +65,7 @@ export default function TeamIndexPage({ goTo }) {
                             <p>{team.region}</p>
                         </div>
                     </div>
-                    <Folder projects={team.projects} cases={team.cases.length} coins={team.coins} />
+                    <Folder projects={team.projects} cases={team.cases.length} coins={team.coins} onClick={() => goTo("workfolder")} team />
                 </div>
                 <div className="block-wrapper gap-[1.25rem] col-span-12 h-fit">
                     <h5>Участники</h5>
