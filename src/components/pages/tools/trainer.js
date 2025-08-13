@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Header } from "@/components/layout/Header";
+import Header from "@/components/layout/Header";
 
 import InfoIcon from '@/assets/general/info.svg';
 import LinkIcon from '@/assets/general/link.svg';
@@ -10,10 +10,9 @@ import Plusicon from '@/assets/general/plus.svg';
 import SettsIcon from '@/assets/general/setts.svg';
 import RandomIcon from '@/assets/general/random.svg';
 
-import Input from '@/components/ui/Input';
+import Input from '@/components/ui/Input/Input';
 import Button from "@/components/ui/Button";
 import Switcher from '@/components/ui/Switcher';
-import Block from "@/components/pages/public/Block";
 
 export default function TrainerPage({ goTo }) {
     const [visualType, setVisualType] = useState('visual-static');
@@ -32,20 +31,20 @@ export default function TrainerPage({ goTo }) {
                 <Button icon onClick={() => goTo('settings')}><SettsIcon /></Button>
             </Header>
             <div className='hero'>
-                <Block className="col-span-6 !h-full">
+                <div className="block-wrapper col-span-6 !h-full">
                     <form className="flex flex-col h-full justify-between">
                         <div className="flex flex-col gap-[1.25rem]">
                             <div className="flex flex-col gap-[1rem]">
                                 <Switcher value={type} onChange={setType} className='!w-full'>
-                                    <span value="text">Текст</span>
-                                    <span value="audio">Аудио</span>
-                                    <span value="visual">Визуал</span>
-                                    <span value="interactive">Интерактив</span>
-                                    <span value="data">Данные</span>
+                                    <Switcher.Option value="text">Текст</Switcher.Option>
+                                    <Switcher.Option value="audio">Аудио</Switcher.Option>
+                                    <Switcher.Option value="visual">Визуал</Switcher.Option>
+                                    <Switcher.Option value="interactive">Интерактив</Switcher.Option>
+                                    <Switcher.Option value="data">Данные</Switcher.Option>
                                 </Switcher>
                                 <Switcher value={visualType} onChange={setVisualType} className={`!w-full ${type === 'visual' ? 'flex' : '!hidden'}`}>
-                                    <span value="visual-static">Статика</span>
-                                    <span value="visual-dynamic">Динамика</span>
+                                    <Switcher.Option value="visual-static">Статика</Switcher.Option>
+                                    <Switcher.Option value="visual-dynamic">Динамика</Switcher.Option>
                                 </Switcher>
                             </div>
                             <div className="flex flex-col gap-[0.5rem]">
@@ -99,7 +98,7 @@ export default function TrainerPage({ goTo }) {
                         </div>
                         <Button className="blue" type="button">Создать&nbsp;запрос</Button>
                     </form>
-                </Block>
+                </div>
 
                 <div className="flex flex-col justify-between col-span-6 h-full">
                     <div className="flex flex-col gap-[1.6rem]">
@@ -113,12 +112,12 @@ export default function TrainerPage({ goTo }) {
                         </div>
                         <div className="flex gap-[0.5rem]">
                             <Switcher value={userType} onChange={setUserType} className="!w-full">
-                                <span value="student">Студент</span>
-                                <span value="teacher">Преподаватель</span>
+                                <Switcher.Option value="student">Студент</Switcher.Option>
+                                <Switcher.Option value="teacher">Преподаватель</Switcher.Option>
                             </Switcher>
                             <Switcher value={who} onChange={setWho} className="!w-full">
-                                <span value="i">Я</span>
-                                <span value="we">Мы</span>
+                                <Switcher.Option value="i">Я</Switcher.Option>
+                                <Switcher.Option value="we">Мы</Switcher.Option>
                             </Switcher>
                         </div>
                         <div className="flex flex-col gap-[0.75rem]">
@@ -131,10 +130,10 @@ export default function TrainerPage({ goTo }) {
                         </div>
                     </div>
                     <div className='flex flex-col gap-[1rem]'>
-                        <Block>
-                            <h6 className='text-(--color-gray-black)'>Ваш промт</h6>
+                        <div className='block-wrapper col-span-4'>
+                            <h6>Ваш промт</h6>
                             <p>Представь, что ты копирайтер, создающий продающие тексты для digital-сфер и ты известен тем, что отлично справляешься с глубокая аналитика, подтверждённая авторитетными источниками. Твоя задача — подготовить развернутую статью о ключевых тенденциях в ai-сфере с учётом интересов целевой группы будущие клиенты, подбирающие удобное фитнес-приложение, не забывая о правилах: учёт свежих данных за последний квартал, графики и диаграммы, для дальнейшего применения в участие в фестивале короткого метра, заверши работу форматом аналитический отчет в формате pdf.</p>
-                        </Block>
+                        </div>
                         <div className='flex flex-col gap-[0.5rem]'>
                             <div className='flex gap-[0.5rem]'>
                                 <Button inverted className="stroke-(--color-gray-black)">WebSim <LinkIcon /></Button>

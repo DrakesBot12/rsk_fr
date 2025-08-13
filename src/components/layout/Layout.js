@@ -1,10 +1,13 @@
-import Aside from './Aside';
+import dynamic from 'next/dynamic';
 
-export default function Layout({ children }) {
+import AsideLoader from './Aside/Loader';
+const Aside = dynamic(() => import('./Aside/Aside'), { ssr: false, loading: () => <AsideLoader /> });
+
+export default function Layout({ children, ...props }) {
     return (
         <div className="root-layout overflow-x-clip">
             <Aside />
-            <main>
+            <main {...props}>
                 { children }
             </main>
         </div>

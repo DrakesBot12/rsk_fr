@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Header } from "@/components/layout/Header";
+import Header from "@/components/layout/Header";
 
 import Buffer from './addons/popup';
 
@@ -11,10 +11,9 @@ import Plusicon from '@/assets/general/plus.svg';
 import SettsIcon from '@/assets/general/setts.svg';
 import RandomIcon from '@/assets/general/random.svg';
 
-import Input from '@/components/ui/Input';
+import Input from '@/components/ui/Input/Input';
 import Button from "@/components/ui/Button";
 import Switcher from '@/components/ui/Switcher';
-import Block from '@/components/pages/public/Block';
 
 export default function IndexPage({ goTo }) {
     const fieldsList = [
@@ -624,11 +623,11 @@ export default function IndexPage({ goTo }) {
             </Header>
 
             <div className='hero relative'>
-                <Block className="col-span-6 !h-full">
+                <div className="block-wrapper col-span-6 !h-full">
                     <form className="flex flex-col h-full justify-between" onSubmit={e => e.preventDefault()}>
                         <div className="flex flex-col gap-[1.25rem]">
                             <div className="flex flex-col gap-[0.5rem]">
-                                <span className="big">Цели и целевая направленность</span>
+                                <span className="link big">Цели и целевая направленность</span>
                                 {fieldsList.slice(0, 4).map(f => (
                                     <div key={f.code} className="group flex w-full gap-[0.5rem]">
                                         <Input className="w-full" placeholder={f.label}
@@ -640,7 +639,7 @@ export default function IndexPage({ goTo }) {
                                 ))}
                             </div>
                             <div className="flex flex-col gap-[0.5rem]">
-                                <span className="big">Условия реализации и параметры оформления</span>
+                                <span className="link big">Условия реализации и параметры оформления</span>
                                 {fieldsList.slice(4).map(f => (
                                     <div key={f.code} className="group flex w-full gap-[0.5rem]">
                                         <Input className="w-full" placeholder={f.label}
@@ -654,7 +653,7 @@ export default function IndexPage({ goTo }) {
                         </div>
                         <Button className="blue" type="button" onClick={createPrompt}>Создать&nbsp;запрос</Button>
                     </form>
-                </Block>
+                </div>
 
                 <div className="flex flex-col justify-between col-span-6 h-full">
                     <div className="flex flex-col gap-[1rem]">
@@ -664,24 +663,24 @@ export default function IndexPage({ goTo }) {
                                 {defaultTypes.map(t => {
                                     const label = t.label || t.key;
                                     return (
-                                        <span key={t.key} value={t.key}>
+                                        <Switcher.Option key={t.key} value={t.key}>
                                             {label.charAt(0).toUpperCase() + label.slice(1)}
-                                        </span>
+                                        </Switcher.Option>
                                     );
                                 })}
                             </Switcher>
                             <Switcher value={visualType} onChange={setVisualType} className={`!w-full ${type === 'visual' ? 'flex' : '!hidden'}`}>
-                                <span value="visual-static">Статика</span>
-                                <span value="visual-dynamic">Динамика</span>
+                                <Switcher.Option value="visual-static">Статика</Switcher.Option>
+                                <Switcher.Option value="visual-dynamic">Динамика</Switcher.Option>
                             </Switcher>
                         </div>
                     </div>
 
                     <div className='flex flex-col gap-[1rem]'>
-                        <Block>
-                            <h6 className='text-(--color-gray-black)'>Ваш промт</h6>
+                        <div className='block-wrapper col-span-4'>
+                            <h6>Ваш промт</h6>
                             <p>{prompt || 'Заполните поля и нажмите "Создать запрос"'}</p>
-                        </Block>
+                        </div>
 
                         <div className='flex flex-col gap-[0.5rem]'>
                             <div className='flex gap-[0.5rem]'>

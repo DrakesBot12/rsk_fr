@@ -1,8 +1,9 @@
 import Image from 'next/image';
 
-import Button from '@/components/ui/Button';
-import { Header } from '@/components/layout/Header';
+import Header from '@/components/layout/Header';
 import Layout from '@/components/layout/Layout';
+
+import Button from '@/components/ui/Button';
 
 import Notify from '@/assets/general/notify.svg';
 

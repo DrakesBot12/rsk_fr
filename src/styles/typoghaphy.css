@@ -31,7 +31,7 @@ h6 {
     font: 500 1rem var(--font-family);
 }
 
-p, input {
+p, input, textarea, .text {
     font: 400 0.75rem var(--font-family);
 
     &.big {
@@ -43,7 +43,7 @@ p, input {
     }
 }
 
-a, button, span {
+a, button, .link {
     font: 600 0.75rem var(--font-family);
 
     &.big {

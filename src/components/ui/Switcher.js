@@ -1,45 +1,20 @@
-import React, { Children, cloneElement, useState } from 'react';
+import React, { Children, cloneElement } from 'react';
 
-export default function Switcher({ 
-    big, 
-    small, 
-    className = '', 
-    children, 
-    value: controlledValue, 
-    onChange 
-}) {
-    // Если value не передан, используем внутренний state
-    const isControlled = controlledValue !== undefined;
-    const [uncontrolledValue, setUncontrolledValue] = useState(() => {
-        // По умолчанию берем value первого ребенка, если есть
-        const firstChild = Children.toArray(children)[0];
-        return firstChild?.props?.value || firstChild?.key || undefined;
-    });
-    const value = isControlled ? controlledValue : uncontrolledValue;
-
+export default function Switcher({ big, small, className = '', children, value, onChange }) {
     const classes = `switcher ${big ? 'big' : small ? 'small' : ''} ${className}`;
 
-    const handleOptionClick = (optionValue) => {
-        if (!isControlled) {
-            setUncontrolledValue(optionValue);
-        }
-        if (onChange) {
-            onChange(optionValue);
-        }
-    };
-
-    const modifiedChildren = Children.map(children, (child) => {
-        // Проверяем, что child - элемент React
-        if (!React.isValidElement(child)) return child;
-
-        // Определяем значение опции
-        const optionValue = child.props.value || child.key;
-
-        return cloneElement(child, {
-            className: `option ${value === optionValue ? 'active' : ''}`,
-            onClick: () => handleOptionClick(optionValue)
-        });
-    });
+    const modifiedChildren = Children.map(children, child =>
+        React.isValidElement(child) ?
+        cloneElement(child, {
+            className: `${value === (child.props.value ?? child.key) ? 'active' : ''} ${child.props.className ?? ''}`,
+            onClick: child.props.disabled
+                ? undefined
+                : child.props.onClick
+                    ? child.props.onClick
+                    : () => onChange?.(child.props.value ?? child.key)
+        })
+        : child
+    );
 
     return (
         <div className={classes}>
@@ -48,24 +23,30 @@ export default function Switcher({
     )
 }
 
-
+Switcher.Option = function Option({ children, value, className = '', disabled, onClick, ...props }) {
+    return (
+        <span
+            value={value}
+            className={`link option ${className} ${disabled ? 'disabled' : ''}`}
+            onClick={disabled ? undefined : onClick}
+            aria-disabled={disabled}
+            {...props}
+        >
+            {children}
+        </span>
+    );
+}
 
 {/*
-    Controlled-режим
+    Пример использования:
     
-    const [tab, setTab] = useState('works')
+    import Switcher from '@/components/ui/Switcher';
+    
+    const [activeTab, setActiveTab] = useState('works');
 
-    <Switcher value={tab} onChange={setTab}>
-        <span value="works">Дела</span>
-        <span value="projects">Проекты</span>
-    </Switcher>
-*/}
-
-{/*
-    Uncontrolled-режим (работает без value/onChange)
-
-    <Switcher>
-        <span value="works">Дела</span>
-        <span value="projects">Проекты</span>
+    <Switcher value={activeTab} onChange={setActiveTab}>
+        <Switcher.Option value="works">Работы</Switcher.Option>
+        <Switcher.Option value="projects">Проекты</Switcher.Option>
+        <Switcher.Option value="tasks">Задачи</Switcher.Option>
     </Switcher>
 */}
