@@ -25,15 +25,14 @@ export default function OrganMembersPage({ goTo }) {
     const router = useRouter();
     const { organ: url } = router.query;
 
+    const [sortBy, setSortBy] = useState('names'); // names, coins
+    const [sortWay, setSortWay] = useState('up'); // down
+    const [caseType, setCaseType] = useState('all');
+    const [search, setSearch] = useState(false);
+
     const organ = organs.find((t) => t.url === url);
 
     if (!organ) return <OrganNotFound goTo={goTo} />;
-
-    const [sortBy, setSortBy] = useState('names') // names, coins
-    const [sortWay, setSortWay] = useState('up') // down
-
-    const [caseType, setCaseType] = useState('all');
-    const [search, setSearch] = useState(false);
 
     return (
         <>
