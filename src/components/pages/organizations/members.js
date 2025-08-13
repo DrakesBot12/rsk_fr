@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 import { organs } from "@/components/pages/organizations/_organs";
+import OrganNotFound from "./not-found";
 
 import Header from "@/components/layout/Header";
 
