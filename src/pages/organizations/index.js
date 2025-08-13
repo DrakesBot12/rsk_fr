@@ -70,7 +70,7 @@ export default function OrganIndexPage() {
                                     </div>
                                     <div className="flex gap-[.25rem] items-center text-(--color-gray-black) group-hover:text-(--color-black)">
                                         <Persons />
-                                        <span className="link small">{organ.members.length} </span>
+                                        <span className="link small">{organ.members.length} участников</span>
                                     </div>
                                     <div className="flex gap-[.25rem] items-center text-(--color-gray-black) group-hover:text-(--color-black)">
                                         <Persons />
