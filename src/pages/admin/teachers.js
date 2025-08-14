@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import Zapret from  "@/assets/general/zapret.svg";
 import NeZapret from  "@/assets/general/neZapret.svg";
 import Imagimagi from "@/assets/general/image.svg";
+import Notify from '@/assets/general/notify.svg';
 
 const teachers = [
     { name: 'Лебедев Андрей Андреевич' },
@@ -30,6 +31,7 @@ export default function AdminTeachers() {
         <Layout>
             <Header>
                 <Header.Heading>Преподаватели</Header.Heading>
+                <Button icon><Notify /></Button>
             </Header>
             <div className="hero items-center justify-center">
                 <div className="flex flex-col col-start-4 col-end-10 h-full gap-[.75rem]">
