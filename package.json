@@ -12,7 +12,7 @@
         "framer-motion": "^12.15.0",
         "js-cookie": "^3.0.5",
         "next": "^15.4.2",
-        "react": "^19.0.0",
+        "react": "^19.1.1",
         "react-dom": "^19.0.0",
         "react-hook-form": "^7.57.0"
     },
