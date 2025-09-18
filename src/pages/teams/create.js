@@ -37,19 +37,6 @@ export default function Createteam() {
                         </div>
                     </div>
                 </div>
-                <div className="col-span-4 flex flex-col h-full justify-between">
-                    <div className="flex flex-col gap-[1.25rem]">
-                        <h6>Параметры</h6>
-                        <div className="flex flex-col gap-[.25rem]">
-                            <Switcher value={teamType} onChange={setTeamType} className="!w-full">
-                                <Switcher.Option value="teacher" disabled>Преподавательская</Switcher.Option>
-                                <Switcher.Option value="student">Студенческая</Switcher.Option>
-                            </Switcher>
-                            <p className="small text-(--color-gray-black)">Тип команды, для студентов или для преподавателей</p>
-                        </div>
-                    </div>
-                    <Button disabled>Создать команду</Button>
-                </div>
             </div>
         </Layout>
     )

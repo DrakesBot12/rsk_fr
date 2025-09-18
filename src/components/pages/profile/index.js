@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 import { getUserData } from '@/utils/auth';
 
 import Header from '@/components/layout/Header';
-import { Card } from '@/components/ui/Card';
+import Card from '@/components/ui/Card';
 
 import Setts from '@/assets/general/setts.svg'
 import Notify from '@/assets/general/notify.svg'

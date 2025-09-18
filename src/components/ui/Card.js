@@ -1,4 +1,4 @@
-export function Card({ children, className = '', ...props }) {
+export default function Card({ children, className = '', ...props }) {
     return (
         <div className={`card col-span-4 h-fit ${className}`} {...props}>
             { children }
