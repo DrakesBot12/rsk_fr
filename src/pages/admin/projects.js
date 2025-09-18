@@ -75,8 +75,8 @@ export default function AdminProjects() {
                 </div>
                 <div className={`flex col-span-6`}>
                     {projects.map((project, idx) => (
-                        <div>
-                            <div key={idx} className=''>
+                        <div key={idx}>
+                            <div className=''>
                                 <h6>{project.name}</h6>
                             </div>
                             <div>
