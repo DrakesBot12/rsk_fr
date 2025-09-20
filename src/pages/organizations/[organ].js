@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Layout from '@/components/layout/Layout';
 import TransitionWrapper from '@/components/layout/TransitionWrapper';
 
-
 import OrganIndexPage from '@/components/pages/organizations';
 import OrganMembersPage from '@/components/pages/organizations/members';
 

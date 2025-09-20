@@ -38,7 +38,7 @@ export default function OrganIndexPage() {
                     <div className="flex w-full justify-between h-fit">
                         <div className={`flex gap-[.75rem] w-${search ? 'full' : '1/2'}`}>
                             <Input type="search" id="searchorgan" name="searchorgan" autoComplete="off" placeholder="Введите название команды" className="w-full" />
-                            <Button inverted icon><Search/></Button>                        
+                            <Button inverted icon><Search/></Button>
                         </div>
                         {search ? '' : (
                             <div className="flex gap-[.75rem] w-fit">
@@ -104,9 +104,10 @@ export default function OrganIndexPage() {
                             <span className="link big">Регион</span>
                             <Input placeholder="Белгородская область" id="sortByReg" name="sortByReg" autoComplete="off" />
                         </div>
-                        <div className="flex flex-col gap-[.5rem]">
+                        {/* <div className="flex flex-col gap-[.5rem]">
                             <span className="link big">Лимиты</span>
                             <Switcher value={sortLetter} onChange={setSortLetter} className="!w-full">
+                                <Switcher.Option value="e">Е</Switcher.Option>
                                 <Switcher.Option value="e">Е</Switcher.Option>
                                 <Switcher.Option value="z">З</Switcher.Option>
                                 <Switcher.Option value="d">Д</Switcher.Option>
@@ -117,7 +118,7 @@ export default function OrganIndexPage() {
                                 <Input type="number" min={0} max={5} step={0.1} className="!w-full" id="max" name="max" autoComplete="off" placeholder="Максимум" />
                                 <Button inverted className="!w-fit">{`+`}</Button>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <Button>Найти организацию</Button>
                 </div>

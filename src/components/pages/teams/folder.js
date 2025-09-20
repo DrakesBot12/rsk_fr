@@ -22,17 +22,7 @@ export default function TeamWorkFolderPage({ goTo }) {
     const team = teams.find((t) => t.url === url);
 
     if (!team) return <TeamNotFound goTo={goTo} />;
-/*         
-cases: [
-    {
-        name: "Разработка системы шифрования",
-        desc: "Создание собственной системы для защиты данных",
-        tags: [
-            { name: "100 баллов", color: "blue", icon: "coin" },
-            { name: "Проект", color: "blue" }
-        ]
-    },
-*/
+
     return (
         <>
             <Header>

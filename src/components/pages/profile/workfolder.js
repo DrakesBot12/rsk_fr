@@ -16,7 +16,7 @@ const cases = [
         desc: "Слайды к выступлению на конференции",
         tags: [
             { name: "10 баллов", color: "blue", icon: "coin" },
-            { name: "Проект", color: "green" }
+            { name: "Проект", color: "blue" }
         ]
     },
     {
@@ -24,7 +24,7 @@ const cases = [
         desc: "Уборка перед приходом гостей",
         tags: [
             { name: "2 балла", color: "blue", icon: "coin" },
-            { name: "Дело", color: "green" }
+            { name: "Дело", color: "blue" }
         ]
     },
     {
@@ -32,7 +32,7 @@ const cases = [
         desc: "Публикация в блог по фронтенду",
         tags: [
             { name: "7 баллов", color: "blue", icon: "coin" },
-            { name: "Проект", color: "green" }
+            { name: "Проект", color: "blue" }
         ]
     },
     {
@@ -40,7 +40,7 @@ const cases = [
         desc: "Список: хлеб, молоко, сыр",
         tags: [
             { name: "1 балл", color: "blue", icon: "coin" },
-            { name: "Дело", color: "green" }
+            { name: "Дело", color: "blue" }
         ]
     },
     {
@@ -48,7 +48,7 @@ const cases = [
         desc: "Тестовый лендинг для портфолио",
         tags: [
             { name: "8 баллов", color: "blue", icon: "coin" },
-            { name: "Проект", color: "green" }
+            { name: "Проект", color: "blue" }
         ]
     },
     {
@@ -56,16 +56,15 @@ const cases = [
         desc: "Систематизировать документы",
         tags: [
             { name: "3 балла", color: "blue", icon: "coin" },
-            { name: "Дело", color: "green" }
+            { name: "Дело", color: "blue" }
         ]
     },
-    // Новые кейсы для теста пагинации
     {
         name: "Сделать домашку по математике",
         desc: "Решить задачи из учебника",
         tags: [
             { name: "5 баллов", color: "blue", icon: "coin" },
-            { name: "Дело", color: "green" }
+            { name: "Дело", color: "blue" }
         ]
     },
     {
@@ -73,7 +72,7 @@ const cases = [
         desc: "Вечерняя прогулка в парке",
         tags: [
             { name: "1 балл", color: "blue", icon: "coin" },
-            { name: "Дело", color: "green" }
+            { name: "Дело", color: "blue" }
         ]
     },
     {
@@ -81,7 +80,7 @@ const cases = [
         desc: "Разработка сайта для школы",
         tags: [
             { name: "12 баллов", color: "blue", icon: "coin" },
-            { name: "Проект", color: "green" }
+            { name: "Проект", color: "blue" }
         ]
     },
     {
@@ -89,7 +88,7 @@ const cases = [
         desc: "Видео по React.js",
         tags: [
             { name: "2 балла", color: "blue", icon: "coin" },
-            { name: "Дело", color: "green" }
+            { name: "Дело", color: "blue" }
         ]
     },
     {
@@ -97,7 +96,7 @@ const cases = [
         desc: "Утренняя разминка",
         tags: [
             { name: "1 балл", color: "blue", icon: "coin" },
-            { name: "Дело", color: "green" }
+            { name: "Дело", color: "blue" }
         ]
     },
     {
@@ -105,7 +104,7 @@ const cases = [
         desc: "Глава из художественной литературы",
         tags: [
             { name: "4 балла", color: "blue", icon: "coin" },
-            { name: "Дело", color: "green" }
+            { name: "Дело", color: "blue" }
         ]
     },
     {
@@ -113,7 +112,7 @@ const cases = [
         desc: "Эксперимент с электричеством",
         tags: [
             { name: "9 баллов", color: "blue", icon: "coin" },
-            { name: "Проект", color: "green" }
+            { name: "Проект", color: "blue" }
         ]
     },
     {
@@ -121,7 +120,7 @@ const cases = [
         desc: "Купить продукты на неделю",
         tags: [
             { name: "2 балла", color: "blue", icon: "coin" },
-            { name: "Дело", color: "green" }
+            { name: "Дело", color: "blue" }
         ]
     },
     {
@@ -129,7 +128,7 @@ const cases = [
         desc: "Подготовить слайды для доклада",
         tags: [
             { name: "6 баллов", color: "blue", icon: "coin" },
-            { name: "Проект", color: "green" }
+            { name: "Проект", color: "blue" }
         ]
     },
     {
@@ -137,7 +136,7 @@ const cases = [
         desc: "Разложить бумаги и канцелярию",
         tags: [
             { name: "2 балла", color: "blue", icon: "coin" },
-            { name: "Дело", color: "green" }
+            { name: "Дело", color: "blue" }
         ]
     },
     {
@@ -145,7 +144,7 @@ const cases = [
         desc: "Написать статью о программировании",
         tags: [
             { name: "7 баллов", color: "blue", icon: "coin" },
-            { name: "Проект", color: "green" }
+            { name: "Проект", color: "blue" }
         ]
     }
 ];
