@@ -37,6 +37,7 @@ export const NAV_LINKS = [
         ]
      },
     { label: 'Новости', href: '/news', icon: dynamic(() => import('@/assets/nav/news.svg')) },
+    { label: 'Курсы', href: '/cours', icon: dynamic(() => import('@/assets/nav/cours.svg')) },
     { 
         label: 'Инструменты',
         href: '#',
