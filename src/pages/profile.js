@@ -17,7 +17,7 @@ export default function ProfilePage() {
         setPageKey(pageName);
     };
 
-    isAuthorized() ? console.log(1) : router.push('/auth')
+    isAuthorized() ? console.log() : useEffect(() => router.push('/auth'))
 
     return (
         <Layout>

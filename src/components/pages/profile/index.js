@@ -13,9 +13,39 @@ import Notify from '@/assets/general/notify.svg'
 import LinkIcon from '@/assets/general/link.svg'
 
 import Folder from '@/components/other/Folder';
-import Calendar from '@/components/ui/Calendar';
 
-export default function ProfileIndexPage({ goTo }) {
+export async function getServerSideProps(context) {
+    try {
+        const response = await fetch(
+            "https://api.rosdk.ru/users/profile_interaction/get_my_profile/",
+            {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    credentials: "include"
+                },
+            }
+        );
+      
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Ошибка API");
+        }
+      
+        const info = await response.json();
+      
+        return {
+            props: { info },
+        };
+    } catch (err) {
+        return {
+            props: { info: null, error: err.message },
+        };
+    }
+}
+
+export default function ProfileIndexPage({ goTo, info, error }) {
+    console.log(info, error)
     const [userData, setUserData] = useState(null);
     const [hydrated, setHydrated] = useState(false);
 
@@ -48,13 +78,12 @@ export default function ProfileIndexPage({ goTo }) {
                         <div className="flex gap-[0.5rem] flex-wrap">
                             <Tags tags={[
                                 { name: `${userData.userType === "teacher" ? 'Преподаватель' : 'Студент'}`, color: "blue", icon: 'coin' },
-                                { name: "Москва", color: "blue" },
-                                { name: "Стаж: 100 дней", color: "blue" }
+                                { name: "Москва", color: "blue" }
                             ]} />
                         </div>
                     </Card.Heading>
                     <Card.Footer>
-                        <a className='big relative z-[1]'>На 40% эффективнее других участников</a>
+                        <a className='big relative z-[1]'>Здраствуйте</a>
                     </Card.Footer>
                 </Card>
                 <div className='col-span-4 h-fit'>
