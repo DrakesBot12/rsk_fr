@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { isAuthorized, saveUserData } from '@/utils/auth';
+import { isAuthorized } from '@/utils/auth';
 
 import Notify from '@/assets/general/notify.svg';
 
@@ -50,13 +50,8 @@ export default function AuthPage() {
 
     const getDirection = () => (authType === 'register' ? 1 : -1);
 
-    const handleSaveUserData = (data) => {
-        saveUserData(data);
-        setStep(1);
-    };
-
     const handleNext = (data) => {
-        handleSaveUserData(data);
+        setStep(1);
     };
 
     const handleSave = (extraData) => {
@@ -73,7 +68,6 @@ export default function AuthPage() {
         login: [
             <LoginStage0
                 key="login-0"
-                onLogin={handleNext}
                 pageVariants={pageVariants}
                 custom={getDirection()}
                 onForgotPassword={handleForgotPassword}
@@ -91,7 +85,7 @@ export default function AuthPage() {
     return (
         <Layout>
             <Header>
-                <Header.Heading className="relative overflow-hidden">
+                <Header.Heading className="flex gap-[.5rem] relative overflow-hidden">
                     Авторизация
                     <span className="text-(--color-gray-white)" style={{font: 'inherit'}}>/</span>
                     <AnimatePresence mode="wait">

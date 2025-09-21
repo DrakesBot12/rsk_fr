@@ -22,10 +22,10 @@ export default function RegStage1({
         >
             <div className='flex flex-col items-center gap-[0.5rem] w-full'>
                 <h3>Регистрация завершена</h3>
-                <p className='text-(--color-gray-black) text-center'>Вы можете закончить настройку своего аккаунта в настройках профиля. Удачи в цифровизации</p>                
+                <p className='text-(--color-gray-black) text-center'>Вы можете закончить настройку своего аккаунта в настройках профиля. Не забудьте подтвердить почту в отправленном вам письме. Удачи в цифровизации!</p>                
             </div>
 
-            <Button onClick={() => router.push('/profile')}>В профиль</Button>
+            <Button onClick={() => router.push('/profile')}>Войти в аккаунт</Button>
         </motion.div>
     );
 } 

@@ -14,9 +14,10 @@ export default function RegStage0({
 }) {
     const [userType, setUserType] = useState('student');
     const [formData, setFormData] = useState({
-        login: '',
+        name: '',
         email: '',
         password: '',
+        role: userType
     });
 
     const handleInputChange = (e) => {
@@ -27,15 +28,55 @@ export default function RegStage0({
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (formData.password.length < 8) {
+            alert('Пароль должен содержать минимум 8 символов');
+            return;
+        }
 
         if (formData.password !== formData.confirmPassword) {
             alert('Пароли не совпадают');
             return;
         }
-        
-        onContinue({ ...formData, userType });
+
+        delete formData.confirmPassword;
+
+        try {
+            const response = await fetch('/api/auth/reg', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...formData
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                switch (response.status) {
+                    case 422:
+                        return alert("Неверные данные: " + JSON.stringify(data));
+                    case 400:
+                        return alert("Пользователь с таким именем уже существует")
+                    case 401:
+                        return alert("Неавторизованный запрос");
+                    case 403:
+                        return alert("Доступ запрещён");
+                    case 404:
+                        return alert("Ресурс не найден");
+                    default:
+                        return alert("Незвестная какая-то ошибка, я хз ващ");
+                }
+            } else { delete formData.password; delete formData.role; onContinue({...formData});}
+
+        } catch (err) {
+            setError(err.message || 'Произошла ошибка при регистрации');
+            console.error('Registration error:', err);
+        }
     };
 
     return (
@@ -63,7 +104,7 @@ export default function RegStage0({
                 onSubmit={handleSubmit}
             >
                 {[
-                    { name: 'login', placeholder: 'Логин', type: 'text', tabIndex: 1 },
+                    { name: 'name', placeholder: 'Логин', type: 'text', tabIndex: 1 },
                     { name: 'password', placeholder: 'Пароль', type: 'password', autocomplete: 'new-password' , tabIndex: 3 },
                     { name: 'email', placeholder: 'Почта', type: 'email', autocomplete: 'email', tabIndex: 2 },
                     { name: 'confirmPassword', placeholder: 'Подтвердите пароль', autocomplete: 'new-password', type: 'password', tabIndex: 4 },
@@ -82,14 +123,14 @@ export default function RegStage0({
                 >
                     Зарегистрироваться
                 </Button>
-                <div className="flex gap-[0.75rem] w-full">
+                {/* <div className="flex gap-[0.75rem] w-full">
                     <Button inverted>Яндекс ID <Yandex /></Button>
                     <Button inverted>ВК ID <VK /></Button>
-                </div>
+                </div> */}
             </div>
             <div className='flex flex-col gap-[.5rem]'>
-                <Input type="checkbox" small autoComplete='off' name="POPD" id="POPD"><span className='text'>Я даю согласие на <span className='link'>обработку персональных данных</span></span></Input>
-                <Input type="checkbox" small autoComplete='off' name="TOTUA" id="TOTUA"><span className='text'>Я принимаю <span className='link'>условия пользовательского соглашения</span></span></Input>
+                <Input type="checkbox" form="registration" small required autoComplete='off' name="POPD" id="POPD"><span className='text'>Я даю согласие на <span className='link'>обработку персональных данных</span></span></Input>
+                <Input type="checkbox" form="registration" small required autoComplete='off' name="TOTUA" id="TOTUA"><span className='text'>Я принимаю <span className='link'>условия пользовательского соглашения</span></span></Input>
             </div>
         </motion.div>
     );
