@@ -1,71 +1,141 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import Tags from '@/components/ui/Tags';
-import Button from '@/components/ui/Button';
+import Tags from "@/components/ui/Tags";
+import Button from "@/components/ui/Button";
 
-import { getUserData } from '@/utils/auth';
+import Header from "@/components/layout/Header";
 
-import Header from '@/components/layout/Header';
+import Setts from "@/assets/general/setts.svg";
+import Notify from "@/assets/general/notify.svg";
 
-import Setts from '@/assets/general/setts.svg';
-import Notify from '@/assets/general/notify.svg';
-
-import Input from '@/components/ui/Input/Input';
-import Textarea from '@/components/ui/Textarea';
+import Input from "@/components/ui/Input/Input";
+import Textarea from "@/components/ui/Textarea";
 
 export default function SettingsPage({ goTo }) {
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState(null); // оригинальные данные
+    const [formData, setFormData] = useState({}); // данные для формы
     const [hydrated, setHydrated] = useState(false);
+    const [isDirty, setIsDirty] = useState(false);
 
     useEffect(() => {
-        setUserData(getUserData());
-        setHydrated(true);
+        const ProfileInfo = async () => {
+            try {
+                const response = await fetch("/api/profile/info", {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                });
+
+                const data = await response.json();
+                setUserData(data);
+                setFormData(data.data);
+                setHydrated(true);
+            } catch (err) {
+                console.error("Request error:", err);
+            }
+        };
+
+        ProfileInfo();
     }, []);
 
     if (!hydrated || !userData) return null;
+
+    // обработчик изменений полей
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => {
+            const newForm = { ...prev, [name]: value };
+            const dirty = Object.keys(newForm).some((key) => newForm[key] !== userData.data[key]);
+            setIsDirty(dirty);
+            return newForm;
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!isDirty) return;
+
+        // создаём объект только с изменёнными полями
+        const changes = { id: userData.data.id };
+        Object.keys(formData).forEach((key) => {
+            if (formData[key] !== userData.data[key]) {
+                changes[key] = formData[key];
+            }
+        });
+
+        try {
+            const response = await fetch("/api/profile/update", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(changes),
+                credentials: "include",
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                alert("Данные успешно обновлены");
+                setUserData((prev) => ({ ...prev, data: formData })); // обновляем оригинальные данные
+                setIsDirty(false);
+                window.location.reload();
+            } else {
+                alert("Ошибка: " + JSON.stringify(data));
+            }
+        } catch (err) {
+            console.error("Update error:", err);
+        }
+    };
 
     return (
         <>
             <Header>
                 <Header.Heading>
-                    {userData.firstName && userData.lastName ? `${userData.firstName} ${userData.lastName}` : 'Незаполнено'}
-                    <span className='text-(--color-gray-black)'>/</span> Настройки
+                    {userData.data.NameIRL && userData.data.Surname ? `${userData.data.NameIRL} ${userData.data.Surname}` : "Незаполнено"}
+                    <span className="text-(--color-gray-black)">/</span> Настройки
                 </Header.Heading>
-                <Button icon active onClick={() => goTo('profile')}><Setts /></Button>
-                <Button icon><Notify /></Button>
+                <Button icon active onClick={() => goTo("profile")}>
+                    <Setts />
+                </Button>
+                <Button icon>
+                    <Notify />
+                </Button>
             </Header>
-            <div className='hero' style={{gridTemplateColumns: "repeat(3, 1fr)"}}>
-                <div className='flex flex-col gap-[.75rem]'>
+            <div className="hero" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+                <div className="flex flex-col gap-[.75rem]">
                     <h6>Основные данные</h6>
-                    <div className='flex gap-[.75rem]'>
-                        <Input type="image" className='h-1/2 aspect-square'/>
-                        <div className='flex flex-col gap-[.5rem] flex-1'>
-                            <Input type="text" id="FamilyName" name="FamilyName" autoComplete="family-name" placeholder="Введите фамилию" required/>
-                            <Input type="text" id="name" name="name" autoComplete="given-name" placeholder="Введите имя" required/>
-                            <Input type="text" id="surname" name="surname" autoComplete="additional-name" placeholder="Введите отчество"/>  
+                    <div className="flex gap-[.75rem]">
+                        {/* <Input type="image" className="h-1/2 aspect-square" /> */}
+                        <div className="flex flex-col gap-[.5rem] flex-1">
+                            <Input type="text" id="FamilyName" name="Surname" placeholder="Введите фамилию" value={formData.Surname || ""} onChange={handleChange} required />
+                            <Input type="text" id="name" name="NameIRL" placeholder="Введите имя" value={formData.NameIRL || ""} onChange={handleChange} required />
+                            <Input type="text" id="surname" name="Patronymic" placeholder="Введите отчество" value={formData.Patronymic || ""} onChange={handleChange} />
                         </div>
                     </div>
-                    <Textarea inverted id="about" name="about" autoComplete="off" rows={2} placeholder="Расскажите о себе кратко" />
-                    <Input type="dropdown" id="region" name="region" autoComplete="address-level1" src="/data/regions.txt" placeholder="Москва" />
+                    <Textarea inverted id="about" name="Description" placeholder="Расскажите о себе кратко" value={formData.Description || ""} onChange={handleChange} />
+                    <Input type="text" id="region" name="Region" placeholder="Введите регион" value={formData.Region || ""} onChange={handleChange} />
                 </div>
-                
-                <div className='flex flex-col gap-[1.25rem]'>
+
+                <div className="flex flex-col gap-[1.25rem]">
                     <h6>Организация и команда</h6>
-                    <div className='flex flex-col gap-[.75rem]'>
-                        <Input id="univers" name="univers" placeholder="Московский государственный университет имени М.В.Ломоносова" autocomplete="off" readOnly />
-                        <Input id="teames" name="teames" placeholder="Союз Самых Смелых Решений (СССР)" autocomplete="off" readOnly />
+                    <div className="flex flex-col gap-[.75rem]">
+                        <Input disabled id="univers" name="univers" placeholder="Московский государственный университет имени М.В.Ломоносова" autoComplete="off" readOnly />
+                        <Input disabled id="teames" name="teames" placeholder="Союз Самых Смелых Решений (СССР)" autoComplete="off" readOnly />
+                        <p style={{ color: "var(--color-gray-black)" }}>
+                            * Меняется в разделе <a href="/organizations">"Организации"</a> и "Команды"
+                        </p>
                     </div>
                 </div>
-                
-                <div className='flex flex-col justify-between h-full '>    
-                    <div className='flex flex-col gap-[1.25rem]'>
-                        <h6>Для преподавателей</h6>
-                        <Input type="image" className=''/>
-                        <Button>Загрузить</Button>
+
+                <div className="flex flex-col justify-between h-full ">
+                    <div className="flex flex-col gap-[1.25rem]">
+                        {/* <h6>Для преподавателей</h6>
+                        <Input type="image" className="" />
+                        <Button>Загрузить</Button> */}
                     </div>
-                    <Button disabled>Сохранить изменения</Button>
+                    <Button onClick={handleSubmit} disabled={!isDirty}>
+                        Сохранить изменения
+                    </Button>
                 </div>
             </div>
         </>
-    )
+    );
 }

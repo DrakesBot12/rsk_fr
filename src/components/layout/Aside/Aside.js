@@ -1,33 +1,35 @@
-import { useState, useMemo } from 'react';
-import { useRouter } from 'next/router';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useMemo } from "react";
+import { useRouter } from "next/router";
+import { motion, AnimatePresence } from "framer-motion";
 
-import Image from 'next/image';
-import Cookies from 'js-cookie';
-import dynamic from 'next/dynamic';
+import Image from "next/image";
+import Cookies from "js-cookie";
+import dynamic from "next/dynamic";
 
-import { useUserData } from '@/utils/auth';
-import Button from '@/components/ui/Button';
+import { useUserData } from "@/utils/auth";
+import Button from "@/components/ui/Button";
 
-import { NAV_LINKS, NavItem } from './Nav';
+import { NAV_LINKS, NavItem } from "./Nav";
 
-const AuthIcon = dynamic(() => import('@/assets/nav/auth.svg'));
-const Burger = dynamic(() => import('@/assets/nav/burger.svg'));
+const AuthIcon = dynamic(() => import("@/assets/nav/auth.svg"));
+const Burger = dynamic(() => import("@/assets/nav/burger.svg"));
 
 export default function Aside() {
     const router = useRouter();
-    const initialCollapsed = Cookies.get('sidebarCollapsed') === 'true';
+    const initialCollapsed = Cookies.get("sidebarCollapsed") === "true";
 
     const [isCollapsed, setIsCollapsed] = useState(initialCollapsed);
     const [hovered, setHovered] = useState(null);
     const links = useMemo(() => NAV_LINKS, []);
     const userData = useUserData();
-  
+
     const toggleSidebar = () => {
-        setIsCollapsed(c => {
+        setIsCollapsed((c) => {
             const next = !c;
-            Cookies.set('sidebarCollapsed', String(next), {
-                path: '/', sameSite: 'strict', expires: 7
+            Cookies.set("sidebarCollapsed", String(next), {
+                path: "/",
+                sameSite: "strict",
+                expires: 7,
             });
             return next;
         });
@@ -36,23 +38,16 @@ export default function Aside() {
     return (
         <motion.aside
             initial={false}
-            animate={isCollapsed ? 'collapsed' : 'expanded'}
+            animate={isCollapsed ? "collapsed" : "expanded"}
             variants={{
-                expanded: { width: '16rem', transition: { type: 'spring', stiffness: 200, damping: 30 } },
-                collapsed: { width: '6.5rem', transition: { type: 'spring', stiffness: 200, damping: 30 } }
+                expanded: { width: "16rem", transition: { type: "spring", stiffness: 200, damping: 30 } },
+                collapsed: { width: "6.5rem", transition: { type: "spring", stiffness: 200, damping: 30 } },
             }}
-            className="overflow-hidden"
-        >
-            <div className={`logo-container flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
+            className="overflow-hidden">
+            <div className={`logo-container flex items-center ${isCollapsed ? "justify-center" : "justify-between"}`}>
                 <AnimatePresence>
                     {!isCollapsed && (
-                        <motion.div
-                            key="logo"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                        >
+                        <motion.div key="logo" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
                             <Image src="/images/logo.svg" alt="logo" width={76} height={40} />
                         </motion.div>
                     )}
@@ -61,66 +56,32 @@ export default function Aside() {
             </div>
 
             <nav>
-                {links.map(item => (
-                    <NavItem
-                        key={item.label}
-                        {...item}
-                        isCollapsed={isCollapsed}
-                        isHovered={hovered === item.label}
-                        onHover={setHovered}
-                    />
+                {links.map((item) => (
+                    <NavItem key={item.label} {...item} isCollapsed={isCollapsed} isHovered={hovered === item.label} onHover={setHovered} />
                 ))}
             </nav>
 
             {userData ? (
-                <div className="flex gap-[0.75rem] justify-center h-[2rem] cursor-pointer" onClick={() => router.push('/profile')}>
+                <div className="flex gap-[0.75rem] justify-center h-[2rem] cursor-pointer" onClick={() => router.push("/profile")}>
                     <div className="h-full rounded-[0.5rem] aspect-square bg-(--color-black)"></div>
                     <AnimatePresence>
                         {!isCollapsed && (
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                className="flex flex-col w-full"
-                            >
-                                <span className='link big'>
-                                    {userData.firstName && userData.lastName
-                                        ? `${userData.firstName} ${userData.lastName}`
-                                        : 'Незаполнено'}
-                                </span>
-                                <span className="link small text-bold text-(--color-gray-black)">
-                                    {userData.email}
-                                </span>
+                            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="flex flex-col w-full">
+                                <span className="link big">{userData.username ? `${userData.username}` : "Незаполнено"}</span>
+                                <span className="link small text-bold text-(--color-gray-black)">{userData.email}</span>
                             </motion.div>
                         )}
                     </AnimatePresence>
                 </div>
             ) : (
-                <Button
-                    inverted
-                    roundeful
-                    className={`auth ${isCollapsed ? '!p-[1rem]' : ''}`}
-                    onClick={() => router.push('/auth')}
-                >
+                <Button inverted roundeful className={`auth ${isCollapsed ? "!p-[1rem]" : ""}`} onClick={() => router.push("/auth")}>
                     <AnimatePresence mode="wait">
                         {!isCollapsed ? (
-                            <motion.span
-                                key="full-text"
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                            >
+                            <motion.span key="full-text" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ type: "spring", stiffness: 300, damping: 25 }}>
                                 Авторизация
                             </motion.span>
                         ) : (
-                            <motion.span
-                                key="icon"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.8 }}
-                                transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                            >
+                            <motion.span key="icon" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }} transition={{ type: "spring", stiffness: 300, damping: 25 }}>
                                 <AuthIcon />
                             </motion.span>
                         )}
@@ -130,8 +91,6 @@ export default function Aside() {
         </motion.aside>
     );
 }
-
-
 
 // import { useState, useEffect } from 'react';
 // import { useUserData } from '@/utils/auth';
@@ -158,9 +117,9 @@ export default function Aside() {
 
 // const NAV_LINKS = [
 //     { label: 'Главная', href: '/', icon: HomeIcon },
-//     { 
-//         label: 'Команды', 
-//         href: '#', 
+//     {
+//         label: 'Команды',
+//         href: '#',
 //         icon: TeamIcon,
 //         submenu: [
 //             { label: 'Создать команду', href: '/teams/create' },
@@ -169,7 +128,7 @@ export default function Aside() {
 //         ]
 //     },
 //     { label: 'Организации', href: '/organizations', icon: OrganIcon },
-//     { 
+//     {
 //         label: 'Мастерская',
 //         href: '#',
 //         icon: PulseIcon,
@@ -178,7 +137,7 @@ export default function Aside() {
 //             { label: 'Статистика', href: '/pulse/stats' }
 //         ]
 //     },
-//     { 
+//     {
 //         label: 'Проекты',
 //         href: '#',
 //         icon: ProjectsIcon,
@@ -189,7 +148,7 @@ export default function Aside() {
 //      },
 //     { label: 'Новости', href: '/news', icon: NewsIcon },
 //     { label: 'Курсы', href: '/courses', icon: CourseIcon },
-//     { 
+//     {
 //         label: 'Инструменты',
 //         href: '#',
 //         icon: InstIcon,
@@ -198,7 +157,7 @@ export default function Aside() {
 //             { label: 'В будущем', href: '/tools/mvp' }
 //         ]
 //     },
-//     { 
+//     {
 //         label: 'Админ панель',
 //         href: '#',
 //         icon: KingIcon,
@@ -222,12 +181,12 @@ export default function Aside() {
 //         setIsCollapsed(storedState === 'true');
 //         setHydrated(true);
 //     }, []);
-    
+
 //     const toggleSidebar = () => {
 //         const newState = !isCollapsed;
 //         setIsCollapsed(newState);
-//         Cookies.set('sidebarCollapsed', newState.toString(), { 
-//             path: '/', 
+//         Cookies.set('sidebarCollapsed', newState.toString(), {
+//             path: '/',
 //             sameSite: 'strict',
 //             expires: 7
 //         });
@@ -235,18 +194,17 @@ export default function Aside() {
 
 //     if (!hydrated) return null;
 
-
 //     return (
-//         <motion.aside 
+//         <motion.aside
 //             initial={false}
 //             animate={isCollapsed ? 'collapsed' : 'expanded'}
 //             variants={{
-//                 expanded: { 
-//                     width: '16rem', 
+//                 expanded: {
+//                     width: '16rem',
 //                     transition: { duration: 0.3, ease: 'easeInOut' }
 //                 },
-//                 collapsed: { 
-//                     width: '6.5rem', 
+//                 collapsed: {
+//                     width: '6.5rem',
 //                     transition: { duration: 0.3, ease: 'easeInOut' }
 //                 }
 //             }}
@@ -270,8 +228,8 @@ export default function Aside() {
 //                             onMouseEnter={() => setHoveredNav(label)}
 //                             onMouseLeave={() => setHoveredNav(null)}
 //                         >
-//                             <Link 
-//                                 className={`${router.pathname === href ? 'active' : ''} flex items-center ${isSubmenuActive ? 'opacity-100' : 'opacity-30'}  group-hover:opacity-100`} 
+//                             <Link
+//                                 className={`${router.pathname === href ? 'active' : ''} flex items-center ${isSubmenuActive ? 'opacity-100' : 'opacity-30'}  group-hover:opacity-100`}
 //                                 href={href}
 //                             >
 //                                 <Icon />
@@ -309,7 +267,7 @@ export default function Aside() {
 //                                                 >
 //                                                     {item.label}
 //                                                 </Link>
-//                                             ))}    
+//                                             ))}
 //                                         </div>
 //                                     </motion.div>
 //                                 </AnimatePresence>
@@ -337,10 +295,10 @@ export default function Aside() {
 //                         </AnimatePresence>
 //                 </div>
 //             ) : (
-//                 <Button 
-//                     inverted 
-//                     roundeful 
-//                     className={`${isCollapsed ? '!p-[1rem]' : ''}`} 
+//                 <Button
+//                     inverted
+//                     roundeful
+//                     className={`${isCollapsed ? '!p-[1rem]' : ''}`}
 //                     onClick={() => router.push('/auth')}
 //                 >
 //                     <AnimatePresence mode="wait">
