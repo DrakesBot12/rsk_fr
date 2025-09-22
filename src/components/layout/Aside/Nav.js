@@ -19,7 +19,7 @@ const BASE_NAV_LINKS = [
     //         { label: 'Моя команда', href: '/teams/my' }
     //     ]
     // },
-    { label: "Организации", disable: false, inactive: true, href: "/organizations", icon: dynamic(() => import("@/assets/nav/organ.svg")) },
+    // { label: "Организации", disable: false, inactive: true, href: "/organizations", icon: dynamic(() => import("@/assets/nav/organ.svg")) },
     // {
     //     label: 'Мастерская',
     //     href: '#',
