@@ -12,7 +12,7 @@ export default function Home() {
             </Header>
             <div className="hero overflow-hidden" style={{ placeItems: "center" }}>
                 <div className="h-screen w-full col-span-12 flex flex-no-wrap gap-[1.5rem]">
-                    <div className="flex-1 h-[calc(100vh-128px)] flex align-center justify-between gap-[4rem] flex-col w-full">
+                    <div className="flex-1 h-[calc(100vh-128px)] flex align-center justify-between gap-[4rem] flex-col w-1/2">
                         <div className="flex w-full flex-col align-center justify-center gap-[1.25rem] items-center">
                             <a className="text-[0.875rem] px-[1rem] py-[0.5rem] rounded-full bg-(--color-blue) border-[3px] border-(--color-blue-plus-50) text-[var(--color-blue-noise)] w-fit">Новый уровень развития</a>
                             <div className="flex flex-col gap-[0.75rem] items-center jusify-center">
@@ -37,12 +37,7 @@ export default function Home() {
                             </a>
                         </div>
                     </div>
-                    <iframe
-                        src={"https://rutube.ru/play/embed/da2ce5366a1352032c1d432a26c80841/"}
-                        allow="autoplay; fullscreen"
-                        allowFullScreen
-                        className="border-none rounded-[1rem] h-[35vh] w-full"
-                    />
+                    <iframe src={"https://rutube.ru/play/embed/da2ce5366a1352032c1d432a26c80841/"} allow="autoplay; fullscreen" allowFullScreen className="border-none rounded-[1rem] h-[35vh] w-1/2" />
                 </div>
 
                 <div id="mainInfo" className="w-full col-span-12 grid grid-cols-2 gap-[1.5rem] pb-[3.75rem]">
@@ -80,8 +75,8 @@ export default function Home() {
     );
 }
 
-
-{/*
+{
+    /*
 <div className="hero overflow-hidden" style={{ placeItems: "center" }}>
     <div className="h-screen w-full col-span-12 grid grid-cols-6 gap-[1.5rem]">
         <div className="col-span-1"></div>
@@ -148,4 +143,5 @@ export default function Home() {
             </div>
         </div>
     </div>
-</div> */}
+</div> */
+}
