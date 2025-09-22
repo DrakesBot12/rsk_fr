@@ -3,12 +3,13 @@ import { useState } from 'react';
 import TransitionWrapper from '@/components/layout/TransitionWrapper';
 
 import Layout from '@/components/layout/Layout';
-import IndexPage from '@/components/pages/tools';
-import TrainerPage from '@/components/pages/tools/trainer';
-import HistoryPage from '@/components/pages/tools/history';
-import SettingsPage from '@/components/pages/tools/settings';
+import IndexPage from '@/components/features/tools';
+import TrainerPage from '@/components/features/tools/trainer';
+import HistoryPage from '@/components/features/tools/history';
+import SettingsPage from '@/components/features/tools/settings';
+import AdminPage from '@/components/features/tools/admin';
 
-export default function MayakOkoPage() {
+export default function Home() {
     const [ pageKey, setPageKey ] = useState("mayakOko")
 
     const goTo = (pageName) => {
@@ -22,6 +23,7 @@ export default function MayakOkoPage() {
                 {pageKey === 'trainer' && <TrainerPage goTo={goTo} />}
                 {pageKey === 'settings' && <SettingsPage goTo={goTo} />}
                 {pageKey === 'history' && <HistoryPage goTo={goTo} />}
+                {pageKey === 'admin' && <AdminPage goTo={goTo} />}
             </TransitionWrapper>
         </Layout>
 
