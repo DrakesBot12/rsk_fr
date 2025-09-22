@@ -14,12 +14,20 @@ export default function Home() {
             <div className="hero overflow-hidden" style={{ placeItems: "center" }}>
                 <div className="h-screen w-full col-span-12 grid grid-cols-6 gap-[1.5rem]">
                     <div className="col-span-1"></div>
-                    <div className="col-span-4 h-full flex align-center justify-center gap-[8rem] flex-col w-full">
+                    <div className="col-span-4 h-full flex align-center justify-center gap-[4rem] flex-col w-full">
                         <div className="flex w-full flex-col align-center justify-center gap-[1.25rem] items-center">
                             <a className="text-[0.875rem] px-[1rem] py-[0.5rem] rounded-full bg-(--color-blue) border-[3px] border-(--color-blue-plus-50) text-[var(--color-blue-noise)] w-fit">Новый уровень развития</a>
                             <div className="flex flex-col gap-[0.75rem] items-center jusify-center">
                                 <h1 className="text-center">Цифровизация вашего учебного заведения вместе с РСК</h1>
-                                <p className="text-[0.875rem] text-[var(--color-gray-black)] w-1/2 text-center">Начните цифровую трансформацию колледжа с нашей платформой и удобными инструментами</p>
+                                <p className="text-[0.875rem] text-[var(--color-gray-black)] w-1/2 text-center">
+                                    Проект-акселератор для управленческих команд СПО, направленный на решение внутренних задач колледжа и создание цифровых решений
+                                </p>
+                                <iframe
+                                    src={"https://rutube.ru/play/embed/da2ce5366a1352032c1d432a26c80841/"}
+                                    style={{ border: "none", borderRadius: "1rem", height: "25vh", aspectRatio: 16 / 9 }}
+                                    allow="autoplay; fullscreen"
+                                    allowFullScreen
+                                />
                             </div>
                         </div>
                         <div className="flex w-full bg-(--color-blue-plus-50) p-[1.875rem] rounded-[1.5rem] gap-[0.75rem]">
@@ -31,6 +39,9 @@ export default function Home() {
                             </a>
                             <a href="/#mainInfo" className="bg-(--color-blue) text-[var(--color-white)] flex align-center justify-center px-[1.25rem] py-[0.75rem] rounded-[0.85rem] text-[0.875rem] w-3/12">
                                 Сведения
+                            </a>
+                            <a href="https://t.me/rskfed" className="bg-(--color-blue) text-[var(--color-white)] flex align-center justify-center px-[1.25rem] py-[0.75rem] rounded-[0.85rem] text-[0.875rem] w-3/12">
+                                Новости
                             </a>
                         </div>
                     </div>

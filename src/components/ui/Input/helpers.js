@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
-export function useDropdownFilter(controlledValue, onChange, src) {
+export function useDropdownFilter(controlledValue, onChange, src, name) {
+    // Добавляем параметр name
     const [value, setValue] = useState(controlledValue || "");
     const [regions, setRegions] = useState([]);
     const [filtered, setFiltered] = useState([]);
@@ -13,10 +14,14 @@ export function useDropdownFilter(controlledValue, onChange, src) {
 
     // fetch regions
     useEffect(() => {
-        fetch(src).then((res) => res.text())
+        fetch(src)
+            .then((res) => res.text())
             .then((text) => {
                 setRegions(
-                    text.split("\n").map((l) => l.trim()).filter(Boolean)
+                    text
+                        .split("\n")
+                        .map((l) => l.trim())
+                        .filter(Boolean)
                 );
             })
             .catch((err) => console.error("Failed to load regions:", err));
@@ -29,22 +34,31 @@ export function useDropdownFilter(controlledValue, onChange, src) {
             setShowDropdown(false);
             return;
         }
-        const matches = regions.filter((r) =>
-            r.toLowerCase().includes(value.toLowerCase())
-        );
+        const matches = regions.filter((r) => r.toLowerCase().includes(value.toLowerCase()));
         setFiltered(matches);
         setShowDropdown(matches.length > 0);
     }, [value, regions]);
 
     const handleInput = (val) => {
         setValue(val);
-        onChange?.({ target: { name: "", value: val } });
+        setShowDropdown(true);
     };
 
     const handleSelect = (val) => {
         setValue(val);
-        onChange?.({ target: { name: "", value: val } });
+        // Теперь передаем правильное имя поля
+        onChange?.({ target: { name: name || "", value: val } });
         setShowDropdown(false);
+    };
+
+    const handleEnter = () => {
+        if (filtered.length > 0) {
+            const firstItem = filtered[0];
+            setValue(firstItem);
+            // И здесь тоже передаем правильное имя поля
+            onChange?.({ target: { name: name || "", value: firstItem } });
+            setShowDropdown(false);
+        }
     };
 
     return {
@@ -54,5 +68,6 @@ export function useDropdownFilter(controlledValue, onChange, src) {
         setShowDropdown,
         handleInput,
         handleSelect,
+        handleEnter,
     };
 }

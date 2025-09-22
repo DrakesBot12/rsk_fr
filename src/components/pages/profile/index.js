@@ -31,7 +31,6 @@ export default function ProfileIndexPage({ goTo }) {
                 const data = await response.json();
                 setUserData(data);
                 setHydrated(true);
-                console.log("Loaded user data:", data);
             } catch (err) {
                 console.error("Request error:", err);
             }
@@ -41,8 +40,6 @@ export default function ProfileIndexPage({ goTo }) {
     }, []);
 
     if (!hydrated || !userData) return null;
-
-    console.log(userData);
 
     return (
         <>

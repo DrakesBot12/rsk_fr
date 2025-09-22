@@ -1,54 +1,51 @@
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { isAuthorized } from '@/utils/auth';
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { isAuthorized } from "@/utils/auth";
 
-import Notify from '@/assets/general/notify.svg';
+import Switcher from "@/components/ui/Switcher";
+import Layout from "@/components/layout/Layout";
 
-import Button from '@/components/ui/Button';
-import Switcher from '@/components/ui/Switcher';
-import Layout from '@/components/layout/Layout';
+import RegStage0 from "@/components/pages/auth/reg/Stage0";
+import RegStage1 from "@/components/pages/auth/reg/Stage1";
+import LoginStage0 from "@/components/pages/auth/login/Stage0";
+import LoginStage1 from "@/components/pages/auth/login/Stage1";
 
-import RegStage0 from '@/components/pages/auth/reg/Stage0';
-import RegStage1 from '@/components/pages/auth/reg/Stage1';
-import LoginStage0 from '@/components/pages/auth/login/Stage0';
-import LoginStage1 from '@/components/pages/auth/login/Stage1';
-
-import Header from '@/components/layout/Header';
+import Header from "@/components/layout/Header";
 
 const pageVariants = {
     initial: (direction) => ({
-        x: direction > 0 ? '100%' : '-100%',
-        opacity: 0
+        x: direction > 0 ? "100%" : "-100%",
+        opacity: 0,
     }),
     in: {
         x: 0,
         opacity: 1,
-        transition: { duration: 0.5, ease: 'circOut' }
+        transition: { duration: 0.5, ease: "circOut" },
     },
     out: (direction) => ({
-        x: direction > 0 ? '-100%' : '100%',
+        x: direction > 0 ? "-100%" : "100%",
         opacity: 0,
-        transition: { duration: 0.5, ease: 'circIn' }
-    })
+        transition: { duration: 0.5, ease: "circIn" },
+    }),
 };
 
 const headerTitleVariants = {
     initial: { opacity: 0, x: -20, y: -20 },
     animate: { opacity: 1, x: 0, y: 0, transition: { duration: 0.3 } },
-    exit: { opacity: 0, x: 20, transition: { duration: 0.3 } }
+    exit: { opacity: 0, x: 20, transition: { duration: 0.3 } },
 };
 
 export default function AuthPage() {
-    const [authType, setAuthType] = useState('register');
+    const [authType, setAuthType] = useState("register");
     const [step, setStep] = useState(0);
     const router = useRouter();
 
     useEffect(() => {
-        if (isAuthorized()) router.push('/profile');
-      }, [router]);
+        if (isAuthorized()) router.push("/profile");
+    }, [router]);
 
-    const getDirection = () => (authType === 'register' ? 1 : -1);
+    const getDirection = () => (authType === "register" ? 1 : -1);
 
     const handleNext = (data) => {
         setStep(1);
@@ -61,25 +58,11 @@ export default function AuthPage() {
     const handleForgotPassword = () => setStep(1);
 
     const stages = {
-        register: [
-            <RegStage0 key="reg-0" onContinue={handleNext} pageVariants={pageVariants} custom={getDirection()} />,
-            <RegStage1 key="reg-1" pageVariants={pageVariants} custom={getDirection()} />
-        ],
+        register: [<RegStage0 key="reg-0" onContinue={handleNext} pageVariants={pageVariants} custom={getDirection()} />, <RegStage1 key="reg-1" pageVariants={pageVariants} custom={getDirection()} />],
         login: [
-            <LoginStage0
-                key="login-0"
-                pageVariants={pageVariants}
-                custom={getDirection()}
-                onForgotPassword={handleForgotPassword}
-            />,
-            <LoginStage1
-                key="login-1"
-                onRecover={handleSave}
-                onBack={() => setStep(0)}
-                pageVariants={pageVariants}
-                custom={getDirection()}
-            />
-        ]
+            <LoginStage0 key="login-0" pageVariants={pageVariants} custom={getDirection()} onForgotPassword={handleForgotPassword} />,
+            <LoginStage1 key="login-1" onRecover={handleSave} onBack={() => setStep(0)} pageVariants={pageVariants} custom={getDirection()} />,
+        ],
     };
 
     return (
@@ -87,16 +70,12 @@ export default function AuthPage() {
             <Header>
                 <Header.Heading className="flex gap-[.5rem] relative overflow-hidden">
                     Авторизация
-                    <span className="text-(--color-gray-white)" style={{font: 'inherit'}}>/</span>
+                    <span className="text-(--color-gray-white)" style={{ font: "inherit" }}>
+                        /
+                    </span>
                     <AnimatePresence mode="wait">
-                        <motion.div
-                            key={authType}
-                            initial="initial"
-                            animate="animate"
-                            exit="exit"
-                            variants={headerTitleVariants}
-                        >
-                            {authType === 'register' ? 'Регистрация' : 'Вход'}
+                        <motion.div key={authType} initial="initial" animate="animate" exit="exit" variants={headerTitleVariants}>
+                            {authType === "register" ? "Регистрация" : "Вход"}
                         </motion.div>
                     </AnimatePresence>
                 </Header.Heading>
@@ -106,16 +85,17 @@ export default function AuthPage() {
                     onChange={(val) => {
                         setAuthType(val);
                         setStep(0);
-                    }}
-                >
-                    <Switcher.Option tabIndex={0} role="button" value="login">Вход</Switcher.Option>
-                    <Switcher.Option tabIndex={1} role="button" value="register">Регистрация</Switcher.Option>
+                    }}>
+                    <Switcher.Option tabIndex={0} role="button" value="login">
+                        Вход
+                    </Switcher.Option>
+                    <Switcher.Option tabIndex={1} role="button" value="register">
+                        Регистрация
+                    </Switcher.Option>
                 </Switcher>
-
-                <Button icon><Notify /></Button>
             </Header>
 
-            <div className="hero relative overflow-hidden" style={{ placeItems: 'center' }}>
+            <div className="hero relative overflow-hidden" style={{ placeItems: "center" }}>
                 <AnimatePresence mode="wait" custom={getDirection()}>
                     {stages[authType][step]}
                 </AnimatePresence>

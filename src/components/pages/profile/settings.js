@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import Tags from "@/components/ui/Tags";
 import Button from "@/components/ui/Button";
 
 import Header from "@/components/layout/Header";
@@ -10,6 +9,7 @@ import Notify from "@/assets/general/notify.svg";
 
 import Input from "@/components/ui/Input/Input";
 import Textarea from "@/components/ui/Textarea";
+import DropdownInput from "@/components/ui/Input/DropdownInput";
 
 export default function SettingsPage({ goTo }) {
     const [userData, setUserData] = useState(null); // оригинальные данные
@@ -111,14 +111,15 @@ export default function SettingsPage({ goTo }) {
                         </div>
                     </div>
                     <Textarea inverted id="about" name="Description" placeholder="Расскажите о себе кратко" value={formData.Description || ""} onChange={handleChange} />
-                    <Input type="text" id="region" name="Region" placeholder="Введите регион" value={formData.Region || ""} onChange={handleChange} />
+                    <DropdownInput id="region" name="Region" placeholder="Введите регион" onChange={handleChange}></DropdownInput>
+                    {/* <Input type="text" id="region" name="Region" placeholder="Введите регион" value={formData.Region || ""} onChange={handleChange} /> */}
                 </div>
 
                 <div className="flex flex-col gap-[1.25rem]">
                     <h6>Организация и команда</h6>
                     <div className="flex flex-col gap-[.75rem]">
-                        <Input disabled id="univers" name="univers" placeholder="Московский государственный университет имени М.В.Ломоносова" autoComplete="off" readOnly />
-                        <Input disabled id="teames" name="teames" placeholder="Союз Самых Смелых Решений (СССР)" autoComplete="off" readOnly />
+                        <Input disabled id="univers" name="univers" placeholder="Организация" autoComplete="off" readOnly />
+                        <Input disabled id="teames" name="teames" placeholder="Команда" autoComplete="off" readOnly />
                         <p style={{ color: "var(--color-gray-black)" }}>
                             * Меняется в разделе <a href="/organizations">"Организации"</a> и "Команды"
                         </p>

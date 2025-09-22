@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 import { useUserData } from "@/utils/auth";
 import Button from "@/components/ui/Button";
 
-import { NAV_LINKS, NavItem } from "./Nav";
+import { useNavLinks, NavItem } from "./Nav";
 
 const AuthIcon = dynamic(() => import("@/assets/nav/auth.svg"));
 const Burger = dynamic(() => import("@/assets/nav/burger.svg"));
@@ -20,7 +20,7 @@ export default function Aside() {
 
     const [isCollapsed, setIsCollapsed] = useState(initialCollapsed);
     const [hovered, setHovered] = useState(null);
-    const links = useMemo(() => NAV_LINKS, []);
+    const { navLinks, isLoading } = useNavLinks();
     const userData = useUserData();
 
     const toggleSidebar = () => {
@@ -34,6 +34,34 @@ export default function Aside() {
             return next;
         });
     };
+
+    // Пока загружаются данные, можно показать скелетон или ничего не показывать
+    if (isLoading) {
+        return (
+            <motion.aside
+                initial={false}
+                animate={isCollapsed ? "collapsed" : "expanded"}
+                variants={{
+                    expanded: { width: "16rem", transition: { type: "spring", stiffness: 200, damping: 30 } },
+                    collapsed: { width: "6.5rem", transition: { type: "spring", stiffness: 200, damping: 30 } },
+                }}
+                className="overflow-hidden">
+                <div className={`logo-container flex items-center ${isCollapsed ? "justify-center" : "justify-between"}`}>
+                    <AnimatePresence>
+                        {!isCollapsed && (
+                            <motion.div key="logo" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
+                                <Image src="/images/logo.svg" alt="logo" width={76} height={40} />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                    <Burger onClick={toggleSidebar} className="cursor-pointer" />
+                </div>
+                <div className="flex justify-center items-center h-20">
+                    <span>Загрузка...</span>
+                </div>
+            </motion.aside>
+        );
+    }
 
     return (
         <motion.aside
@@ -56,8 +84,8 @@ export default function Aside() {
             </div>
 
             <nav>
-                {links.map((item) => (
-                    <NavItem key={item.label} {...item} isCollapsed={isCollapsed} isHovered={hovered === item.label} onHover={setHovered} />
+                {navLinks.map((item) => (
+                    <NavItem key={item.label} {...item} isCollapsed={isCollapsed} disable={item.disable} isHovered={hovered === item.label} onHover={setHovered} />
                 ))}
             </nav>
 
