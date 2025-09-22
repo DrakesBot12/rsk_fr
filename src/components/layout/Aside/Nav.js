@@ -39,7 +39,7 @@ const BASE_NAV_LINKS = [
     //     ]
     //  },
     // { label: 'Новости', href: '/news', icon: dynamic(() => import('@/assets/nav/news.svg')) },
-    { label: "Обучение", disable: false, inactive: true, href: "/cours", icon: dynamic(() => import("@/assets/nav/cours.svg")) },
+    // { label: "Обучение", disable: false, inactive: true, href: "/cours", icon: dynamic(() => import("@/assets/nav/cours.svg")) },
     {
         label: "Инструменты",
         disable: false,
