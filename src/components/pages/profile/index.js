@@ -51,9 +51,9 @@ export default function ProfileIndexPage({ goTo }) {
                 <Button icon onClick={() => goTo("settings")}>
                     <Setts />
                 </Button>
-                <Button icon>
+                {/* <Button icon>
                     <Notify />
-                </Button>
+                </Button> */}
             </Header>
             <div className="hero" style={{ gridTemplateRows: "repeat(2, auto)" }}>
                 <Card>

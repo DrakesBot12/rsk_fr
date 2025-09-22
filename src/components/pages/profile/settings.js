@@ -95,9 +95,9 @@ export default function SettingsPage({ goTo }) {
                 <Button icon active onClick={() => goTo("profile")}>
                     <Setts />
                 </Button>
-                <Button icon>
+                {/* <Button icon>
                     <Notify />
-                </Button>
+                </Button> */}
             </Header>
             <div className="hero" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
                 <div className="flex flex-col gap-[.75rem]">
