@@ -118,11 +118,9 @@ export default function SettingsPage({ goTo }) {
                 <div className="flex flex-col gap-[1.25rem]">
                     <h6>Организация и команда</h6>
                     <div className="flex flex-col gap-[.75rem]">
-                        <Input disabled id="univers" name="univers" placeholder="Организация" autoComplete="off" readOnly />
+                        <DropdownInput id="univers" name="univers" placeholder="Организация" value={formData.category} onChange={handleChange} options={["БГТУ", "МГУ", "ПТУ", "ФСУ"]} />
                         <Input disabled id="teames" name="teames" placeholder="Команда" autoComplete="off" readOnly />
-                        <p style={{ color: "var(--color-gray-black)" }}>
-                            * Меняется в разделе <a href="/organizations">"Организации"</a> и "Команды"
-                        </p>
+                        <p style={{ color: "var(--color-gray-black)" }}>* "Команды" временно недоступны</p>
                     </div>
                 </div>
 

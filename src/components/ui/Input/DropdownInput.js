@@ -4,12 +4,13 @@ import { useDropdownFilter } from "./helpers";
 export default function DropdownInput({
     value: controlledValue,
     onChange,
-    name, // Добавляем проп name
+    name,
     src = "/data/regions.txt",
+    options, // Новый проп - массив опций
     ...props
 }) {
     const dropdownRef = useRef(null);
-    const { value, filtered, showDropdown, handleInput, handleSelect, setShowDropdown, handleEnter } = useDropdownFilter(controlledValue, onChange, src, name); // Передаем name в хук
+    const { value, filtered, showDropdown, handleInput, handleSelect, setShowDropdown, handleEnter } = useDropdownFilter(controlledValue, onChange, src, name, options); // Передаем options в хук
 
     // Обработчик нажатия клавиш
     const handleKeyDown = (e) => {
@@ -30,16 +31,7 @@ export default function DropdownInput({
 
     return (
         <div className={`input-wrapper relative w-full ${showDropdown ? " input-wrapper--dropdown-open" : ""}`} ref={dropdownRef}>
-            <input
-                type="text"
-                value={value}
-                onChange={(e) => handleInput(e.target.value)}
-                onFocus={() => value && setShowDropdown(true)}
-                onKeyDown={handleKeyDown}
-                autoComplete="off"
-                name={name} // Передаем name в input
-                {...props}
-            />
+            <input type="text" value={value} onChange={(e) => handleInput(e.target.value)} onFocus={() => value && setShowDropdown(true)} onKeyDown={handleKeyDown} autoComplete="off" name={name} {...props} />
             {showDropdown && (
                 <div className="dropdown-wrapper">
                     <div
@@ -49,8 +41,8 @@ export default function DropdownInput({
                             opacity: showDropdown ? 1 : 0,
                             transform: showDropdown ? "translateY(0)" : "translateY(-10px)",
                         }}>
-                        {filtered.map((item) => (
-                            <p key={item} onClick={() => handleSelect(item)} className="cursor-pointer hover:bg-gray-100 px-2 py-1">
+                        {filtered.map((item, index) => (
+                            <p key={item + index} onClick={() => handleSelect(item)} className="cursor-pointer hover:bg-gray-100 px-2 py-1">
                                 {item}
                             </p>
                         ))}
