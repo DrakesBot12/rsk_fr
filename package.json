@@ -11,7 +11,7 @@
     "dependencies": {
         "docx": "^9.5.1",
         "file-saver": "^2.0.5",
-        "framer-motion": "^12.15.0",
+        "framer-motion": "^12.23.18",
         "js-cookie": "^3.0.5",
         "next": "^15.4.2",
         "react": "^19.0.0",
