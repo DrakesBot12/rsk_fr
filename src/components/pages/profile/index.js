@@ -80,7 +80,7 @@ export default function ProfileIndexPage({ goTo }) {
                         <h6>Организация и команда</h6>
                         <div className="flex flex-col gap-[0.75rem]">
                             <div className="group cursor-pointer flex items-center justify-between w-full">
-                                <a className="flex-1">Московский государственный университет имени М.В.Ломоносова</a>
+                                <a className="flex-1">{userData.data.Organization}</a>
                                 <LinkIcon className="stroke-(--color-gray-white) group-hover:stroke-black" style={{ transition: "stroke .3s ease-in-out" }} />
                             </div>
                             <hr className="w-full border-solid border-[1.5px] border-(--color-gray-plus)" />

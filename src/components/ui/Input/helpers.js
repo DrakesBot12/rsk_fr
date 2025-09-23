@@ -1,3 +1,4 @@
+// helpers.js
 import { useState, useEffect } from "react";
 
 export function useDropdownFilter(controlledValue, onChange, src, name, options) {
@@ -12,11 +13,14 @@ export function useDropdownFilter(controlledValue, onChange, src, name, options)
         if (controlledValue !== undefined) setValue(controlledValue);
     }, [controlledValue]);
 
-    // fetch regions только если не передан options и src указан
+    // fetch regions только если не передан options или он пустой, и src указан
     useEffect(() => {
-        // Если передан options, используем его вместо загрузки из файла
-        if (options && Array.isArray(options)) {
-            setRegions(options);
+        // Если передан options, это массив и он не пустой, используем его вместо загрузки из файла
+        if (options && Array.isArray(options) && options.length > 0) {
+            // Уникализируем и сортируем опции для лучшего UX (опционально, но рекомендуется)
+            const uniqueOptions = [...new Set(options)];
+            uniqueOptions.sort((a, b) => a.localeCompare(b));
+            setRegions(uniqueOptions);
             return;
         }
 
@@ -25,12 +29,14 @@ export function useDropdownFilter(controlledValue, onChange, src, name, options)
             fetch(src)
                 .then((res) => res.text())
                 .then((text) => {
-                    setRegions(
-                        text
-                            .split("\n")
-                            .map((l) => l.trim())
-                            .filter(Boolean)
-                    );
+                    const loadedRegions = text
+                        .split("\n")
+                        .map((l) => l.trim())
+                        .filter(Boolean);
+                    // Уникализируем и сортируем загруженные данные (опционально)
+                    const uniqueLoaded = [...new Set(loadedRegions)];
+                    uniqueLoaded.sort((a, b) => a.localeCompare(b));
+                    setRegions(uniqueLoaded);
                 })
                 .catch((err) => console.error("Failed to load regions:", err));
         }
