@@ -9,16 +9,18 @@ const DownIcon = dynamic(() => import("@/assets/general/down.svg"));
 // Базовый массив навигационных ссылок
 const BASE_NAV_LINKS = [
     { label: "Главная", disable: false, inactive: false, href: "/", icon: dynamic(() => import("@/assets/nav/home.svg")) },
-    // {
-    //     label: 'Команды',
-    //     href: '#',
-    //     icon: dynamic(() => import('@/assets/nav/team.svg')),
-    //     submenu: [
-    //         { label: 'Создать команду', href: '/teams/create' },
-    //         { label: 'Список команд', href: '/teams' },
-    //         { label: 'Моя команда', href: '/teams/my' }
-    //     ]
-    // },
+    {
+        label: "Команды",
+        disable: false,
+        inactive: true,
+        href: "#",
+        icon: dynamic(() => import("@/assets/nav/team.svg")),
+        submenu: [
+            { label: "Создать команду", href: "/teams/create" },
+            { label: "Список команд", href: "/teams" },
+            { label: "Моя команда", href: "/teams/my" },
+        ],
+    },
     // { label: "Организации", disable: false, inactive: true, href: "/organizations", icon: dynamic(() => import("@/assets/nav/organ.svg")) },
     // {
     //     label: 'Мастерская',
@@ -162,6 +164,7 @@ export function NavItem({ label, href, icon: Icon, submenu, isCollapsed, isHover
 
     // Если элемент отключен, не рендерим его
     if (disable) return null;
+    inactive ? (submenu = null) : null;
 
     return (
         <div key={label} className={`group flex flex-col gap-[0.75rem] cursor-pointer`} onMouseEnter={() => onHover(label)} onMouseLeave={() => onHover(null)}>

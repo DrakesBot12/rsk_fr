@@ -126,7 +126,7 @@ export default function SettingsPage({ goTo }) {
                         </div>
                     </div>
                     <Textarea inverted id="about" name="Description" placeholder="Расскажите о себе кратко" value={formData.Description || ""} onChange={handleChange} />
-                    <DropdownInput id="region" name="Region" placeholder="Введите регион" onChange={handleChange} />
+                    <DropdownInput id="region" name="Region" placeholder="Введите регион" value={formData.Region || ""} onChange={handleChange} />
                 </div>
 
                 <div className="flex flex-col gap-[1.25rem]">
