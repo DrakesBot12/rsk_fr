@@ -68,7 +68,6 @@ export default function Createteam() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     name: formData.name.toString(),
-                    city: "city", // как указано в требованиях
                     region: formData.region.toString(),
                     organization_name: formData.organization_name.toString(),
                 }),
@@ -76,6 +75,7 @@ export default function Createteam() {
             });
 
             const data = await response.json();
+            console.log(data);
 
             if (response.ok && data.success) {
                 alert("Команда успешно создана!");
@@ -86,7 +86,7 @@ export default function Createteam() {
                     organization_name: userData?.Organization || "",
                 });
             } else {
-                alert("Ошибка при создании команды: " + (data.message || "Неизвестная ошибка"));
+                alert("Ошибка при создании команды: " + (data.data.detail || "Неизвестная ошибка"));
             }
         } catch (err) {
             console.error("Create team error:", err);

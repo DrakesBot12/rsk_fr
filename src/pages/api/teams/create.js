@@ -5,6 +5,7 @@ export default async function RegHandler(req, res) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Cookie: req.headers.cookie || "",
             },
             body: JSON.stringify({
                 name: req.body.name.toString(),
@@ -20,20 +21,7 @@ export default async function RegHandler(req, res) {
         console.log("Response: ", data);
 
         if (!response.ok) {
-            switch (response.status) {
-                case 422:
-                    return res.status(422).json({ success: false, error: JSON.stringify(data) });
-                case 400:
-                    return res.status(400).json({ success: false, error: "Пользователь с таким именем уже существует" });
-                case 401:
-                    return res.status(401).json({ success: false, error: "Пользователь не найден" });
-                case 403:
-                    return res.status(403).json({ success: false, error: "Доступ запрещён" });
-                case 404:
-                    return res.status(404).json({ success: false, error: "Ресурс не найден" });
-                default:
-                    return res.status(response.status).json({ success: false, error: data });
-            }
+            return res.json({ success: false, data });
         }
 
         // возвращаем клиенту

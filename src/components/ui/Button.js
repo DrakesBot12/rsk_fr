@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-export default function Button({ children, roundeful, big, small, inverted, icon, active, disabled = false, className, to, ...props }) {
+export default function Button({ children, roundeful, big, small, inverted, icon, active, red, disabled = false, className, to, ...props }) {
     const router = useRouter();
 
     const classes = `
@@ -9,6 +9,7 @@ export default function Button({ children, roundeful, big, small, inverted, icon
         ${inverted ? "inverted" : ""}
         ${icon ? "icon" : ""}
         ${active ? "active" : ""}
+        ${red ? "bg-[var(--color-red-noise)]! text-[var(--color-red)]!" : ""}
         ${className || ""}
     `;
 

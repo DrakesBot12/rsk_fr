@@ -16,7 +16,7 @@ const BASE_NAV_LINKS = [
         href: "#",
         icon: dynamic(() => import("@/assets/nav/team.svg")),
         submenu: [
-            { label: "Создать команду", href: "/teams/create" },
+            // { label: "Создать команду", href: "/teams/create" },
             { label: "Список команд", href: "/teams" },
             { label: "Моя команда", href: "/teams/my" },
         ],

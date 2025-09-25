@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import Tags from "@/components/ui/Tags";
 import Button from "@/components/ui/Button";
@@ -18,6 +19,7 @@ import { color } from "framer-motion";
 export default function ProfileIndexPage({ goTo }) {
     const [userData, setUserData] = useState(null); // данные профиля
     const [hydrated, setHydrated] = useState(false); // флаг готовности данных
+    const router = useRouter();
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -39,12 +41,31 @@ export default function ProfileIndexPage({ goTo }) {
         fetchProfile();
     }, []);
 
+    const handleLogout = () => {
+        const confirmed = window.confirm("Вы уверены, что хотите выйти?");
+        if (!confirmed) return;
+
+        // Удаляем все cookie
+        const cookies = document.cookie.split(";");
+        for (let cookie of cookies) {
+            const eqPos = cookie.indexOf("=");
+            const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+        }
+
+        // Редирект
+        router.push("/auth");
+    };
+
     if (!hydrated || !userData) return null;
 
     return (
         <>
             <Header>
                 <Header.Heading>{userData.data.NameIRL && userData.data.Surname ? `${userData.data.NameIRL} ${userData.data.Surname}` : "Незаполнено"}</Header.Heading>
+                <Button red className={"w-fit!"} onClick={handleLogout}>
+                    Выйти
+                </Button>
                 <Button icon onClick={() => goTo("settings")}>
                     <Setts />
                 </Button>
