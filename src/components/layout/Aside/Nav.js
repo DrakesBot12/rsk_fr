@@ -21,15 +21,15 @@ const BASE_NAV_LINKS = [
             { label: "Моя команда", href: "/teams/my" },
         ],
     },
-    // { label: "Организации", disable: false, inactive: true, href: "/organizations", icon: dynamic(() => import("@/assets/nav/organ.svg")) },
+    { label: "Организации", disable: false, inactive: true, href: "/organizations", icon: dynamic(() => import("@/assets/nav/organ.svg")) },
     // {
-    //     label: 'Мастерская',
-    //     href: '#',
-    //     icon: dynamic(() => import('@/assets/nav/pulse.svg')),
+    //     label: "Мастерская",
+    //     href: "#",
+    //     icon: dynamic(() => import("@/assets/nav/pulse.svg")),
     //     submenu: [
-    //         { label: 'Пульс', href: '/pulse' },
-    //         { label: 'Статистика', href: '/pulse/stats' }
-    //     ]
+    //         { label: "Пульс", href: "/pulse" },
+    //         { label: "Статистика", href: "/pulse/stats" },
+    //     ],
     // },
     // {
     //     label: 'Проекты',

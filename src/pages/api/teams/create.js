@@ -18,7 +18,6 @@ export default async function RegHandler(req, res) {
         });
 
         const data = await response.json();
-        console.log("Response: ", data);
 
         if (!response.ok) {
             return res.json({ success: false, data });

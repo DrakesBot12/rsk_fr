@@ -6,17 +6,17 @@ const CaseValueContext = createContext();
 
 export default function Case({ value, onChange, children, tabs, pages = 5, perPage = 3, ...props }) {
     // Защита от некорректных значений perPage и pages
-    const safePerPage = typeof perPage === 'number' && perPage > 0 ? perPage : 1;
-    const safePages = typeof pages === 'number' && pages > 0 ? pages : 5;
+    const safePerPage = typeof perPage === "number" && perPage > 0 ? perPage : 1;
+    const safePages = typeof pages === "number" && pages > 0 ? pages : 5;
     const [page, setPage] = useState(0);
 
     // Мемоизация вычислений
     const { childrenArray, hasTabs, tabContent, paginated, totalPages, contentLength } = useMemo(() => {
         const childrenArray = React.Children.toArray(children);
-        const hasTabs = childrenArray.some(child => child?.type === Case.Tab);
+        const hasTabs = childrenArray.some((child) => child?.type === Case.Tab);
         let tabContent = null;
         if (hasTabs) {
-            const activeTab = childrenArray.find(child => {
+            const activeTab = childrenArray.find((child) => {
                 if (!child.props || child.type !== Case.Tab) return false;
                 if (!child.props.tab) return true;
                 return child.props.tab === value;
@@ -48,13 +48,12 @@ export default function Case({ value, onChange, children, tabs, pages = 5, perPa
         <Switcher
             className="!w-full"
             value={page}
-            onChange={val => {
-                if (val === 'next') return; // не меняем страницу, если выбрана стрелка
+            onChange={(val) => {
+                if (val === "next") return; // не меняем страницу, если выбрана стрелка
                 setPage(val);
             }}
             aria-label="Пагинация по страницам"
-            role="navigation"
-        >
+            role="navigation">
             {(() => {
                 let start = Math.max(0, Math.min(page - Math.floor(safePages / 2), totalPages - safePages));
                 let end = Math.min(totalPages, start + safePages);
@@ -62,11 +61,7 @@ export default function Case({ value, onChange, children, tabs, pages = 5, perPa
                 return Array.from({ length: end - start }).map((_, idx) => {
                     const pageNum = start + idx;
                     return (
-                        <Switcher.Option
-                            key={pageNum}
-                            value={pageNum}
-                            aria-current={pageNum === page ? "page" : undefined}
-                        >
+                        <Switcher.Option key={pageNum} value={pageNum} aria-current={pageNum === page ? "page" : undefined}>
                             {pageNum + 1}
                         </Switcher.Option>
                     );
@@ -79,28 +74,27 @@ export default function Case({ value, onChange, children, tabs, pages = 5, perPa
                 onClick={() => {
                     if (page < totalPages - 1) setPage(page + 1);
                 }}
-                aria-label="Следующая страница"
-            >
-                {'>'}
+                aria-label="Следующая страница">
+                {">"}
             </Switcher.Option>
         </Switcher>
     );
 
     return (
         <div className={`flex flex-col ${props.className}`}>
-            {tabs && tabs.length > 0 &&
+            {tabs && tabs.length > 0 && (
                 <Switcher className="!w-full" value={value} onChange={onChange}>
-                    {tabs.map((tab, idx) => <Switcher.Option key={idx} value={tab.name}>{tab.label}</Switcher.Option>)}
+                    {tabs.map((tab, idx) => (
+                        <Switcher.Option key={idx} value={tab.name}>
+                            {tab.label}
+                        </Switcher.Option>
+                    ))}
                 </Switcher>
-            }
+            )}
             {!tabs || tabs.length === 0 ? (
                 <>
                     <div className={`flex flex-col gap-[.75rem] ${props.classChildren}`}>
-                        {Array.isArray(paginated) && paginated.length === 0 ? (
-                            <div className="text-center text-(--color-gray-black)">Нет данных</div>
-                        ) : (
-                            Array.isArray(paginated) ? paginated : paginated
-                        )}
+                        {Array.isArray(paginated) && paginated.length === 0 ? <div className="text-center text-(--color-gray-black)">Нет данных</div> : Array.isArray(paginated) ? paginated : paginated}
                     </div>
                     {Array.isArray(tabContent) && totalPages > 1 && renderPagination()}
                 </>
@@ -108,18 +102,14 @@ export default function Case({ value, onChange, children, tabs, pages = 5, perPa
                 <div className="flex flex-col justify-between h-full">
                     <div className={`flex flex-col gap-[.75rem] ${props.classChildren}`}>
                         <CaseValueContext.Provider value={value}>
-                            {Array.isArray(paginated) && paginated.length === 0 ? (
-                                <div className="text-center text-(--color-gray-black)">Нет данных</div>
-                            ) : (
-                                Array.isArray(paginated) ? paginated : paginated
-                            )}
+                            {Array.isArray(paginated) && paginated.length === 0 ? <div className="text-center text-(--color-gray-black)">Нет данных</div> : Array.isArray(paginated) ? paginated : paginated}
                         </CaseValueContext.Provider>
                     </div>
                     {Array.isArray(tabContent) && totalPages > 1 && renderPagination()}
                 </div>
             )}
         </div>
-    )
+    );
 }
 
 Case.Tab = function Tab({ children, tab = "" }) {
@@ -131,10 +121,10 @@ Case.Tab = function Tab({ children, tab = "" }) {
     if (tab === value) return children;
     // В остальных случаях ничего не рендерим
     return null;
-}
+};
 
-
-{/*
+{
+    /*
 
 import Case from '@/components/ui/Case';
 
@@ -152,4 +142,5 @@ const [caseType, setCaseType] = useState('all');
     <Case.Tab> Показывается на всех табах </Case.Tab>
 </Case>
 
-*/}
+*/
+}
