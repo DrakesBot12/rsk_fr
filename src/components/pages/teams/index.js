@@ -40,6 +40,30 @@ export default function TeamIndexPage({ goTo, teamData }) {
         }
     };
 
+    const LeaveTeam = async () => {
+        try {
+            const response = await fetch(`/api/teams/leave/${team.id}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                alert("Вы покинули команду");
+                return true;
+            } else {
+                alert("Произошла ошибка: ", data);
+                console.error("Join team error:", data);
+                return false;
+            }
+        } catch (err) {
+            alert("Произошла ошибка: ", data);
+            console.error("Request error:", err);
+            return false;
+        }
+    };
+
     useEffect(() => {
         const TeamMembers = async () => {
             try {
@@ -135,6 +159,7 @@ export default function TeamIndexPage({ goTo, teamData }) {
                                     Вступить
                                 </Button>
                                 <Button
+                                    onClick={LeaveTeam}
                                     small
                                     disabled={!idUserTeam || idUserTeam !== team.id} // если нет команды или не в этой команде, кнопка неактивна
                                 >
