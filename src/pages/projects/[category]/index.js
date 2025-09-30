@@ -6,11 +6,11 @@ import Layout from "@/components/layout/Layout";
 import { categories } from "../_categories";
 
 import Card from "@/components/ui/Card";
-import Case from "@/components/ui/Case";
 import Button from "@/components/ui/Button";
 
 import Index from "@/assets/general/index.svg";
 import Notify from '@/assets/general/notify.svg';
+import Link from "next/link";
 
 export default function CategoryPage() {
     const router = useRouter();
@@ -64,9 +64,37 @@ export default function CategoryPage() {
                         </Card.Footer>
                     </Card>
                 </div>
-                <Case>
-                    
-                </Case>
+                {(() => {
+                    const projects = category.levels[0].map((project, idx) => ({ ...project, originalIdx: idx }));
+                    const sorted = [
+                        ...projects.filter(p => p.status === "open"),
+                        ...projects.filter(p => p.status !== "open")
+                    ];
+                    return (
+                        <div className="col-span-12 grid grid-cols-3 gap-[1.25rem] h-fit">
+                            {sorted.map((project) => (
+                                <Link
+                                    href={`/projects/${category.url}/${project.url}`}
+                                    key={project.originalIdx}
+                                    className="flex flex-col min-h-[200px] justify-between gap-[1rem] p-[1.25rem]
+                                    rounded-[1rem] border-[1.5px] border-(--color-gray-plus-50) hover:bg-(--color-white-gray) hover:border-(--color-white-gray) transition"
+                                >
+                                    <div className="flex flex-col gap-[.5rem]">
+                                        <div className="flex justify-between items-center gap-[.5rem]">
+                                            <h5>{project.name}</h5>
+                                            {/* Нумерация по исходному порядку */}
+                                            <span className="link big text-(--color-gray-white)">#{project.originalIdx + 1}</span>
+                                        </div>
+                                        <p className="text-(--color-gray-black)">{project.desc}</p>
+                                    </div>
+                                    <div className={`flex items-center justify-center px-[.75rem] py-[1rem] rounded-[6.25rem] ${project.status === "open" ? "bg-(--color-green-noise) text-(--color-green-black)" : "bg-(--color-gray-plus-50) text-(--color-black)"}`}>
+                                        {project.status === "open" ? "Выполнено" : "Выполнить"}
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    );
+                })()}
             </div>
         </Layout>
     )
