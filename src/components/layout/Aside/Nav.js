@@ -73,24 +73,34 @@ export function useNavLinks() {
 
     useEffect(() => {
         const checkAuthAndRole = async () => {
-            // Функция для получения куки
+            // Утилита для получения куки
             const getCookie = (name) => {
                 if (typeof document === "undefined") return null;
                 const value = `; ${document.cookie}`;
                 const parts = value.split(`; ${name}=`);
                 if (parts.length === 2) return parts.pop().split(";").shift();
-                console.log(parts);
                 return null;
+            };
+
+            // Утилита для удаления всех cookie (без confirm)
+            const clearCookies = () => {
+                const cookies = document.cookie.split(";");
+                for (let cookie of cookies) {
+                    const eqPos = cookie.indexOf("=");
+                    const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+                    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+                }
             };
 
             const userData = getCookie("userData");
             const existingRole = getCookie("role");
+
             // Если токена нет
             if (!userData) {
                 setNavLinks((prevLinks) =>
                     prevLinks.map((link) => ({
                         ...link,
-                        inactive: link.inactive, // оставляем исходное значение inactive
+                        inactive: link.inactive,
                     }))
                 );
                 setIsLoading(false);
@@ -112,10 +122,25 @@ export function useNavLinks() {
                     credentials: "include",
                 });
 
-                if (!response.ok) throw new Error("Failed to fetch profile");
+                if (!response.ok) {
+                    // если сессия устарела — чистим куки и редиректим
+                    if (response.status === 401 || response.status === 403) {
+                        clearCookies();
+                        router.push("/auth");
+                        return;
+                    }
+                    throw new Error("Failed to fetch profile");
+                }
 
                 const data = await response.json();
-                const role = data.data.Type;
+                const role = data?.data?.Type;
+
+                if (!role) {
+                    // если роль не пришла — тоже чистим и редиректим
+                    clearCookies();
+                    router.push("/auth");
+                    return;
+                }
 
                 // Сохраняем роль в куки на 1 день
                 if (typeof document !== "undefined") {
@@ -125,8 +150,8 @@ export function useNavLinks() {
                 updateNavLinks(role, true);
             } catch (err) {
                 console.error("Request error:", err);
-                // В случае ошибки оставляем навигацию как есть
-                updateNavLinks(null, true);
+                clearCookies();
+                router.push("/auth");
             } finally {
                 setIsLoading(false);
             }

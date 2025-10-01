@@ -21,6 +21,7 @@ export default async function getOrg(req, res) {
         }
 
         const data = await response_info.json();
+        console.log(data);
 
         return res.json({ success: true, data });
     } catch (err) {

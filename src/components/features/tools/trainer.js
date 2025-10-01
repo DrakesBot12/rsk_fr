@@ -132,7 +132,7 @@ export default function TrainerPage({ goTo }) {
 
             try {
                 // Загрузка данных задания из TaskText.json
-                const basePath = `./tasks/${userType}/${who}`;
+                const basePath = `/tasks/${userType}/${who}`;
                 const response = await fetch(`${basePath}/TaskText.json`);
 
                 if (!response.ok) throw new Error("Не удалось загрузить текст задания");
@@ -686,7 +686,7 @@ export default function TrainerPage({ goTo }) {
             setError(null);
 
             try {
-                const basePath = `./tasks/${userType}/${who}`;
+                const basePath = `/tasks/${userType}/${who}`;
                 const response = await fetch(`${basePath}/index.json`);
 
                 if (!response.ok) {
@@ -1901,12 +1901,11 @@ export default function TrainerPage({ goTo }) {
                                     <div key={f.code} className="group flex w-full items-start gap-2">
                                         {isMobile ? (
                                             <>
-                                                {/* ЭТО ВЕРСИЯ ДЛЯ МОБИЛЬНЫХ */}
                                                 <div className="flex-1 min-w-0">
                                                     <TextareaAutosize
                                                         minRows={1}
-                                                        className="w-full resize-none rounded-lg border border-gray-300 bg-white p-2 text-base"
-                                                        placeholder={f.label}
+                                                        className="w-full resize-none rounded-lg border border-gray-300 bg-white p-2 text-base text-left" // Добавлено text-left
+                                                        placeholder={f.label} // Убедитесь что placeholder передается
                                                         value={fields[f.code]}
                                                         onChange={(e) => handleChange(f.code, e.target.value)}
                                                     />
@@ -1925,8 +1924,12 @@ export default function TrainerPage({ goTo }) {
                                             </>
                                         ) : (
                                             <>
-                                                {/* ЭТО ВЕРСИЯ ДЛЯ ДЕСКТОПА (остается как было) */}
-                                                <Input className="w-full" placeholder={f.label} value={fields[f.code]} onChange={(e) => handleChange(f.code, e.target.value)} type="button" />
+                                                <Input
+                                                    className="w-full text-left" // Добавлено text-left
+                                                    placeholder={f.label}
+                                                    value={fields[f.code]}
+                                                    onChange={(e) => handleChange(f.code, e.target.value)}
+                                                />
                                                 <Button icon className="!hidden group-hover:!flex" onClick={() => handleShowBufferForField(f.code)} type="button">
                                                     <CopyIcon />
                                                 </Button>
@@ -1947,11 +1950,10 @@ export default function TrainerPage({ goTo }) {
                                     <div key={f.code} className="group flex w-full items-start gap-2">
                                         {isMobile ? (
                                             <>
-                                                {/* ЭТО ВЕРСИЯ ДЛЯ МОБИЛЬНЫХ */}
                                                 <div className="flex-1 min-w-0">
                                                     <TextareaAutosize
                                                         minRows={1}
-                                                        className="w-full resize-none rounded-lg border border-gray-300 bg-white p-2 text-base"
+                                                        className="w-full resize-none rounded-lg border border-gray-300 bg-white p-2 text-base text-left" // Добавлено text-left
                                                         placeholder={f.label}
                                                         value={fields[f.code]}
                                                         onChange={(e) => handleChange(f.code, e.target.value)}
@@ -1971,8 +1973,12 @@ export default function TrainerPage({ goTo }) {
                                             </>
                                         ) : (
                                             <>
-                                                {/* ЭТО ВЕРСИЯ ДЛЯ ДЕСКТОПА (остается как было) */}
-                                                <Input className="w-full" placeholder={f.label} value={fields[f.code]} onChange={(e) => handleChange(f.code, e.target.value)} type="button" />
+                                                <Input
+                                                    className="w-full text-left" // Добавлено text-left
+                                                    placeholder={f.label}
+                                                    value={fields[f.code]}
+                                                    onChange={(e) => handleChange(f.code, e.target.value)}
+                                                />
                                                 <Button icon className="!hidden group-hover:!flex" onClick={() => handleShowBufferForField(f.code)} type="button">
                                                     <CopyIcon />
                                                 </Button>

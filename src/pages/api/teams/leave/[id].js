@@ -6,7 +6,7 @@ export default async function LeaveTeam(req, res) {
         }
 
         const response_info = await fetch(`https://api.rosdk.ru/teams/teams/leave_team/${req.query.id}`, {
-            method: "POST",
+            method: "DELETE",
             headers: {
                 Accept: "application/json",
                 Cookie: req.headers.cookie || "",

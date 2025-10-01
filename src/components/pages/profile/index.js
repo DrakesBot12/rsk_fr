@@ -93,7 +93,7 @@ export default function ProfileIndexPage({ goTo }) {
                         </div>
                     </Card.Heading>
                     <Card.Footer>
-                        <a className="big relative z-[1]">Здраствуйте</a>
+                        <a className="big relative z-[1]">Теперь вы с нами!</a>
                     </Card.Footer>
                 </Card>
                 <div className="col-span-4 h-fit">
@@ -101,15 +101,13 @@ export default function ProfileIndexPage({ goTo }) {
                         <h6>Организация и команда</h6>
                         <div className="flex flex-col gap-[0.75rem]">
                             <div className="group cursor-pointer flex items-center justify-between w-full">
-                                <a className="flex-1">{userData.data.Organization}</a>
+                                <a className="flex-1">{userData.data.Organization ? userData.data.Organization : "Отсутсвует"}</a>
                                 <LinkIcon className="stroke-(--color-gray-white) group-hover:stroke-black" style={{ transition: "stroke .3s ease-in-out" }} />
                             </div>
                             <hr className="w-full border-solid border-[1.5px] border-(--color-gray-plus)" />
                             <div className="group flex items-center justify-between w-full">
-                                <p className="flex-1" style={{ color: "var(--color-gray-black)" }}>
-                                    Недоступны до окончания прохождения обучения
-                                </p>
-                                {/* <LinkIcon className="stroke-(--color-gray-white) group-hover:stroke-black" style={{ transition: "stroke .3s ease-in-out" }} /> */}
+                                <a className="flex-1">{userData.data.Team ? userData.data.Team : "Отсутсвует"}</a>
+                                <LinkIcon className="stroke-(--color-gray-white) group-hover:stroke-black" style={{ transition: "stroke .3s ease-in-out" }} />
                             </div>
                         </div>
                     </div>
