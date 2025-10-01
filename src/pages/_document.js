@@ -1,6 +1,7 @@
+// pages/_document.js
 import { Html, Head, Main, NextScript } from "next/document";
 
-export default function Document() {
+export default function Document(props) {
     return (
         <Html lang="ru">
             <Head>
@@ -9,23 +10,27 @@ export default function Document() {
                         display: none;
                     }
                     @media (max-width: 900px) {
-                        .desktop {
+                        body:not([data-pathname^="/tools"]) .desktop {
                             display: none;
                         }
-                        .mobile {
+                        body:not([data-pathname^="/tools"]) .mobile {
                             display: flex;
+                            padding: 40px;
                         }
                     }
                 `}</style>
             </Head>
-            <body>
+            <body data-pathname={props.__NEXT_DATA__?.page || ""}>
                 <div className="desktop">
                     <Main />
                     <NextScript />
                 </div>
                 <div className="mobile flex flex-col w-full h-screen justify-center items-center gap-[8px]">
                     <h3 className="w-full text-center">Упс...</h3>
-                    <p className="w-full text-center">Версия для телефонов пока отсутствует. Для доступа к сайту используйте ПК</p>
+                    <p className="w-full text-center">Мобильная версия пока недоступна. Используйте ПК для сайта, но инструменты МАЯК ОКО и тренажер доступны.</p>
+                    <a href="/tools/mayak-oko" className="button bg-black text-white">
+                        Тренажер
+                    </a>
                 </div>
             </body>
         </Html>

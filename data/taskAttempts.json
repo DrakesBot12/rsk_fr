@@ -86,10 +86,22 @@
               "userType": "teacher",
               "who": "im"
             }
+          },
+          {
+            "timestamp": "2025-10-01T13:30:50.553Z",
+            "timeSpent": 0,
+            "secondsSpent": 0,
+            "taskIndex": 2,
+            "completed": true,
+            "taskDetails": {
+              "type": "text",
+              "userType": "teacher",
+              "who": "im"
+            }
           }
         ],
         "bestTime": 0,
-        "lastAttempt": "2025-10-01T12:33:42.184Z"
+        "lastAttempt": "2025-10-01T13:30:50.553Z"
       },
       "Задание 4": {
         "attempts": [
@@ -111,9 +123,9 @@
       }
     },
     "stats": {
-      "totalTasksCompleted": 7,
+      "totalTasksCompleted": 8,
       "totalTimeSpent": 0,
-      "lastActivity": "2025-10-01T12:34:23.032Z"
+      "lastActivity": "2025-10-01T13:30:50.553Z"
     }
   }
 }

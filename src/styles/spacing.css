@@ -80,6 +80,12 @@ aside {
     }
 }
 
+@media (max-width: 640px) {
+    aside {
+        display: none;
+    }
+}
+
 header {
     gap: 0.625rem;
     display: flex;
@@ -91,7 +97,8 @@ header {
     }
 }
 
-button {
+button,
+.button {
     width: 100%;
     display: flex;
     cursor: pointer;
