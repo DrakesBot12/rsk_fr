@@ -113,7 +113,7 @@ export default function Teams() {
                                     <div className="flex gap-[.25rem] items-center group-hover:text-(--color-blue)">
                                         <Coins />
                                         {/* Коинсов пока нет надо добавить */}
-                                        <span className="link small">Хуйвам</span>
+                                        <span className="link small">0</span>
                                     </div>
                                     <div className="flex gap-[.25rem] items-center text-(--color-gray-black) group-hover:text-(--color-black)">
                                         <Persons />
@@ -122,12 +122,12 @@ export default function Teams() {
                                     <div className="flex gap-[.25rem] items-center text-(--color-gray-black) group-hover:text-(--color-black)">
                                         <Projects />
                                         {/* Проектов пока нет надо добавить */}
-                                        <span className="link small">хуйвам проектов</span>
+                                        <span className="link small">0 проектов</span>
                                     </div>
                                     <div className="flex gap-[.25rem] items-center text-(--color-gray-black) group-hover:text-(--color-black)">
                                         <Del />
                                         {/* Дел пока нет надо добавить */}
-                                        <span className="link small">хуйвам дел</span>
+                                        <span className="link small">0 дел</span>
                                     </div>
                                 </div>
                             </Link>

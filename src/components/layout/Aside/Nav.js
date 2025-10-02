@@ -42,17 +42,18 @@ const BASE_NAV_LINKS = [
     //  },
     // { label: 'Новости', href: '/news', icon: dynamic(() => import('@/assets/nav/news.svg')) },
     // { label: "Обучение", disable: false, inactive: true, href: "/cours", icon: dynamic(() => import("@/assets/nav/cours.svg")) },
-    {
-        label: "Инструменты",
-        disable: false,
-        inactive: false,
-        href: "#",
-        icon: dynamic(() => import("@/assets/nav/inst.svg")),
-        submenu: [
-            { label: "Маяк Око", href: "/tools/mayak-oko" },
-            // { label: "В будущем", href: "/tools/mvp" },
-        ],
-    },
+    { label: "Маяк Око", href: "/tools/mayak-oko", icon: dynamic(() => import("@/assets/nav/inst.svg")) },
+    // {
+    //     label: "Инструменты",
+    //     disable: false,
+    //     inactive: false,
+    //     href: "#",
+    //     icon: dynamic(() => import("@/assets/nav/inst.svg")),
+    //     submenu: [
+    //         { label: "Маяк Око", href: "/tools/mayak-oko" },
+    //         // { label: "В будущем", href: "/tools/mvp" },
+    //     ],
+    // },
     {
         label: "Админ панель",
         disable: true, // по умолчанию заблокирована

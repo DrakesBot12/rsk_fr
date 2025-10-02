@@ -199,5 +199,32 @@
       "totalTimeSpent": 0,
       "lastActivity": "2025-10-02T05:40:35.603Z"
     }
+  },
+  "{\"id\":\"eba08247-151d-4379-aac7-28caf9dcd9bd\"}": {
+    "tasks": {
+      "Задание 1": {
+        "attempts": [
+          {
+            "timestamp": "2025-10-02T14:54:09.531Z",
+            "timeSpent": 0,
+            "secondsSpent": 1,
+            "taskIndex": 0,
+            "completed": true,
+            "taskDetails": {
+              "type": "text",
+              "userType": "student",
+              "who": "im"
+            }
+          }
+        ],
+        "bestTime": 0,
+        "lastAttempt": "2025-10-02T14:54:09.531Z"
+      }
+    },
+    "stats": {
+      "totalTasksCompleted": 1,
+      "totalTimeSpent": 0,
+      "lastActivity": "2025-10-02T14:54:09.531Z"
+    }
   }
 }

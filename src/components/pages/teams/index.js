@@ -189,7 +189,7 @@ export default function TeamIndexPage({ goTo, teamData }) {
                         </div>
                     </div>
 
-                    <Folder projects="хуйвам" cases="хуйвам" coins="хуйвам" onClick={() => goTo("workfolder")} />
+                    <Folder projects="0" cases="0" coins="0" onClick={() => goTo("workfolder")} />
                 </div>
 
                 <div className="block-wrapper gap-[1.25rem] col-span-12 h-fit">
