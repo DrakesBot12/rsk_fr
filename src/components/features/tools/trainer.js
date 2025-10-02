@@ -68,6 +68,7 @@ export default function TrainerPage({ goTo }) {
 
     const [showImagePopup, setShowImagePopup] = useState(false);
     const [currentImage, setCurrentImage] = useState("");
+    const [taskInputValue, setTaskInputValue] = useState(String(currentTaskIndex + 1));
 
     const [levels, setLevels] = useState({
         level1: "",
@@ -246,6 +247,44 @@ export default function TrainerPage({ goTo }) {
             setCompletedTasks(JSON.parse(savedTasks));
         }
     }, []);
+
+    const handleTaskInputChange = (e) => {
+        const value = e.target.value.replace(/[^0-9]/g, "");
+        setTaskInputValue(value);
+    };
+
+    const applyTaskInput = () => {
+        if (taskInputValue === "") {
+            setTaskInputValue(String(currentTaskIndex + 1));
+            return;
+        }
+
+        const numValue = parseInt(taskInputValue);
+        if (numValue < 1) {
+            setTaskInputValue("1");
+            setCurrentTaskIndex(0);
+            loadTaskDetails(tasks[0]);
+        } else if (numValue > tasks.length) {
+            setTaskInputValue(String(tasks.length));
+            setCurrentTaskIndex(tasks.length - 1);
+            loadTaskDetails(tasks[tasks.length - 1]);
+        } else {
+            const newIndex = numValue - 1;
+            setCurrentTaskIndex(newIndex);
+            loadTaskDetails(tasks[newIndex]);
+        }
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            applyTaskInput();
+            e.target.blur();
+        }
+    };
+
+    useEffect(() => {
+        setTaskInputValue(String(currentTaskIndex + 1));
+    }, [currentTaskIndex]);
 
     // Очистка таймера при размонтировании
     useEffect(() => {
@@ -1732,10 +1771,10 @@ export default function TrainerPage({ goTo }) {
                                 </div>
                             </div>
                             <div className="flex gap-[0.5rem]">
-                                <Switcher value={userType} onChange={setUserType} className="!w-full">
+                                {/* <Switcher value={userType} onChange={setUserType} className="!w-full">
                                     <span value="student">Студент</span>
                                     <span value="teacher">Преподаватель</span>
-                                </Switcher>
+                                </Switcher> */}
                                 <Switcher
                                     value={who}
                                     onChange={(value) => {
@@ -1760,19 +1799,15 @@ export default function TrainerPage({ goTo }) {
                                         <Button className={"square"} onClick={prevTask} disabled={currentTaskIndex === 0}>
                                             ←
                                         </Button>
-                                        <Input
+                                        <input
                                             type="number"
                                             min="1"
                                             max={tasks.length}
-                                            value={currentTaskIndex + 1}
-                                            onChange={(e) => {
-                                                const newIndex = parseInt(e.target.value) - 1;
-                                                if (!isNaN(newIndex) && newIndex >= 0 && newIndex < tasks.length) {
-                                                    setCurrentTaskIndex(newIndex);
-                                                    loadTaskDetails(tasks[newIndex]);
-                                                }
-                                            }}
-                                            className="text-center"
+                                            value={taskInputValue}
+                                            onChange={handleTaskInputChange}
+                                            onBlur={applyTaskInput} // Применяем когда поле теряет фокус
+                                            onKeyPress={handleKeyPress} // Применяем при нажатии Enter
+                                            className="w-16 text-center border border-gray-300 rounded-md px-2 py-1"
                                         />
                                         <Button className={"square"} onClick={nextTask} disabled={currentTaskIndex === tasks.length - 1}>
                                             →
@@ -2006,10 +2041,10 @@ export default function TrainerPage({ goTo }) {
                                     </div>
                                 </div>
                                 <div className="flex gap-[0.5rem]">
-                                    <Switcher value={userType} onChange={setUserType} className="!w-full">
+                                    {/* <Switcher value={userType} onChange={setUserType} className="!w-full">
                                         <Switcher.Option value="student">Студент</Switcher.Option>
                                         <Switcher.Option value="teacher">Преподаватель</Switcher.Option>
-                                    </Switcher>
+                                    </Switcher> */}
                                     <Switcher
                                         value={who}
                                         onChange={(value) => {
@@ -2034,19 +2069,15 @@ export default function TrainerPage({ goTo }) {
                                             <Button className={"square"} onClick={prevTask} disabled={currentTaskIndex === 0}>
                                                 ←
                                             </Button>
-                                            <Input
+                                            <input
                                                 type="number"
                                                 min="1"
                                                 max={tasks.length}
-                                                value={currentTaskIndex + 1}
-                                                onChange={(e) => {
-                                                    const newIndex = parseInt(e.target.value) - 1;
-                                                    if (!isNaN(newIndex) && newIndex >= 0 && newIndex < tasks.length) {
-                                                        setCurrentTaskIndex(newIndex);
-                                                        loadTaskDetails(tasks[newIndex]);
-                                                    }
-                                                }}
-                                                className="text-center"
+                                                value={taskInputValue}
+                                                onChange={handleTaskInputChange}
+                                                onBlur={applyTaskInput}
+                                                onKeyPress={handleKeyPress}
+                                                className="text-center border border-gray-300 rounded-md px-2 py-1 w-16"
                                             />
                                             <Button className={"square"} onClick={nextTask} disabled={currentTaskIndex === tasks.length - 1}>
                                                 →
