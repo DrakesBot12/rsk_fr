@@ -856,16 +856,13 @@ export default function TrainerPage({ goTo }) {
 
     function ConfirmationPopup({ title, message, confirmText, onConfirm, onCancel }) {
         return (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                <div className="bg-white p-6 rounded-lg max-w-md w-full">
-                    <div className="flex justify-between items-start mb-4">
+            <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+                <div className="bg-white p-6 rounded-lg max-w-md w-full shadow-2xl border border-gray-200">
+                    <div className="mb-4 text-center">
                         <h3 className="text-xl font-bold">{title || "Подтверждение"}</h3>
-                        <button onClick={onCancel} className="square text-gray-500 hover:text-gray-700">
-                            ✕
-                        </button>
                     </div>
 
-                    <div className="big mb-6">{message}</div>
+                    <div className="big mb-6 text-center">{message}</div>
 
                     <div className="flex justify-end gap-2">
                         <Button onClick={onCancel} className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
@@ -882,13 +879,17 @@ export default function TrainerPage({ goTo }) {
 
     const showSwitchToWeConfirmation = () => {
         setConfirmationConfig({
-            title: 'Переход к разделу "Мы"',
-            message: "Вы уверены, что хотите перейти к командной части тренажера?",
+            title: 'Переход к разделу "МЫ"',
+            message: (
+                <div className="flex flex-col items-center gap-4 text-center">
+                    <p>Вы уверены, что хотите перейти к командной части тренажера?</p>
+                    <Button onClick={() => window.open("https://forms.yandex.ru/u/68dee03484227c479bc7d233", "_blank", "noopener,noreferrer")}>Пройти рефлексию после этапа «Я»</Button>
+                </div>
+            ),
             confirmText: "Да, перейти",
             onConfirm: () => {
                 setShowConfirmation(false);
-                setShowSecondQuestionnaire(true);
-                setHasCompletedQuestionnaire(true);
+                setWho("we"); // Переключаем на "Мы" после подтверждения
             },
             onCancel: () => {
                 setShowConfirmation(false);
@@ -899,18 +900,7 @@ export default function TrainerPage({ goTo }) {
     };
 
     const showCompleteSessionConfirmation = () => {
-        setConfirmationConfig({
-            title: "Завершение сессии",
-            message: 'Подтвердите, что вы завершили прохождение тренажера "МАЯК"',
-            confirmText: "Да, завершил(а)",
-            onConfirm: () => {
-                setShowConfirmation(false);
-                setShowSessionCompletionPopup(true);
-                //setShowThirdQuestionnaire(true);
-            },
-            onCancel: () => setShowConfirmation(false),
-        });
-        setShowConfirmation(true);
+        setShowSessionCompletionPopup(true);
     };
 
     function FirstQuestionnairePopup({ onClose, onSubmit }) {
@@ -954,9 +944,11 @@ export default function TrainerPage({ goTo }) {
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                 <div className="bg-white p-6 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
                     <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-xl font-bold">Анкета №1: Входная диагностика («Точка А»)</h3>
-                        <button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
-                            ✕
+                        <h3 className="text-xl font-bold">Анкета №3: Выходная диагностика («Точка Б»)</h3>
+                        <button onClick={onClose} className="p-1 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
                         </button>
                     </div>
 
@@ -1168,11 +1160,8 @@ export default function TrainerPage({ goTo }) {
         return (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
                 <div className="bg-white p-6 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-                    <div className="flex justify-between items-start mb-4">
+                    <div className="mb-4">
                         <h3 className="text-xl font-bold">Анкета №3: Выходная диагностика («Точка Б»)</h3>
-                        <button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
-                            ✕
-                        </button>
                     </div>
 
                     <div className="space-y-6">
@@ -1386,44 +1375,54 @@ export default function TrainerPage({ goTo }) {
             }));
         };
 
+        // Проверка, заполнено ли хотя бы одно поле
+        const isSaveDisabled = !Object.values(levels).some((level) => level && level.trim() !== "");
+
         return (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                <div className="bg-white p-6 rounded-lg max-w-md w-full">
-                    <div className="flex justify-between items-start mb-4">
+            <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
+                <div className="relative bg-white p-6 rounded-lg max-w-md w-full shadow-2xl border border-gray-200 pointer-events-auto">
+                    {/* Крестик для закрытия убран */}
+
+                    <div className="mb-4">
                         <h3 className="text-xl font-bold">Завершение сессии</h3>
-                        <button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
-                            ✕
-                        </button>
                     </div>
 
-                    <div className="space-y-4">
-                        <p>Пожалуйста, заполните измерения Delta для завершения сессии:</p>
-
-                        <div className="grid grid-cols-2 gap-2">
-                            <Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
-                            <Input type="number" placeholder="Уровень 2" value={levels.level2} onChange={(e) => handleLevelChange("level2", e.target.value)} />
-                            <Input type="number" placeholder="Уровень 3" value={levels.level3} onChange={(e) => handleLevelChange("level3", e.target.value)} />
-                            <Input type="number" placeholder="Уровень 4" value={levels.level4} onChange={(e) => handleLevelChange("level4", e.target.value)} />
-                            <Input type="number" placeholder="Уровень 5" value={levels.level5} onChange={(e) => handleLevelChange("level5", e.target.value)} />
+                    {/* Сразу показываем форму для ввода Delta */}
+                    <>
+                        <div className="space-y-4">
+                            <p>Пожалуйста, заполните измерения Delta для завершения сессии:</p>
+                            <div className="grid grid-cols-2 gap-2">
+                                <Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
+                                <Input type="number" placeholder="Уровень 2" value={levels.level2} onChange={(e) => handleLevelChange("level2", e.target.value)} />
+                                <Input type="number" placeholder="Уровень 3" value={levels.level3} onChange={(e) => handleLevelChange("level3", e.target.value)} />
+                                <Input type="number" placeholder="Уровень 4" value={levels.level4} onChange={(e) => handleLevelChange("level4", e.target.value)} />
+                                <Input type="number" placeholder="Уровень 5" value={levels.level5} onChange={(e) => handleLevelChange("level5", e.target.value)} />
+                            </div>
                         </div>
-                    </div>
-
-                    <div className="mt-6 flex justify-end gap-2">
-                        <Button
-                            as="a"
-                            href={"https://prompt-mastery-trainer-spo.lovable.app/"}
-                            target="_blank"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                window.open("https://prompt-mastery-trainer-spo.lovable.app/", "_blank");
-                            }}
-                            className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
-                            Пройти Тестирование
-                        </Button>
-                        <Button onClick={() => onSave(levels)} className="!bg-blue-500 !text-white hover:!bg-blue-600">
-                            Сохранить и завершить
-                        </Button>
-                    </div>
+                        <div className="mt-6 flex justify-center gap-2">
+                            {/* Новая кнопка "Отмена" */}
+                            <Button onClick={onClose} className="!bg-gray-200 !text-gray-800 hover:!bg-gray-300 flex-1">
+                                Отмена
+                            </Button>
+                            <Button
+                                as="a"
+                                href={"https://prompt-mastery-trainer-spo.lovable.app/"}
+                                target="_blank"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    window.open("https://prompt-mastery-trainer-spo.lovable.app/", "_blank");
+                                }}
+                                className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200 flex-1">
+                                Пройти Тестирование
+                            </Button>
+                            {/* Кнопка "Сохранить" с проверкой на заполненность полей и подсказкой */}
+                            <span className="flex-1" title={isSaveDisabled ? "Сначала заполните хотя бы одно поле Дельта" : ""}>
+                                <Button onClick={() => onSave(levels)} className="!bg-blue-500 !text-white hover:!bg-blue-600 w-full" disabled={isSaveDisabled}>
+                                    Сохранить и завершить
+                                </Button>
+                            </span>
+                        </div>
+                    </>
                 </div>
             </div>
         );
@@ -1692,9 +1691,6 @@ export default function TrainerPage({ goTo }) {
         <>
             <Header>
                 <Header.Heading>МАЯК ОКО</Header.Heading>
-                <Button icon onClick={() => goTo("history")}>
-                    <TimeIcon />
-                </Button>
                 <Button icon onClick={() => goTo("settings")}>
                     <SettsIcon />
                 </Button>
@@ -2065,8 +2061,8 @@ export default function TrainerPage({ goTo }) {
                                                 Задание {currentTaskIndex + 1} из {tasks.length}
                                             </span>
                                         </div>
-                                        <div className="flex gap-[0.5rem] square">
-                                            <Button className={"square"} onClick={prevTask} disabled={currentTaskIndex === 0}>
+                                        <div className="flex items-center gap-[0.5rem]">
+                                            <Button icon className="!bg-gray-900 !text-white" onClick={prevTask} disabled={currentTaskIndex === 0}>
                                                 ←
                                             </Button>
                                             <input
@@ -2075,11 +2071,11 @@ export default function TrainerPage({ goTo }) {
                                                 max={tasks.length}
                                                 value={taskInputValue}
                                                 onChange={handleTaskInputChange}
-                                                onBlur={applyTaskInput}
-                                                onKeyPress={handleKeyPress}
-                                                className="text-center border border-gray-300 rounded-md px-2 py-1 w-16"
+                                                onBlur={applyTaskInput} // Применяем когда поле теряет фокус
+                                                onKeyPress={handleKeyPress} // Применяем при нажатии Enter
+                                                className="w-16 text-center border border-gray-300 rounded-md px-2 py-1"
                                             />
-                                            <Button className={"square"} onClick={nextTask} disabled={currentTaskIndex === tasks.length - 1}>
+                                            <Button icon className="!bg-gray-900 !text-white" onClick={nextTask} disabled={currentTaskIndex === tasks.length - 1}>
                                                 →
                                             </Button>
                                         </div>
@@ -2322,13 +2318,10 @@ function TaskCompletionPopup({ taskData, onClose, elapsedTime }) {
         }
     };
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white p-6 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                <div className="flex justify-between items-start mb-4">
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
+            <div className="bg-white p-6 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto pointer-events-auto">
+                <div className="mb-4">
                     <h3 className="text-xl font-bold">Задание завершено за {formatTaskTime(elapsedTime)}</h3>
-                    <button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
-                        ✕
-                    </button>
                 </div>
 
                 <div className="space-y-4">

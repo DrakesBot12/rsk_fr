@@ -199,9 +199,6 @@ export default function SettingsPage({ goTo }) {
                 <Button icon onClick={() => goTo("history")}>
                     <TimeIcon />
                 </Button>
-                <Button icon onClick={() => goTo("admin")}>
-                    <InfoIcon />
-                </Button>
                 <Button icon active onClick={() => goTo("mayakOko")}>
                     <SettsIcon />
                 </Button>

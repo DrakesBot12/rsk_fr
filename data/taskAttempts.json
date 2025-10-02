@@ -226,5 +226,50 @@
       "totalTimeSpent": 0,
       "lastActivity": "2025-10-02T14:54:09.531Z"
     }
+  },
+  "{\"id\":\"740d25ac-2945-4467-9dfa-52b7d2be7adb\"}": {
+    "tasks": {
+      "Задание 2": {
+        "attempts": [
+          {
+            "timestamp": "2025-10-02T21:15:57.912Z",
+            "timeSpent": 0,
+            "secondsSpent": 0,
+            "taskIndex": 1,
+            "completed": true,
+            "taskDetails": {
+              "type": "text",
+              "userType": "teacher",
+              "who": "we"
+            }
+          }
+        ],
+        "bestTime": 0,
+        "lastAttempt": "2025-10-02T21:15:57.912Z"
+      },
+      "Задание 4": {
+        "attempts": [
+          {
+            "timestamp": "2025-10-02T21:16:12.131Z",
+            "timeSpent": 0,
+            "secondsSpent": 0,
+            "taskIndex": 3,
+            "completed": true,
+            "taskDetails": {
+              "type": "text",
+              "userType": "teacher",
+              "who": "we"
+            }
+          }
+        ],
+        "bestTime": 0,
+        "lastAttempt": "2025-10-02T21:16:12.131Z"
+      }
+    },
+    "stats": {
+      "totalTasksCompleted": 2,
+      "totalTimeSpent": 0,
+      "lastActivity": "2025-10-02T21:16:12.131Z"
+    }
   }
 }
