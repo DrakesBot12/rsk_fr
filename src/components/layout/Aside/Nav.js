@@ -82,16 +82,6 @@ export function useNavLinks() {
                 return null;
             };
 
-            // Утилита для удаления всех cookie (без confirm)
-            const clearCookies = () => {
-                const cookies = document.cookie.split(";");
-                for (let cookie of cookies) {
-                    const eqPos = cookie.indexOf("=");
-                    const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
-                    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
-                }
-            };
-
             const userData = getCookie("userData");
             const existingRole = getCookie("role");
 
@@ -121,6 +111,8 @@ export function useNavLinks() {
                     headers: { "Content-Type": "application/json" },
                     credentials: "include",
                 });
+
+                console.log("Status: ", response.status);
 
                 if (!response.ok) {
                     // если сессия устарела — чистим куки и редиректим

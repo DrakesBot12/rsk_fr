@@ -2,7 +2,8 @@ import Image from "next/image";
 
 import Header from "@/components/layout/Header";
 import Layout from "@/components/layout/Layout";
-import Link from "@/assets/general/link.svg";
+import Link_icon from "@/assets/general/link.svg";
+import Link from "next/link";
 
 export default function Home() {
     return (
@@ -23,18 +24,18 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="flex w-full bg-(--color-blue-plus-50) p-[1.875rem] rounded-[1.5rem] gap-[0.75rem]">
-                            <a href="/auth" className="bg-(--color-blue) text-[var(--color-white)] flex align-center justify-center px-[1.25rem] py-[0.75rem] rounded-[0.85rem] text-[0.875rem] w-full">
+                            <Link href="/auth" className="bg-(--color-blue) text-[var(--color-white)] flex align-center justify-center px-[1.25rem] py-[0.75rem] rounded-[0.85rem] text-[0.875rem] w-full">
                                 Регистрация
-                            </a>
-                            <a href="/#mainInfo" className="bg-(--color-blue) text-[var(--color-white)] flex align-center justify-center px-[1.25rem] py-[0.75rem] rounded-[0.85rem] text-[0.875rem] w-3/12">
+                            </Link>
+                            <Link href="/#mainInfo" className="bg-(--color-blue) text-[var(--color-white)] flex align-center justify-center px-[1.25rem] py-[0.75rem] rounded-[0.85rem] text-[0.875rem] w-3/12">
                                 Контакты
-                            </a>
-                            <a href="/#mainInfo" className="bg-(--color-blue) text-[var(--color-white)] flex align-center justify-center px-[1.25rem] py-[0.75rem] rounded-[0.85rem] text-[0.875rem] w-3/12">
+                            </Link>
+                            <Link href="/#mainInfo" className="bg-(--color-blue) text-[var(--color-white)] flex align-center justify-center px-[1.25rem] py-[0.75rem] rounded-[0.85rem] text-[0.875rem] w-3/12">
                                 Сведения
-                            </a>
-                            <a href="https://t.me/rskfed" className="bg-(--color-blue) text-[var(--color-white)] flex align-center justify-center px-[1.25rem] py-[0.75rem] rounded-[0.85rem] text-[0.875rem] w-3/12">
+                            </Link>
+                            <Link href="https://t.me/rskfed" target="_blank" className="bg-(--color-blue) text-[var(--color-white)] flex align-center justify-center px-[1.25rem] py-[0.75rem] rounded-[0.85rem] text-[0.875rem] w-3/12">
                                 Новости
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <iframe src={"https://rutube.ru/play/embed/da2ce5366a1352032c1d432a26c80841/"} allow="autoplay; fullscreen" allowFullScreen className="border-none rounded-[1rem] h-[35vh] w-1/2" />
@@ -55,13 +56,13 @@ export default function Home() {
                     <div className="flex flex-col gap-[0.75rem] p-[1.25rem] rounded-[1.25rem] bg-(--color-white-gray)">
                         <h3>Сведения</h3>
                         <div className="flex gap-[0.5rem] group cursor-pointer">
-                            <Link className="w-[1.25rem]"></Link>
+                            <Link_icon className="w-[1.25rem]"></Link_icon>
                             <a target="_blank" href="https://i.pinimg.com/736x/51/b7/e7/51b7e7cb176cc85bc6bf77c21378b6ca.jpg">
                                 <h6>Положение о конкурсе</h6>
                             </a>
                         </div>
                         <div className="flex gap-[0.5rem] group cursor-pointer">
-                            <Link className="w-[1.25rem]"></Link>
+                            <Link_icon className="w-[1.25rem]"></Link_icon>
                             <a
                                 target="_blank"
                                 href="https://docs.yandex.ru/docs/view?url=ya-disk-public%3A%2F%2F4Y9bFhoQd%2BEh8Vk6aVciLCjpoC35hPNd1UYmIkGxmnsrxw5CImAYaS%2BTxOkTJkVEq%2FJ6bpmRyOJonT3VoXnDag%3D%3D%3A%2F152fz.pdf&name=152fz.pdf">

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Header from "@/components/layout/Header";
 import Buffer from "./addons/popup";
 
@@ -19,6 +19,20 @@ import Input from "@/components/ui/Input/Input";
 import Button from "@/components/ui/Button";
 import Switcher from "@/components/ui/Switcher";
 import Block from "@/components/features/public/Block";
+
+const CORRECT_TOKENS = [
+    "MA8YQ-OKO2V-P3XZM-LR9QD-K7N4E",
+    "JX3FQ-7B2WK-9PL8D-M4R6T-VN5YH",
+    "KL9ZD-4WX7M-P2Q8R-T6H3Y-F5V1E",
+    "QZ4R7-M8N3K-L2P9D-X6Y1T-VB5WU",
+    "D9F2K-5T7XJ-R3M8P-Y4N6Q-W1VHZ",
+    "T3Y8H-P6K2M-9D4R7-Q1X5W-LN9VZ",
+    "R7W4E-K2N5D-M8P3Q-Y1T6X-V9BZJ",
+    "H5L9M-3X2P8-Q6R4T-K1Y7W-N9VZD",
+    "F2K8J-4D7N3-P5Q9R-M1W6X-T3YVH",
+    "B6N9Q-1M4K7-R3T8P-Y2X5W-Z7VHD",
+    "W4P7Z-2K9N5-D3R8M-Q1Y6T-X5VHB",
+];
 
 export default function TrainerPage({ goTo }) {
     const isMobile = useMediaQuery("(max-width: 1023px)");
@@ -86,19 +100,6 @@ export default function TrainerPage({ goTo }) {
     const [userType, setUserType] = useState("teacher");
     const [who, setWho] = useState("im");
     const [isTokenValid, setIsTokenValid] = useState(false);
-    const CORRECT_TOKENS = [
-        "MA8YQ-OKO2V-P3XZM-LR9QD-K7N4E",
-        "JX3FQ-7B2WK-9PL8D-M4R6T-VN5YH",
-        "KL9ZD-4WX7M-P2Q8R-T6H3Y-F5V1E",
-        "QZ4R7-M8N3K-L2P9D-X6Y1T-VB5WU",
-        "D9F2K-5T7XJ-R3M8P-Y4N6Q-W1VHZ",
-        "T3Y8H-P6K2M-9D4R7-Q1X5W-LN9VZ",
-        "R7W4E-K2N5D-M8P3Q-Y1T6X-V9BZJ",
-        "H5L9M-3X2P8-Q6R4T-K1Y7W-N9VZD",
-        "F2K8J-4D7N3-P5Q9R-M1W6X-T3YVH",
-        "B6N9Q-1M4K7-R3T8P-Y2X5W-Z7VHD",
-        "W4P7Z-2K9N5-D3R8M-Q1Y6T-X5VHB",
-    ];
     const [fields, setFields] = useState({
         m: "",
         a: "",
@@ -679,6 +680,43 @@ export default function TrainerPage({ goTo }) {
         },
     };
 
+    // Загрузка деталей конкретного задания
+    const loadTaskDetails = useCallback(
+        async (task) => {
+            try {
+                const basePath = `/tasks/${userType}/${who}`;
+                setCurrentTask(task);
+
+                setShowLevelsInput(task.toolName1 === "Пройти Тестирование");
+
+                if (task.instruction) {
+                    setIsCheckingFile(true);
+                    const potentialUrl = `${basePath}/Instructions/${task.instruction}`;
+                    const fileExists = await checkFileExists(potentialUrl);
+                    setIsCheckingFile(false);
+                    setInstructionFileUrl(fileExists ? potentialUrl : "");
+                } else {
+                    setInstructionFileUrl("");
+                }
+
+                if (task.file) {
+                    setIsCheckingFile(true);
+                    const potentialUrl = `${basePath}/Files/${task.file}`;
+                    const fileExists = await checkFileExists(potentialUrl);
+                    setIsCheckingFile(false);
+                    setTaskFileUrl(fileExists ? potentialUrl : "");
+                } else {
+                    setTaskFileUrl("");
+                }
+
+                setCurrentImage(task.photo ? `${basePath}/${task.photo}` : "");
+            } catch (err) {
+                setError(`Ошибка загрузки задания: ${err.message}`);
+            }
+        },
+        [userType, who]
+    ); // зависимости
+
     // Загрузка списка заданий при изменении userType или who
     useEffect(() => {
         const loadTasks = async () => {
@@ -717,7 +755,7 @@ export default function TrainerPage({ goTo }) {
         if (isTokenValid) {
             loadTasks();
         }
-    }, [userType, who, isTokenValid]);
+    }, [userType, who, isTokenValid, loadTaskDetails]);
 
     const handleSaveSessionCompletion = async (levels) => {
         try {
@@ -774,53 +812,6 @@ export default function TrainerPage({ goTo }) {
             return response.ok;
         } catch (error) {
             return false;
-        }
-    };
-
-    // Загрузка деталей конкретного задания
-    const loadTaskDetails = async (task) => {
-        try {
-            const basePath = `/tasks/${userType}/${who}`;
-            setCurrentTask(task);
-
-            // Проверяем, является ли задание третьим
-            setShowLevelsInput(task.toolName1 === "Пройти Тестирование");
-
-            if (task.instruction) {
-                setIsCheckingFile(true); // Включаем анимацию загрузки
-                const potentialUrl = `${basePath}/Instructions/${task.instruction}`;
-                const fileExists = await checkFileExists(potentialUrl);
-                setIsCheckingFile(false); // Включаем анимацию загрузки
-                if (fileExists) {
-                    setInstructionFileUrl(potentialUrl);
-                } else {
-                    setInstructionFileUrl("");
-                }
-            } else {
-                setInstructionFileUrl("");
-            }
-
-            if (task.file) {
-                setIsCheckingFile(true);
-                const potentialUrl = `${basePath}/Files/${task.file}`;
-                const fileExists = await checkFileExists(potentialUrl);
-                setIsCheckingFile(false);
-                if (fileExists) {
-                    setTaskFileUrl(potentialUrl);
-                } else {
-                    setTaskFileUrl("");
-                }
-            } else {
-                setTaskFileUrl("");
-            }
-
-            if (task.photo) {
-                setCurrentImage(`${basePath}/${task.photo}`);
-            } else {
-                setCurrentImage("");
-            }
-        } catch (err) {
-            setError(`Ошибка загрузки задания: ${err.message}`);
         }
     };
 
@@ -1009,8 +1000,8 @@ export default function TrainerPage({ goTo }) {
                         {/* Вопрос 6 */}
                         <div>
                             <label className="block mb-2 font-medium">6. Что для вас будет наилучшим личным результатом участия в этом тренажере?</label>
-                            <textarea value={personalGoal} onChange={(e) => setPersonalGoal(e.target.value)} className="w-full p-3 border border-gray-300 rounded-md h-24" placeholder="Закончите фразу: 'В конце тренинга я хочу...'" />
-                            <p className="text-sm text-gray-500 mt-1">Пример: "...побороть страх перед нейросетями", "...найти 2-3 инструмента для своей работы"</p>
+                            <textarea value={personalGoal} onChange={(e) => setPersonalGoal(e.target.value)} className="w-full p-3 border border-gray-300 rounded-md h-24" placeholder='Закончите фразу: "В конце тренинга я хочу..."' />
+                            <p className="text-sm text-gray-500 mt-1">Пример: &quot;...побороть страх перед нейросетями&quot;, &quot;...найти 2-3 инструмента для своей работы&quot;</p>
                         </div>
 
                         <div className="mt-6 flex justify-end gap-2">

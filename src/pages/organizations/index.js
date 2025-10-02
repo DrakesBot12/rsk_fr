@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import Header from "@/components/layout/Header";
 import Layout from "@/components/layout/Layout";
@@ -32,29 +32,29 @@ export default function OrganIndexPage() {
     const limit = 20; // фиксированное количество на страницу
     const [searchQuery, setSearchQuery] = useState("");
 
-    // функция для загрузки организаций с учетом skip и search
-    const loadOrgs = async (page = 0) => {
-        // При поиске всегда используем skip=0 (первая страница)
-        const skip = searchQuery ? 0 : page * limit;
+    const loadOrgs = useCallback(
+        async (page = 0) => {
+            const skip = searchQuery ? 0 : page * limit;
 
-        try {
-            const res = await fetch(`/api/org/getOrg?skip=${skip}&limit=${limit}&search=${encodeURIComponent(searchQuery)}`);
-            const data = await res.json();
-            if (data.success && Array.isArray(data.organizations)) {
-                setOrgans(data.organizations);
+            try {
+                const res = await fetch(`/api/org/getOrg?skip=${skip}&limit=${limit}&search=${encodeURIComponent(searchQuery)}`);
+                const data = await res.json();
+                if (data.success && Array.isArray(data.organizations)) {
+                    setOrgans(data.organizations);
 
-                // Если это поиск, сбрасываем текущую страницу на 0
-                if (searchQuery && page !== 0) {
-                    setCurrentPage(0);
+                    if (searchQuery && page !== 0) {
+                        setCurrentPage(0);
+                    }
+                } else {
+                    setOrgans([]);
                 }
-            } else {
+            } catch (err) {
+                console.error("Ошибка при загрузке организаций:", err);
                 setOrgans([]);
             }
-        } catch (err) {
-            console.error("Ошибка при загрузке организаций:", err);
-            setOrgans([]);
-        }
-    };
+        },
+        [searchQuery, limit] // зависимости, которые используются внутри функции
+    );
 
     // получаем общее количество организаций для пагинации
     const getTotalCount = async () => {
@@ -79,7 +79,7 @@ export default function OrganIndexPage() {
             setCurrentPage(0);
         }
         loadOrgs(currentPage);
-    }, [currentPage, searchQuery]);
+    }, [currentPage, searchQuery, loadOrgs]);
 
     // Обработчик поиска
     const handleSearch = () => {

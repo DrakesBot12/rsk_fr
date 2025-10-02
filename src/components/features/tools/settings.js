@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import Header from "@/components/layout/Header";
 import { addKeyToCookies, addUserToCookies, getKeyFromCookies } from "./actions";
@@ -57,6 +57,19 @@ export default function SettingsPage({ goTo }) {
     const max = 180;
     const [value, setValue] = useState(0);
 
+    // Валидация токена
+    const validateToken = useCallback(
+        (tokenToValidate = token) => {
+            const isValid = CORRECT_TOKENS.includes(tokenToValidate);
+            setIsTokenValid(isValid);
+
+            if (isValid) {
+                setShowNotification(true);
+            }
+        },
+        [token]
+    );
+
     // Получаем токен из cookies при монтировании компонента
     useEffect(() => {
         async function fetchTokenAndUsage() {
@@ -73,7 +86,7 @@ export default function SettingsPage({ goTo }) {
             setValue(max - recordsCount);
         }
         fetchTokenAndUsage();
-    }, []);
+    }, [validateToken]);
 
     async function getRecordsCount() {
         try {
@@ -96,16 +109,6 @@ export default function SettingsPage({ goTo }) {
         if (val < 30) return "range-low";
         if (val < 80) return "range-mid";
         return "range-high";
-    };
-
-    // Валидация токена
-    const validateToken = (tokenToValidate = token) => {
-        const isValid = CORRECT_TOKENS.includes(tokenToValidate);
-        setIsTokenValid(isValid);
-
-        if (isValid) {
-            setShowNotification(true);
-        }
     };
 
     // Обработчики изменений данных

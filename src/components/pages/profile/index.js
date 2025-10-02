@@ -22,6 +22,16 @@ export default function ProfileIndexPage({ goTo }) {
     const router = useRouter();
 
     useEffect(() => {
+        // Утилита для удаления всех cookie (без confirm)
+        const clearCookies = () => {
+            const cookies = document.cookie.split(";");
+            for (let cookie of cookies) {
+                const eqPos = cookie.indexOf("=");
+                const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
+                document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+            }
+        };
+
         const fetchProfile = async () => {
             try {
                 const response = await fetch("/api/profile/info", {
@@ -29,7 +39,15 @@ export default function ProfileIndexPage({ goTo }) {
                     headers: { "Content-Type": "application/json" },
                     credentials: "include",
                 });
-                if (!response.ok) throw new Error("Failed to fetch profile");
+                if (!response.ok) {
+                    // если сессия устарела — чистим куки и редиректим
+                    if (response.status === 401 || response.status === 403) {
+                        clearCookies();
+                        router.push("/auth");
+                        return;
+                    }
+                    throw new Error("Failed to fetch profile");
+                }
                 const data = await response.json();
                 setUserData(data);
                 setHydrated(true);

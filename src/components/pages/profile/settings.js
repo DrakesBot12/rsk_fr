@@ -134,7 +134,7 @@ export default function SettingsPage({ goTo }) {
                     <div className="flex flex-col gap-[.75rem]">
                         <DropdownInput id="Organization" name="Organization" placeholder="Организация" value={formData.Organization || ""} onChange={handleChange} options={orgList} />
                         <Input disabled id="teames" name="teames" placeholder="Команда" autoComplete="off" readOnly />
-                        <p style={{ color: "var(--color-gray-black)" }}>* "Команды" временно недоступны</p>
+                        <p style={{ color: "var(--color-gray-black)" }}>* &quot;Команды&quot; временно недоступны</p>
                     </div>
                 </div>
 

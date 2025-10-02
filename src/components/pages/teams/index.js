@@ -11,10 +11,65 @@ import Notify from "@/assets/general/notify.svg";
 import SettsIcon from "@/assets/general/setts.svg";
 
 export default function TeamIndexPage({ goTo, teamData }) {
-    if (!teamData) return <p>Команда не найдена или загружается...</p>;
-
     const [teamMembers, setTeamMembers] = useState([]);
     const [idUserTeam, setIdUserTeam] = useState(null);
+
+    const team = teamData;
+
+    useEffect(() => {
+        if (!team?.id) return;
+
+        const TeamMembers = async () => {
+            try {
+                const response = await fetch(`/api/teams/members/${team.id}`, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                });
+
+                const data = await response.json();
+                console.log(data.data);
+                if (data.success) {
+                    setTeamMembers(data.data);
+                } else {
+                    console.error("Invalid orgList data:", data);
+                    setTeamMembers(null);
+                }
+            } catch (err) {
+                console.error("Request error:", err);
+                setTeamMembers(null);
+            }
+        };
+
+        const ApiIdUserTeam = async () => {
+            try {
+                const response = await fetch("/api/teams/myteam", {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                });
+
+                const data = await response.json();
+                console.log(data);
+                if (data.success) {
+                    setIdUserTeam(data.data[0].team.id);
+                } else {
+                    console.error("Invalid orgList data:", data);
+                    setIdUserTeam(null);
+                }
+            } catch (err) {
+                console.error("Request error:", err);
+                setIdUserTeam(null);
+            }
+        };
+
+        TeamMembers();
+        ApiIdUserTeam();
+    }, [team?.id]);
+
+    if (!teamData) {
+        return <p>Команда не найдена или загружается...</p>;
+    }
 
     const JoinTeam = async () => {
         try {
@@ -64,56 +119,6 @@ export default function TeamIndexPage({ goTo, teamData }) {
         }
     };
 
-    useEffect(() => {
-        const TeamMembers = async () => {
-            try {
-                const response = await fetch(`/api/teams/members/${team.id}`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                });
-
-                const data = await response.json();
-                console.log(data.data);
-                if (data.success) {
-                    setTeamMembers(data.data);
-                } else {
-                    console.error("Invalid orgList data:", data);
-                    setTeamMembers(null);
-                }
-            } catch (err) {
-                console.error("Request error:", err);
-                setTeamMembers(null);
-            }
-        };
-
-        const ApiIdUserTeam = async () => {
-            try {
-                const response = await fetch("/api/teams/myteam", {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                });
-
-                const data = await response.json();
-                console.log(data);
-                if (data.success) {
-                    setIdUserTeam(data.data[0].team.id);
-                } else {
-                    console.error("Invalid orgList data:", data);
-                    setIdUserTeam(null);
-                }
-            } catch (err) {
-                console.error("Request error:", err);
-                setIdUserTeam(null);
-            }
-        };
-
-        TeamMembers();
-        ApiIdUserTeam();
-    }, []);
-
-    const team = teamData;
     const leader = teamMembers.find((member) => member.is_leader);
     const leaderName = leader ? `${(leader.name || "").trim()} ${(leader.surname || "").trim()}`.trim() || "Незаполнено" : "Незаполнено";
 
