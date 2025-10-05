@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import Header from "@/components/layout/Header";
 
@@ -15,6 +16,7 @@ export default function TeamIndexPage({ goTo, teamData }) {
     const [idUserTeam, setIdUserTeam] = useState(null);
 
     const team = teamData;
+    const router = useRouter();
 
     useEffect(() => {
         if (!team?.id) return;
@@ -82,6 +84,7 @@ export default function TeamIndexPage({ goTo, teamData }) {
             const data = await response.json();
             if (data.success) {
                 alert("Вы вступили в команду");
+                router.refresh();
                 return true;
             } else {
                 alert("Произошла ошибка: ", data);
@@ -106,6 +109,7 @@ export default function TeamIndexPage({ goTo, teamData }) {
             const data = await response.json();
             if (data.success) {
                 alert("Вы покинули команду");
+                router.refresh();
                 return true;
             } else {
                 alert("Произошла ошибка: ", data);

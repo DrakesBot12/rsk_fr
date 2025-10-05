@@ -81,7 +81,7 @@ export default function ProfileIndexPage({ goTo }) {
         <>
             <Header>
                 <Header.Heading>{userData.data.NameIRL && userData.data.Surname ? `${userData.data.NameIRL} ${userData.data.Surname}` : "Незаполнено"}</Header.Heading>
-                <Button red className={"w-fit!"} onClick={handleLogout}>
+                <Button red className={"w-fit! shadow-none!"} onClick={handleLogout}>
                     Выйти
                 </Button>
                 <Button icon onClick={() => goTo("settings")}>
@@ -95,17 +95,17 @@ export default function ProfileIndexPage({ goTo }) {
                 <Card>
                     <Card.Heading>
                         <div className="flex gap-[1rem] w-full">
-                            <div className="w-[4.75rem] aspect-square rounded-full bg-(--color-black)"></div>
+                            {/* <div className="w-[4.75rem] aspect-square rounded-full bg-(--color-black)"></div> */}
                             <div className="flex flex-col gap-[0.25rem] flex-1 ">
-                                <h4>{userData.data.NameIRL && userData.data.Surname && userData.data.Patronymic ? `${userData.data.NameIRL} ${userData.data.Surname} ${userData.data.Patronymic}` : "Незаполнено"}</h4>
-                                <p className="line-clamp-3">{userData.data?.Description ? userData.data.Description : "Незаполнено"}</p>
+                                <h4>{userData.data.NameIRL && userData.data.Surname && userData.data.Patronymic ? `${userData.data.NameIRL} ${userData.data.Surname} ${userData.data.Patronymic}` : "ФИО Незаполнено"}</h4>
+                                <p className="line-clamp-3">{userData.data?.Description ? userData.data.Description : "Описание Незаполнено"}</p>
                             </div>
                         </div>
                         <div className="flex gap-[0.5rem] flex-wrap">
                             <Tags
                                 tags={[
                                     { name: `${userData.data.Type === "teacher" ? "Преподаватель" : "Студент"}`, color: "blue", icon: "coin" },
-                                    { name: `${userData.data?.Region ? `${userData.data.Region}` : "Незаполнено"}`, color: "blue" },
+                                    { name: `${userData.data?.Region ? `${userData.data.Region}` : "Регион Незаполнен"}`, color: "blue" },
                                 ]}
                             />
                         </div>

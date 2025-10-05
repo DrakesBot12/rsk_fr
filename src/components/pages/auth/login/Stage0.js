@@ -57,7 +57,7 @@ export default function LoginStage0({ onForgotPassword, pageVariants, custom = 1
                     case 422:
                         return alert("Неверные данные: " + JSON.stringify(data));
                     case 401:
-                        return alert("Пользователь не найден");
+                        return alert("Неверный логин или пароль");
                     case 403:
                         return alert("Вы не подтвердили email");
                     default:

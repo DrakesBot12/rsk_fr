@@ -163,11 +163,11 @@ export default function OrganIndexPage() {
                                 <div className="flex gap-[1.5rem] items-center">
                                     <div className="flex gap-[.25rem] items-center group-hover:text-(--color-blue)">
                                         <Index />
-                                        <span className="link small">Нет подключения</span>
+                                        <span className="link small">0 индексов</span>
                                     </div>
                                     <div className="flex gap-[.25rem] items-center text-(--color-gray-black) group-hover:text-(--color-black)">
                                         <Persons />
-                                        <span className="link small">Нет подключения</span>
+                                        <span className="link small">0 участников</span>
                                     </div>
                                     <div className="flex gap-[.25rem] items-center text-(--color-gray-black) group-hover:text-(--color-black)">
                                         <Persons />

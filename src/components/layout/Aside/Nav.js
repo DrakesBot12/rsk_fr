@@ -8,11 +8,12 @@ const DownIcon = dynamic(() => import("@/assets/general/down.svg"));
 
 // Базовый массив навигационных ссылок
 const BASE_NAV_LINKS = [
-    { label: "Главная", disable: false, inactive: false, href: "/", icon: dynamic(() => import("@/assets/nav/home.svg")) },
+    { label: "Главная", disable: false, login: false, learn: false, href: "/", icon: dynamic(() => import("@/assets/nav/home.svg")) },
     {
         label: "Команды",
         disable: false,
-        inactive: true,
+        login: true,
+        learn: true,
         href: "#",
         icon: dynamic(() => import("@/assets/nav/team.svg")),
         submenu: [
@@ -21,7 +22,7 @@ const BASE_NAV_LINKS = [
             { label: "Моя команда", href: "/teams/my" },
         ],
     },
-    { label: "Организации", disable: false, inactive: true, href: "/organizations", icon: dynamic(() => import("@/assets/nav/organ.svg")) },
+    { label: "Организации", disable: false, login: true, learn: false, href: "/organizations", icon: dynamic(() => import("@/assets/nav/organ.svg")) },
     // {
     //     label: "Мастерская",
     //     href: "#",
@@ -31,22 +32,25 @@ const BASE_NAV_LINKS = [
     //         { label: "Статистика", href: "/pulse/stats" },
     //     ],
     // },
-    // {
-    //     label: 'Проекты',
-    //     href: '#',
-    //     icon: dynamic(() => import('@/assets/nav/projects.svg')),
-    //     submenu: [
-    //         { label: 'Категории', href: '/projects' },
-    //         { label: 'Создать дело', href: '/projects/new-work' }
-    //     ]
-    //  },
+    {
+        label: "Проекты",
+        href: "#",
+        login: true,
+        learn: true,
+        icon: dynamic(() => import("@/assets/nav/projects.svg")),
+        submenu: [
+            { label: "Категории", href: "/projects" },
+            { label: "Создать дело", href: "/projects/new-work" },
+        ],
+    },
     // { label: 'Новости', href: '/news', icon: dynamic(() => import('@/assets/nav/news.svg')) },
-    // { label: "Обучение", disable: false, inactive: true, href: "/cours", icon: dynamic(() => import("@/assets/nav/cours.svg")) },
-    { label: "Маяк Око", href: "/tools/mayak-oko", icon: dynamic(() => import("@/assets/nav/inst.svg")) },
+    { label: "Обучение", disable: false, login: true, learn: false, href: "/cours", icon: dynamic(() => import("@/assets/nav/cours.svg")) },
+    { label: "Маяк Око", href: "/tools/mayak-oko", login: false, learn: false, icon: dynamic(() => import("@/assets/nav/inst.svg")) },
     // {
     //     label: "Инструменты",
     //     disable: false,
-    //     inactive: false,
+    //     login: false,
+    //     learn: false,
     //     href: "#",
     //     icon: dynamic(() => import("@/assets/nav/inst.svg")),
     //     submenu: [
@@ -57,7 +61,8 @@ const BASE_NAV_LINKS = [
     {
         label: "Админ панель",
         disable: true, // по умолчанию заблокирована
-        inactive: false,
+        login: false,
+        learn: false,
         href: "#",
         icon: dynamic(() => import("@/assets/nav/king.svg")),
         submenu: [
@@ -85,35 +90,34 @@ export function useNavLinks() {
 
             const userData = getCookie("userData");
             const existingRole = getCookie("role");
+            const existingLearn = getCookie("learn");
 
             // Если токена нет
             if (!userData) {
                 setNavLinks((prevLinks) =>
                     prevLinks.map((link) => ({
                         ...link,
-                        inactive: link.inactive,
+                        login: link.login,
                     }))
                 );
                 setIsLoading(false);
                 return;
             }
 
-            // Если токен есть, но роль уже в куках
-            if (existingRole) {
-                updateNavLinks(existingRole, true);
+            // Если токен есть, но роль и learn уже в куках
+            if (existingRole && existingLearn !== undefined) {
+                updateNavLinks(existingRole, existingLearn === "true", true);
                 setIsLoading(false);
                 return;
             }
 
-            // Если токен есть, но роли в куках нет - делаем запрос
+            // Если токен есть, но роли или learn в куках нет - делаем запрос
             try {
                 const response = await fetch("/api/profile/info", {
                     method: "GET",
                     headers: { "Content-Type": "application/json" },
                     credentials: "include",
                 });
-
-                console.log("Status: ", response.status);
 
                 if (!response.ok) {
                     // если сессия устарела — чистим куки и редиректим
@@ -127,6 +131,7 @@ export function useNavLinks() {
 
                 const data = await response.json();
                 const role = data?.data?.Type;
+                const learn = data?.data?.learn === true; // Преобразуем в boolean
 
                 if (!role) {
                     // если роль не пришла — тоже чистим и редиректим
@@ -135,12 +140,13 @@ export function useNavLinks() {
                     return;
                 }
 
-                // Сохраняем роль в куки на 1 день
+                // Сохраняем роль и learn в куки на 1 день
                 if (typeof document !== "undefined") {
                     document.cookie = `role=${role}; max-age=86400; path=/`;
+                    document.cookie = `learn=${learn}; max-age=10800; path=/`;
                 }
 
-                updateNavLinks(role, true);
+                updateNavLinks(role, learn, true);
             } catch (err) {
                 console.error("Request error:", err);
                 clearCookies();
@@ -150,15 +156,10 @@ export function useNavLinks() {
             }
         };
 
-        const updateNavLinks = (role, hasToken) => {
+        const updateNavLinks = (role, learn, hasToken) => {
             setNavLinks((prevLinks) =>
                 prevLinks.map((link) => {
                     const updatedLink = { ...link };
-
-                    // Если у пользователя есть токен, снимаем inactive для всех ссылок
-                    if (hasToken) {
-                        updatedLink.inactive = false;
-                    }
 
                     // Для админ панели проверяем роль
                     if (link.label === "Админ панель") {
@@ -170,23 +171,52 @@ export function useNavLinks() {
             );
         };
 
+        const clearCookies = () => {
+            if (typeof document !== "undefined") {
+                document.cookie = "userData=; max-age=0; path=/";
+                document.cookie = "role=; max-age=0; path=/";
+                document.cookie = "learn=; max-age=0; path=/";
+            }
+        };
+
         checkAuthAndRole();
     }, []);
 
     return { navLinks, isLoading };
 }
 
-export function NavItem({ label, href, icon: Icon, submenu, isCollapsed, isHovered, onHover, disable, inactive }) {
+export function NavItem({ label, href, icon: Icon, submenu, isCollapsed, isHovered, onHover, disable, login, learn }) {
     const router = useRouter();
     const isSubmenuActive = submenu?.some((item) => router.pathname === item.href);
 
+    // Получаем данные из кук
+    const getCookie = (name) => {
+        if (typeof document === "undefined") return null;
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+        return null;
+    };
+
+    const userData = getCookie("userData");
+    const userLearn = getCookie("learn") === "true";
+
+    // Проверяем условия активности ссылки
+    const isLoginInactive = login && !userData;
+    const isLearnInactive = learn && !userLearn;
+    const isInactive = isLoginInactive || isLearnInactive;
+
     // Если элемент отключен, не рендерим его
     if (disable) return null;
-    inactive ? (submenu = null) : null;
+
+    // Если ссылка неактивна, скрываем подменю
+    if (isInactive) {
+        submenu = null;
+    }
 
     return (
         <div key={label} className={`group flex flex-col gap-[0.75rem] cursor-pointer`} onMouseEnter={() => onHover(label)} onMouseLeave={() => onHover(null)}>
-            <Link className={`${router.pathname === href ? "active" : ""} items-center ${inactive ? "inactive pointer-events-none" : isSubmenuActive ? "opacity-100" : "opacity-30 group-hover:opacity-100"}`} href={inactive ? "#" : href}>
+            <Link className={`${router.pathname === href ? "active" : ""} items-center ${isInactive ? "inactive pointer-events-none" : isSubmenuActive ? "opacity-100" : "opacity-30 group-hover:opacity-100"}`} href={isInactive ? "#" : href}>
                 <Icon />
                 <AnimatePresence>
                     {!isCollapsed && (
