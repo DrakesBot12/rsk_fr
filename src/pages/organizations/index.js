@@ -128,9 +128,9 @@ export default function OrganIndexPage() {
                             ""
                         ) : (
                             <div className="flex gap-[.75rem] w-fit">
-                                <Button inverted className="!w-fit" onClick={() => setSearch(true)}>
+                                {/* <Button inverted className="!w-fit" onClick={() => setSearch(true)}>
                                     Параметры&nbsp;поиска
-                                </Button>
+                                </Button> */}
                             </div>
                         )}
                     </div>

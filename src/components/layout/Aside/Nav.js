@@ -44,7 +44,7 @@ const BASE_NAV_LINKS = [
         ],
     },
     // { label: 'Новости', href: '/news', icon: dynamic(() => import('@/assets/nav/news.svg')) },
-    { label: "Обучение", disable: false, login: true, learn: false, href: "/cours", icon: dynamic(() => import("@/assets/nav/cours.svg")) },
+    { label: "Обучение", disable: false, login: true, learn: true, href: "/cours", icon: dynamic(() => import("@/assets/nav/cours.svg")) },
     { label: "Маяк Око", href: "/tools/mayak-oko", login: false, learn: false, icon: dynamic(() => import("@/assets/nav/inst.svg")) },
     // {
     //     label: "Инструменты",
