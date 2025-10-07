@@ -74,6 +74,7 @@ const BASE_NAV_LINKS = [
 ];
 
 export function useNavLinks() {
+    const router = useRouter();
     const [navLinks, setNavLinks] = useState(BASE_NAV_LINKS);
     const [isLoading, setIsLoading] = useState(true);
 
