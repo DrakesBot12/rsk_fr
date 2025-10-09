@@ -1,0 +1,555 @@
+[
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "https://forms.yandex.ru/u/680cdb32eb614693f6dd4487",
+        "toolName1": "Входная анкета",
+        "photo": ""
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "https://prompt-mastery-trainer-spo.lovable.app/",
+        "toolName1": "Пройти Тестирование",
+        "photo": ""
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "",
+        "instruction": "7.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek",
+        "photo": "7.png"
+    },
+    {
+        "file": "8.pdf",
+        "instruction": "8.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek",
+        "photo": "8.png"
+    },
+    {
+        "file": "",
+        "instruction": "9.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek",
+        "photo": "9.png"
+    },
+    {
+        "file": "",
+        "instruction": "10.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek",
+        "photo": "10.png"
+    },
+    {
+        "file": "",
+        "instruction": "11.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek",
+        "photo": "11.png"
+    },
+    {
+        "file": "12.pdf",
+        "instruction": "12.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek",
+        "photo": "12.png"
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "14.m4a",
+        "instruction": "14.pdf",
+        "toolLink1": "https://any2text.ru/",
+        "toolName1": "any2text",
+        "photo": "14.png"
+    },
+    {
+        "file": "",
+        "instruction": "15.pdf",
+        "toolLink1": "https://suno.com/",
+        "toolName1": "Suno",
+        "photo": "15.png"
+    },
+    {
+        "file": "16.mp3",
+        "instruction": "16.pdf",
+        "toolLink1": "https://suno.com/",
+        "toolName1": "Suno",
+        "photo": "16.png"
+    },
+    {
+        "file": "17.pdf",
+        "instruction": "17.pdf",
+        "toolLink1": "https://suno.com/",
+        "toolName1": "Suno",
+        "photo": "17.png"
+    },
+    {
+        "file": "18.m4a",
+        "instruction": "18.pdf",
+        "toolLink1": "https://auphonic.com/",
+        "toolName1": "auphonic",
+        "photo": "18.png"
+    },
+    {
+        "file": "",
+        "instruction": "19.pdf",
+        "toolLink1": "https://suno.com/",
+        "toolName1": "Suno",
+        "photo": "19.png"
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "https://fusionbrain.ai/",
+        "toolName1": "fusionbrain",
+        "photo": "21.png"
+    },
+    {
+        "file": "22.jpg",
+        "instruction": "22.pdf",
+        "toolLink1": "https://huggingface.co/spaces/Kwai-Kolors/Kolors-Virtual-Try-On",
+        "toolName1": "Huggingface",
+        "photo": "22.png"
+    },
+    {
+        "file": "",
+        "instruction": "23.pdf",
+        "toolLink1": "https://fusionbrain.ai/",
+        "toolName1": "fusionbrain",
+        "photo": "23.png"
+    },
+    {
+        "file": "",
+        "instruction": "24.pdf",
+        "toolLink1": "https://t.me/AIMemeArenaBot",
+        "toolName1": "AiMemeArena",
+        "photo": "24.png"
+    },
+    {
+        "file": "25.zip",
+        "instruction": "25.pdf",
+        "toolLink1": "https://www.krea.ai/",
+        "toolName1": "Krea",
+        "photo": "25.png"
+    },
+    {
+        "file": "",
+        "instruction": "26.pdf",
+        "toolLink1": "https://fusionbrain.ai/",
+        "toolName1": "fusionbrain",
+        "photo": "26.png"
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "",
+        "instruction": "28.pdf",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim",
+        "photo": "28.png"
+    },
+    {
+        "file": "",
+        "instruction": "29.pdf",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim",
+        "photo": "29.png"
+    },
+    {
+        "file": "30.pptx",
+        "instruction": "30.pdf",
+        "toolLink1": "https://gamma.app/signup?r=ffdoazwoqvphhy2",
+        "toolName1": "Gamma",
+        "photo": "30.png"
+    },
+    {
+        "file": "31.pdf",
+        "instruction": "31.pdf",
+        "toolLink1": "https://t.me/AIMemeArenaBot",
+        "toolName1": "AiMemeArena",
+        "photo": "31.png"
+    },
+    {
+        "file": "",
+        "instruction": "32.pdf",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim",
+        "photo": "32.png"
+    },
+    {
+        "file": "",
+        "instruction": "33.pdf",
+        "toolLink1": "https://gamma.app/signup?r=ffdoazwoqvphhy2",
+        "toolName1": "Gamma",
+        "photo": "33.png"
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "35.pdf",
+        "instruction": "35.pdf",
+        "toolLink1": "https://pictory.ai/",
+        "toolName1": "Picrory",
+        "photo": "35.png"
+    },
+    {
+        "file": "36.pdf",
+        "instruction": "36.pdf",
+        "toolLink1": "https://fusionbrain.ai/",
+        "toolName1": "fusionbrain",
+        "photo": "36.png"
+    },
+    {
+        "file": "37.zip",
+        "instruction": "37.pdf",
+        "toolLink1": "https://app.pixverse.ai/",
+        "toolName1": "pixverse",
+        "photo": "37.png"
+    },
+    {
+        "file": "",
+        "instruction": "38.pdf",
+        "toolLink1": "https://t.me/AIMemeArenaBot",
+        "toolName1": "AiMemeArena",
+        "photo": "38.png"
+    },
+    {
+        "file": "",
+        "instruction": "39.pdf",
+        "toolLink1": "https://pictory.ai/",
+        "toolName1": "Picrory",
+        "photo": "39.png"
+    },
+    {
+        "file": "40.pdf",
+        "instruction": "40.pdf",
+        "toolLink1": "https://fusionbrain.ai/",
+        "toolName1": "fusionbrain",
+        "photo": "40.png"
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "42.xlsx",
+        "instruction": "42.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek",
+        "photo": "42.png"
+    },
+    {
+        "file": "43.xlsx",
+        "instruction": "43.pdf",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim",
+        "photo": "43.png"
+    },
+    {
+        "file": "44.xlsx",
+        "instruction": "44.pdf",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim",
+        "photo": "44.png"
+    },
+    {
+        "file": "45.pdf",
+        "instruction": "45.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek",
+        "photo": "45.png"
+    },
+    {
+        "file": "46.xlsx",
+        "instruction": "46.pdf",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim",
+        "photo": "46.png"
+    },
+    {
+        "file": "47.xlsx",
+        "instruction": "47.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek",
+        "photo": "47.png"
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "",
+        "instruction": "",
+        "toolLink1": "",
+        "toolName1": "",
+        "photo": ""
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "53.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "",
+        "toolName1": ""
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "58.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "60.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "61.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "62.pdf",
+        "toolLink1": "https://gamma.app/signup?r=ffdoazwoqvphhy2",
+        "toolName1": "Gamma"
+    },
+    {
+        "file": "",
+        "toolLink1": "",
+        "toolName1": ""
+    },
+    {
+        "file": "64.xlsx",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim"
+    },
+    {
+        "file": "66.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "67.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeekS"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://pictory.ai/",
+        "toolName1": "Picrory"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://gamma.app/signup?r=ffdoazwoqvphhy2",
+        "toolName1": "Gamma"
+    },
+    {
+        "file": "",
+        "toolLink1": "",
+        "toolName1": ""
+    },
+    {
+        "file": "71.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim"
+    },
+    {
+        "file": "73.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "74.pdf",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://pictory.ai/",
+        "toolName1": "Picrory"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "",
+        "toolName1": ""
+    },
+    {
+        "file": "78.jpg",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim"
+    },
+    {
+        "file": "79.xlsx",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "80.xlsx",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim"
+    },
+    {
+        "file": "81.xlsx",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "82.xlsx",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "83.xlsx",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim"
+    },
+    {
+        "file": "",
+        "toolLink1": "",
+        "toolName1": ""
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://websim.ai/",
+        "toolName1": "Websim"
+    },
+    {
+        "file": "87",
+        "toolLink1": "https://gamma.app/signup?r=ffdoazwoqvphhy2",
+        "toolName1": "Gamma"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "https://chat.deepseek.com/",
+        "toolName1": "DeepSeek"
+    },
+    {
+        "file": "",
+        "toolLink1": "",
+        "toolName1": ""
+    }
+]

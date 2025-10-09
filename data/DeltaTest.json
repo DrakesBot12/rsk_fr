@@ -11,5 +11,161 @@
         "level5": 0
       }
     }
+  },
+  "{\"id\":\"admin-id\"}": {
+    "2025-10-09T12:21:51.950Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:21:54.310Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:21:54.645Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:21:54.789Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:21:53.637Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:22:24.013Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:37:48.898Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:37:49.514Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:37:50.114Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:37:50.298Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:37:50.458Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:38:11.098Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T12:50:43.193Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 123,
+        "level2": 0,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    },
+    "2025-10-09T17:36:06.967Z": {
+      "taskNumber": "session-completion",
+      "elapsedTime": 0,
+      "levels": {
+        "level1": 0,
+        "level2": 12,
+        "level3": 0,
+        "level4": 0,
+        "level5": 0
+      }
+    }
   }
 }
