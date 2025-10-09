@@ -23,6 +23,7 @@ const BASE_NAV_LINKS = [
         ],
     },
     { label: "Организации", disable: false, login: true, learn: false, href: "/organizations", icon: dynamic(() => import("@/assets/nav/organ.svg")) },
+    { label: "Проекты", disable: false, login: true, learn: false, href: "/projects", icon: dynamic(() => import("@/assets/nav/projects.svg")) },
     // {
     //     label: "Мастерская",
     //     href: "#",
@@ -32,17 +33,6 @@ const BASE_NAV_LINKS = [
     //         { label: "Статистика", href: "/pulse/stats" },
     //     ],
     // },
-    {
-        label: "Проекты",
-        href: "#",
-        login: true,
-        learn: true,
-        icon: dynamic(() => import("@/assets/nav/projects.svg")),
-        submenu: [
-            { label: "Категории", href: "/projects" },
-            { label: "Создать дело", href: "/projects/new-work" },
-        ],
-    },
     // { label: 'Новости', href: '/news', icon: dynamic(() => import('@/assets/nav/news.svg')) },
     { label: "Обучение", disable: false, login: true, learn: true, href: "/cours", icon: dynamic(() => import("@/assets/nav/cours.svg")) },
     { label: "Маяк Око", href: "/tools/mayak-oko", login: false, learn: false, icon: dynamic(() => import("@/assets/nav/inst.svg")) },
@@ -181,7 +171,7 @@ export function useNavLinks() {
         };
 
         checkAuthAndRole();
-    }, []);
+    }, [router]);
 
     return { navLinks, isLoading };
 }

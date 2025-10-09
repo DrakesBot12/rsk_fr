@@ -57,7 +57,7 @@ export default function ProfileIndexPage({ goTo }) {
         };
 
         fetchProfile();
-    }, []);
+    }, [router]);
 
     const handleLogout = () => {
         const confirmed = window.confirm("Вы уверены, что хотите выйти?");

@@ -6,7 +6,7 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "npx eslint ."
     },
     "dependencies": {
         "docx": "^9.5.1",
@@ -27,5 +27,8 @@
         "eslint": "^9",
         "eslint-config-next": "15.3.2",
         "tailwindcss": "^4"
-    }
+    },
+    "eslintIgnore": [
+        ".next"
+    ]
 }
