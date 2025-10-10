@@ -7,7 +7,7 @@ export default async function ProjectsAllHandler(req, res) {
         }
 
         // Получаем данные проектов из бекенда
-        const org_name = req.query;
+        const { org_name } = req.query;
         const response = await fetch(`https://api.rosdk.ru/projects/zvezda/projects?organization_name=${org_name}`, {
             method: "GET",
             headers: {

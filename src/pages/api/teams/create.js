@@ -1,6 +1,5 @@
 export default async function RegHandler(req, res) {
     try {
-        console.log("Require: ", req.body);
         const response = await fetch("https://api.rosdk.ru/teams/teams/register", {
             method: "POST",
             headers: {
@@ -19,6 +18,8 @@ export default async function RegHandler(req, res) {
 
         const data = await response.json();
 
+        console.log("data", data);
+
         if (!response.ok) {
             return res.json({ success: false, data });
         }
@@ -26,6 +27,7 @@ export default async function RegHandler(req, res) {
         // возвращаем клиенту
         return res.json({ success: true, data });
     } catch (err) {
+        console.log("error", err.message);
         return res.json({ success: false, error: err.message }, { status: 500 });
     }
 }
