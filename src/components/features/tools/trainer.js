@@ -20,6 +20,9 @@ import Button from "@/components/ui/Button";
 import Switcher from "@/components/ui/Switcher";
 import Block from "@/components/features/public/Block";
 
+const TRAINER_PREFIX = 'trainer_v1'; // 👈 ВАЖНО: другой префикс!
+const getStorageKey = (key) => `${TRAINER_PREFIX}_${key}`;
+
 const CORRECT_TOKENS = [
     "MA8YQ-OKO2V-P3XZM-LR9QD-K7N4E",
     "JX3FQ-7B2WK-9PL8D-M4R6T-VN5YH",
@@ -39,11 +42,11 @@ export default function TrainerPage({ goTo }) {
     // Состояния для работы с заданиями
     const [tasks, setTasks] = useState([]);
 
-    const [hasCompletedSecondQuestionnaire, setHasCompletedSecondQuestionnaire] = useState(localStorage.getItem("hasCompletedSecondQuestionnaire") === "true");
+    const [hasCompletedSecondQuestionnaire, setHasCompletedSecondQuestionnaire] = useState(localStorage.getItem(getStorageKey("hasCompletedSecondQuestionnaire")) === "true");
 
     useEffect(() => {
         // Проверяем localStorage при загрузке
-        const completed = localStorage.getItem("hasCompletedSecondQuestionnaire") === "true";
+        const completed = localStorage.getItem(getStorageKey("hasCompletedSecondQuestionnaire")) === "true";
         setHasCompletedSecondQuestionnaire(completed);
     }, []);
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -202,7 +205,7 @@ export default function TrainerPage({ goTo }) {
                         },
                     };
                     setCompletedTasks(newTasks);
-                    localStorage.setItem("completedTasks", JSON.stringify(newTasks));
+                    localStorage.setItem(getStorageKey("completedTasks"), JSON.stringify(newTasks));
                 }
             } catch (err) {
                 console.error("Error saving task data:", err);
@@ -242,7 +245,7 @@ export default function TrainerPage({ goTo }) {
     };
 
     useEffect(() => {
-        const savedTasks = localStorage.getItem("completedTasks");
+        const savedTasks = localStorage.getItem(getStorageKey("completedTasks"));
         if (savedTasks) {
             setCompletedTasks(JSON.parse(savedTasks));
         }
@@ -1289,7 +1292,7 @@ export default function TrainerPage({ goTo }) {
             if (!response.ok) throw new Error("Ошибка сохранения");
 
             if (questionnaireType === "Second") {
-                localStorage.setItem("hasCompletedSecondQuestionnaire", "true");
+                localStorage.setItem(getStorageKey("hasCompletedSecondQuestionnaire"), "true");
                 setHasCompletedSecondQuestionnaire(true);
             }
 
@@ -1494,7 +1497,7 @@ export default function TrainerPage({ goTo }) {
             const updatedBuffer = [trimmedValue, ...currentBuffer].slice(0, 6);
             newBuffer[code] = updatedBuffer;
             setBuffer(newBuffer);
-            setCookie("buffer", JSON.stringify(newBuffer));
+            setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
         }
     };
 
@@ -1535,7 +1538,7 @@ export default function TrainerPage({ goTo }) {
                         const newBuffer = { ...buffer };
                         newBuffer[code] = randomValues;
                         setBuffer(newBuffer);
-                        setCookie("buffer", JSON.stringify(newBuffer));
+                        setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
                     }
                 }
             }
@@ -1574,7 +1577,7 @@ export default function TrainerPage({ goTo }) {
                             const newBuffer = { ...buffer };
                             newBuffer[code] = combinedBuffer;
                             setBuffer(newBuffer);
-                            setCookie("buffer", JSON.stringify(newBuffer));
+                            setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
                         }
                     }
                 }
@@ -1636,8 +1639,8 @@ export default function TrainerPage({ goTo }) {
         setPrompt(finalPrompt);
 
         const entry = { date: new Date().toISOString(), type, prompt: finalPrompt };
-        const newHist = [entry, ...JSON.parse(localStorage.getItem("history") || "[]")].slice(0, 50);
-        localStorage.setItem("history", JSON.stringify(newHist));
+        const newHist = [entry, ...JSON.parse(localStorage.getItem(getStorageKey("history")) || "[]")].slice(0, 50);
+localStorage.setItem(getStorageKey("history"), JSON.stringify(newHist));
         setHistory(newHist);
     };
 
@@ -1659,7 +1662,7 @@ export default function TrainerPage({ goTo }) {
     // Проверка токена
 
     useEffect(() => {
-        const completed = localStorage.getItem("hasCompletedQuestionnaire") === "true";
+        const completed = localStorage.getItem(getStorageKey("hasCompletedQuestionnaire")) === "true";
         setHasCompletedQuestionnaire(completed);
     }, []);
 

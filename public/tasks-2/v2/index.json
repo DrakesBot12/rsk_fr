@@ -44,43 +44,43 @@
     {
         "file": "",
         "instruction": "7.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity",
         "photo": "7.png"
     },
     {
         "file": "8.pdf",
         "instruction": "8.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity",
         "photo": "8.png"
     },
     {
         "file": "",
         "instruction": "9.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity",
         "photo": "9.png"
     },
     {
         "file": "",
         "instruction": "10.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity",
         "photo": "10.png"
     },
     {
         "file": "",
         "instruction": "11.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity",
         "photo": "11.png"
     },
     {
         "file": "12.pdf",
         "instruction": "12.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity",
         "photo": "12.png"
     },
     {
@@ -94,7 +94,9 @@
         "file": "14.m4a",
         "instruction": "14.pdf",
         "toolLink1": "https://any2text.ru/",
-        "toolName1": "any2text",
+        "toolName1": "1: any2text",
+        "toolLink2": "https://www.perplexity.ai/",
+        "toolName2": "2: Perplexity",
         "photo": "14.png"
     },
     {
@@ -108,7 +110,9 @@
         "file": "16.mp3",
         "instruction": "16.pdf",
         "toolLink1": "https://suno.com/",
-        "toolName1": "Suno",
+        "toolName1": "1: Suno",
+        "toolLink2": "https://www.perplexity.ai/",
+        "toolName2": "2: Perplexity",
         "photo": "16.png"
     },
     {
@@ -129,7 +133,9 @@
         "file": "",
         "instruction": "19.pdf",
         "toolLink1": "https://suno.com/",
-        "toolName1": "Suno",
+        "toolName1": "1: Suno",
+        "toolLink2": "https://www.perplexity.ai/",
+        "toolName2": "2: Perplexity",
         "photo": "19.png"
     },
     {
@@ -191,15 +197,15 @@
     {
         "file": "",
         "instruction": "28.pdf",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim",
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable",
         "photo": "28.png"
     },
     {
         "file": "",
         "instruction": "29.pdf",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim",
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable",
         "photo": "29.png"
     },
     {
@@ -219,8 +225,8 @@
     {
         "file": "",
         "instruction": "32.pdf",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim",
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable",
         "photo": "32.png"
     },
     {
@@ -240,8 +246,10 @@
     {
         "file": "35.pdf",
         "instruction": "35.pdf",
-        "toolLink1": "https://pictory.ai/",
-        "toolName1": "Picrory",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "1: Perplexity",
+        "toolLink2": "https://pictory.ai/",
+        "toolName2": "2: Picrory",
         "photo": "35.png"
     },
     {
@@ -268,8 +276,10 @@
     {
         "file": "",
         "instruction": "39.pdf",
-        "toolLink1": "https://pictory.ai/",
-        "toolName1": "Picrory",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "1: Perplexity",
+        "toolLink2": "https://pictory.ai/",
+        "toolName2": "2: Picrory",
         "photo": "39.png"
     },
     {
@@ -289,243 +299,253 @@
     {
         "file": "42.xlsx",
         "instruction": "42.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity",
         "photo": "42.png"
     },
     {
         "file": "43.xlsx",
         "instruction": "43.pdf",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim",
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable",
         "photo": "43.png"
     },
     {
         "file": "44.xlsx",
         "instruction": "44.pdf",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim",
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable",
         "photo": "44.png"
     },
     {
         "file": "45.pdf",
         "instruction": "45.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity",
         "photo": "45.png"
     },
     {
         "file": "46.xlsx",
         "instruction": "46.pdf",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim",
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable",
         "photo": "46.png"
     },
     {
         "file": "47.xlsx",
         "instruction": "47.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity",
         "photo": "47.png"
     },
     {
-        "file": "",
+        "file": "48",
         "instruction": "",
         "toolLink1": "",
         "toolName1": "",
         "photo": ""
     },
     {
-        "file": "",
+        "file": "49",
         "instruction": "",
         "toolLink1": "",
         "toolName1": "",
         "photo": ""
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "50",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim"
+        "file": "51",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "1: Perplexity",
+        "toolLink2": "https://lovable.dev/",
+        "toolName2": "2: Lovable"
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "52",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
         "file": "53.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "54",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "55",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
+        "file": "56",
         "toolLink1": "",
         "toolName1": ""
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "57",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
         "file": "58.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "59",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
         "file": "60.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
         "file": "61.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
         "file": "62.pdf",
-        "toolLink1": "https://gamma.app/signup?r=ffdoazwoqvphhy2",
-        "toolName1": "Gamma"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "1: Perplexity",
+        "toolLink2": "https://gamma.app/signup?r=ffdoazwoqvphhy2",
+        "toolName2": "2: Gamma"
     },
     {
-        "file": "",
+        "file": "63",
         "toolLink1": "",
         "toolName1": ""
     },
     {
         "file": "64.xlsx",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim"
+        "file": "65",
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable"
     },
     {
         "file": "66.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
         "file": "67.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeekS"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "PerplexityS"
     },
     {
-        "file": "",
-        "toolLink1": "https://pictory.ai/",
-        "toolName1": "Picrory"
+        "file": "68",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "1: Perplexity",
+        "toolLink2": "https://pictory.ai/",
+        "toolName2": "Picrory"
     },
     {
-        "file": "",
-        "toolLink1": "https://gamma.app/signup?r=ffdoazwoqvphhy2",
-        "toolName1": "Gamma"
+        "file": "69",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "1: Perplexity",
+        "toolLink2": "https://gamma.app/signup?r=ffdoazwoqvphhy2",
+        "toolName2": "2: Gamma"
     },
     {
-        "file": "",
+        "file": "70",
         "toolLink1": "",
         "toolName1": ""
     },
     {
         "file": "71.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity",
+        "toolLink2": "https://lovable.dev/",
+        "toolName2": "Lovable"
     },
     {
         "file": "",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim"
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable"
     },
     {
         "file": "73.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
         "file": "74.pdf",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
+        "file": "75",
         "toolLink1": "https://pictory.ai/",
         "toolName1": "Picrory"
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "76",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
+        "file": "77",
         "toolLink1": "",
         "toolName1": ""
     },
     {
         "file": "78.jpg",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim"
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable"
     },
     {
         "file": "79.xlsx",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
         "file": "80.xlsx",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim"
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable"
     },
     {
         "file": "81.xlsx",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
         "file": "82.xlsx",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
         "file": "83.xlsx",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim"
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable"
     },
     {
-        "file": "",
+        "file": "84",
         "toolLink1": "",
         "toolName1": ""
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "85",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
-        "toolLink1": "https://websim.ai/",
-        "toolName1": "Websim"
+        "file": "86",
+        "toolLink1": "https://lovable.dev/",
+        "toolName1": "Lovable"
     },
     {
         "file": "87",
@@ -533,22 +553,22 @@
         "toolName1": "Gamma"
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "88",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "89",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
-        "toolLink1": "https://chat.deepseek.com/",
-        "toolName1": "DeepSeek"
+        "file": "90",
+        "toolLink1": "https://www.perplexity.ai/",
+        "toolName1": "Perplexity"
     },
     {
-        "file": "",
+        "file": "91",
         "toolLink1": "",
         "toolName1": ""
     }

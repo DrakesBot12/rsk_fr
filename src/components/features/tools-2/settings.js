@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import Header from "@/components/layout/Header";
 import { addKeyToCookies, addUserToCookies, getKeyFromCookies } from "./actions";
@@ -53,21 +53,6 @@ export default function SettingsPage({ goTo }) {
     const [value, setValue] = useState(0);
 
     // Получаем токен из cookies при монтировании компонента
-    useEffect(() => {
-        async function fetchTokenAndUsage() {
-            const KeyInCookies = await getKeyFromCookies();
-            if (KeyInCookies) {
-                setToken(KeyInCookies.text);
-                validateToken(KeyInCookies.text);
-                setTokenExists(true);
-            }
-
-            const recordsCount = await getRecordsCount();
-            // console.log(recordsCount)
-            setValue(max - recordsCount);
-        }
-        fetchTokenAndUsage();
-    }, [validateToken]);
 
     async function getRecordsCount() {
         try {
@@ -101,6 +86,22 @@ export default function SettingsPage({ goTo }) {
         },
         [token]
     );
+
+    useEffect(() => {
+        async function fetchTokenAndUsage() {
+            const KeyInCookies = await getKeyFromCookies();
+            if (KeyInCookies) {
+                setToken(KeyInCookies.text);
+                validateToken(KeyInCookies.text);
+                setTokenExists(true);
+            }
+
+            const recordsCount = await getRecordsCount();
+            // console.log(recordsCount)
+            setValue(max - recordsCount);
+        }
+        fetchTokenAndUsage();
+    }, [validateToken]);
 
     const handleUserDataChange = (e) => {
         const { name, value } = e.target;

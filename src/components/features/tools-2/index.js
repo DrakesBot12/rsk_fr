@@ -25,6 +25,9 @@ import Button from "@/components/ui/Button";
 import Switcher from "@/components/ui/Switcher";
 import Block from "@/components/features/public/Block";
 
+const STORAGE_PREFIX = 'trainer_v2_'; // Префикс для новой версии
+const getStorageKey = (key) => `${STORAGE_PREFIX}${key}`;
+
 function removeKeyCookie() {
     document.cookie = "activated_key=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
 }
@@ -80,14 +83,13 @@ export default function IndexPage({ goTo }) {
     const [openSubAccordionKey, setOpenSubAccordionKey] = useState(null);
 
     useEffect(() => {
-        const isCompletionPending = localStorage.getItem("sessionCompletionPending") === "true";
-
-        // Если мы вернулись после завершения тренажера, выполняем очистку здесь.
+        const completionKey = 'trainer_v2_sessionCompletionPending';
+        const isCompletionPending = localStorage.getItem(getStorageKey("sessionCompletionPending")) === "true";
         if (isCompletionPending) {
-            localStorage.removeItem("sessionCompletionPending");
+            // Мы пришли после завершения тренажера. Токен УЖЕ удален.
+            // Наша задача - просто убрать флаг и почистить сессию.
+            localStorage.removeItem("trainer_v2_sessionCompletionPending");
             sessionStorage.removeItem("currentPage");
-            removeKeyCookie(); // <-- ДОБАВЬТЕ ЭТУ СТРОКУ
-            // Устанавливаем текущую страницу как главную и остаемся на ней.
             sessionStorage.setItem("currentPage", "mayakOko");
         } else {
             // Если процесс завершения не идет, работаем как обычно:
@@ -128,7 +130,7 @@ export default function IndexPage({ goTo }) {
     }, []);
 
     useEffect(() => {
-        const buf = getCookie("buffer");
+        const buf = getCookie(getStorageKey("buffer"));
         if (buf) {
             try {
                 setBuffer(JSON.parse(buf));
@@ -137,7 +139,7 @@ export default function IndexPage({ goTo }) {
             }
         }
 
-        const hist = localStorage.getItem("history");
+        const hist = localStorage.getItem(getStorageKey("history"));
         if (hist) {
             try {
                 setHistory(JSON.parse(hist));
@@ -165,7 +167,7 @@ export default function IndexPage({ goTo }) {
 
     function handleUpdateBuffer(newBuffer) {
         setBuffer(newBuffer);
-        setCookie("buffer", JSON.stringify(newBuffer));
+        setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
     }
 
     {
@@ -229,7 +231,7 @@ export default function IndexPage({ goTo }) {
             const updatedBuffer = [trimmedValue, ...currentBuffer].slice(0, 6);
             newBuffer[code] = updatedBuffer;
             setBuffer(newBuffer);
-            setCookie("buffer", JSON.stringify(newBuffer));
+            setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
         }
     }
 
@@ -266,7 +268,7 @@ export default function IndexPage({ goTo }) {
                 }
                 const newBuffer = { ...buffer, [code]: [...currentBufferForField, ...additionalValues] };
                 setBuffer(newBuffer);
-                setCookie("buffer", JSON.stringify(newBuffer));
+                setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
             }
         }
         setShowBuffer(true);
@@ -316,7 +318,7 @@ export default function IndexPage({ goTo }) {
         const entry = { date: new Date().toISOString(), type, prompt: finalPrompt };
         const newHist = [entry, ...history].slice(0, 50);
         setHistory(newHist);
-        localStorage.setItem("history", JSON.stringify(newHist));
+        localStorage.setItem(getStorageKey("history"), JSON.stringify(newHist));
     }
 
     const isCreateDisabled = !Object.values(fields).every((field) => field.trim() !== "");
