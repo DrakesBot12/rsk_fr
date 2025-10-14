@@ -1,1 +1,3 @@
-// Не готово
+export default function ProjectPage() {
+    return <></>;
+}

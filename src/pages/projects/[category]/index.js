@@ -29,7 +29,7 @@ export default function CategoryPage() {
 
     useEffect(() => {
         fetchProjects(dataProfile.Organization);
-    }, [dataProfile.Organization]);
+    }, [dataProfile.Organization, fetchProjects]);
 
     useEffect(() => {
         console.log("projects", projects);
