@@ -6,7 +6,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "npx eslint ."
+        "lint": "npx eslint .",
+        "format": "prettier --write ."
     },
     "dependencies": {
         "docx": "^9.5.1",
@@ -26,6 +27,7 @@
         "@tailwindcss/postcss": "^4",
         "eslint": "^9",
         "eslint-config-next": "15.3.2",
+        "prettier": "^3.6.2",
         "tailwindcss": "^4"
     },
     "eslintIgnore": [

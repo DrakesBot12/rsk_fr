@@ -1,20 +1,20 @@
 [
-	{
-		"file": "task1.pdf",
-		"instruction": "instruction1.pdf",
-		"toolLink1": "https://websim.ai",
-		"toolLink2": "https://gamma.app",
-		"toolName1": "Websim",
-		"toolName2": "Gamma",
-		"photo": "photo.png"
-	},
-	{
-		"file": "task2.pdf",
-		"instruction": "instruction2.pdf",
-		"toolLink1": "https://gamma.app",
-		"toolLink2": "https://websim.ai",
-		"toolName1": "Gamma",
-		"toolName2": "WebSim",
-		"photo": "photo.png"
-	}
+    {
+        "file": "task1.pdf",
+        "instruction": "instruction1.pdf",
+        "toolLink1": "https://websim.ai",
+        "toolLink2": "https://gamma.app",
+        "toolName1": "Websim",
+        "toolName2": "Gamma",
+        "photo": "photo.png"
+    },
+    {
+        "file": "task2.pdf",
+        "instruction": "instruction2.pdf",
+        "toolLink1": "https://gamma.app",
+        "toolLink2": "https://websim.ai",
+        "toolName1": "Gamma",
+        "toolName2": "WebSim",
+        "photo": "photo.png"
+    }
 ]

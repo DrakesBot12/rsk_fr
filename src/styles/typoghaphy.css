@@ -1,8 +1,9 @@
 :root {
-    --font-family: 'Manrope', sans-serif;
+    --font-family: "Manrope", sans-serif;
 }
 
-html, body {
+html,
+body {
     font-size: 16px;
     font-family: var(--font-family);
 }
@@ -31,7 +32,10 @@ h6 {
     font: 500 1rem var(--font-family);
 }
 
-p, input, textarea, .text {
+p,
+input,
+textarea,
+.text {
     font: 400 0.75rem var(--font-family);
 
     &.big {
@@ -43,7 +47,9 @@ p, input, textarea, .text {
     }
 }
 
-a, button, .link {
+a,
+button,
+.link {
     font: 600 0.75rem var(--font-family);
 
     &.big {

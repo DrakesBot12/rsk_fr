@@ -25,7 +25,7 @@ import Button from "@/components/ui/Button";
 import Switcher from "@/components/ui/Switcher";
 import Block from "@/components/features/public/Block";
 
-const STORAGE_PREFIX = 'trainer_v2_'; // Префикс для новой версии
+const STORAGE_PREFIX = "trainer_v2_"; // Префикс для новой версии
 const getStorageKey = (key) => `${STORAGE_PREFIX}${key}`;
 
 function removeKeyCookie() {
@@ -83,7 +83,7 @@ export default function IndexPage({ goTo }) {
     const [openSubAccordionKey, setOpenSubAccordionKey] = useState(null);
 
     useEffect(() => {
-        const completionKey = 'trainer_v2_sessionCompletionPending';
+        const completionKey = "trainer_v2_sessionCompletionPending";
         const isCompletionPending = localStorage.getItem(getStorageKey("sessionCompletionPending")) === "true";
         if (isCompletionPending) {
             // Мы пришли после завершения тренажера. Токен УЖЕ удален.

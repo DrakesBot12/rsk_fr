@@ -1,9 +1,9 @@
-import Cookies from 'js-cookie';
-import { useState, useEffect } from 'react';
+import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 
 // Получение userData из cookies
 export function getUserData() {
-    const cookie = Cookies.get('userData');
+    const cookie = Cookies.get("userData");
     if (!cookie) return null;
     try {
         return JSON.parse(cookie);
@@ -22,9 +22,9 @@ export function isAuthorized() {
 export function saveUserData(data) {
     const current = getUserData() || {};
     const updated = { ...current, ...data, token: true }; // добавляем "токен"
-    Cookies.set('userData', JSON.stringify(updated), {
-        path: '/',
-        sameSite: 'strict',
+    Cookies.set("userData", JSON.stringify(updated), {
+        path: "/",
+        sameSite: "strict",
         expires: 7,
     });
     return updated;
@@ -32,7 +32,7 @@ export function saveUserData(data) {
 
 // Удаление данных (выход)
 export function clearUserData() {
-    Cookies.remove('userData');
+    Cookies.remove("userData");
 }
 
 // React-хук для получения userData внутри компонентов

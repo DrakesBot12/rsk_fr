@@ -22,7 +22,7 @@ import Button from "@/components/ui/Button";
 import Switcher from "@/components/ui/Switcher";
 import Block from "@/components/features/public/Block";
 
-const STORAGE_PREFIX = 'trainer_v1_'; // Префикс для старой версии
+const STORAGE_PREFIX = "trainer_v1_"; // Префикс для старой версии
 const getStorageKey = (key) => `${STORAGE_PREFIX}${key}`;
 
 const CORRECT_TOKENS = [
@@ -509,7 +509,6 @@ export default function IndexPage({ goTo }) {
         }
         // Читаем историю из cookie
         const hist = localStorage.getItem(getStorageKey("history"));
-
 
         if (hist) {
             try {

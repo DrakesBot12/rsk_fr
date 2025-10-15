@@ -1,74 +1,74 @@
 .profile-info {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 32px;
-  padding: 20px;
-  position: relative;
-  border-radius: 16px;
-  border: 1.5px solid;
-  border-color: var(--color-gray-plus-50);
-  transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 32px;
+    padding: 20px;
+    position: relative;
+    border-radius: 16px;
+    border: 1.5px solid;
+    border-color: var(--color-gray-plus-50);
+    transition: all 0.3s ease;
 }
 
 .profile-info:hover {
-  background: var(--color-white-gray);
-  border-color: var(--color-white-gray);
+    background: var(--color-white-gray);
+    border-color: var(--color-white-gray);
 }
 
 .profile-info .name {
-  position: relative;
-  flex: 1;
-  font-weight: 600;
-  color: var(--color-black);
-  font-size: 1.125rem;
-  line-height: 1.4;
+    position: relative;
+    flex: 1;
+    font-weight: 600;
+    color: var(--color-black);
+    font-size: 1.125rem;
+    line-height: 1.4;
 }
 
 .profile-info .frame {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    flex: 0 0 auto;
 }
 
 .profile-info .button {
-  all: unset;
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 12px 16px;
-  position: relative;
-  flex: 0 0 auto;
-  background-color: var(--color-gray-plus-50);
-  border-radius: 100px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    all: unset;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 16px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: var(--color-gray-plus-50);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .profile-info .button:hover {
-  background-color: var(--color-gray-plus);
+    background-color: var(--color-gray-plus);
 }
 
 .profile-info .login-text {
-  position: relative;
-  width: fit-content;
-  font-weight: 500;
-  color: var(--color-blue);
-  font-size: 0.875rem;
-  text-align: center;
-  line-height: 1.4;
+    position: relative;
+    width: fit-content;
+    font-weight: 500;
+    color: var(--color-blue);
+    font-size: 0.875rem;
+    text-align: center;
+    line-height: 1.4;
 }
 
 .profile-info .text-wrapper {
-  position: relative;
-  width: fit-content;
-  font-weight: 500;
-  color: var(--color-black);
-  font-size: 0.875rem;
-  text-align: center;
-  line-height: 1.4;
+    position: relative;
+    width: fit-content;
+    font-weight: 500;
+    color: var(--color-black);
+    font-size: 0.875rem;
+    text-align: center;
+    line-height: 1.4;
 }

@@ -20,7 +20,7 @@ import Button from "@/components/ui/Button";
 import Switcher from "@/components/ui/Switcher";
 import Block from "@/components/features/public/Block";
 
-const TRAINER_PREFIX = 'trainer_v1'; // 👈 ВАЖНО: другой префикс!
+const TRAINER_PREFIX = "trainer_v1"; // 👈 ВАЖНО: другой префикс!
 const getStorageKey = (key) => `${TRAINER_PREFIX}_${key}`;
 
 const CORRECT_TOKENS = [
@@ -1640,7 +1640,7 @@ export default function TrainerPage({ goTo }) {
 
         const entry = { date: new Date().toISOString(), type, prompt: finalPrompt };
         const newHist = [entry, ...JSON.parse(localStorage.getItem(getStorageKey("history")) || "[]")].slice(0, 50);
-localStorage.setItem(getStorageKey("history"), JSON.stringify(newHist));
+        localStorage.setItem(getStorageKey("history"), JSON.stringify(newHist));
         setHistory(newHist);
     };
 

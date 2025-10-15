@@ -2,12 +2,7 @@ import TextInput from "./TextInput";
 import DropdownInput from "./DropdownInput";
 import ImageInput from "./ImageInput";
 
-export default function Input({
-    type = "",
-    className = "",
-    children,
-    ...props
-}) {
+export default function Input({ type = "", className = "", children, ...props }) {
     const wrapperClass = (base) => `${base} ${className}`;
 
     switch (type) {
@@ -18,7 +13,7 @@ export default function Input({
                     {children}
                 </div>
             );
-        
+
         case "dropdown":
             return (
                 <div className={wrapperClass("input-wrapper relative")}>
@@ -26,7 +21,7 @@ export default function Input({
                     {children}
                 </div>
             );
-        
+
         default:
             return (
                 <div className={wrapperClass("input-wrapper")}>

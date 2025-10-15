@@ -24,7 +24,7 @@ import Switcher from "@/components/ui/Switcher";
 
 import Block from "@/components/features/public/Block";
 
-const TRAINER_PREFIX = 'trainer_v2'; // Уникальный префикс для этого тренажера
+const TRAINER_PREFIX = "trainer_v2"; // Уникальный префикс для этого тренажера
 const getStorageKey = (key) => `${TRAINER_PREFIX}_${key}`;
 
 const CONSTANTS = {
@@ -177,7 +177,7 @@ const useTaskManager = ({ userType, who, taskVersion, isTokenValid }) => {
                 setCurrentTaskIndex(index);
             }
         },
-        [tasks.length, setCurrentTaskIndex] 
+        [tasks.length, setCurrentTaskIndex]
     );
 
     const nextTask = useCallback(() => goToTask(currentTaskIndex + 1), [currentTaskIndex, goToTask]);
@@ -466,202 +466,202 @@ const FirstQuestionnairePopup = memo(function FirstQuestionnairePopup({ onClose,
 });
 
 const SecondQuestionnairePopup = memo(function SecondQuestionnairePopup({ onClose, onSubmit }) {
-	const [confidence, setConfidence] = useState(5);
-	const [understanding, setUnderstanding] = useState(5);
-	const [insight, setInsight] = useState("");
+    const [confidence, setConfidence] = useState(5);
+    const [understanding, setUnderstanding] = useState(5);
+    const [insight, setInsight] = useState("");
 
-	const handleSubmit = () => {
-		if (!insight.trim()) {
-			alert('Пожалуйста, заполните поле "Главный вывод"');
-			return;
-		}
-		onSubmit({
-			confidence,
-			understanding,
-			insight,
-		});
-		onClose();
-	};
+    const handleSubmit = () => {
+        if (!insight.trim()) {
+            alert('Пожалуйста, заполните поле "Главный вывод"');
+            return;
+        }
+        onSubmit({
+            confidence,
+            understanding,
+            insight,
+        });
+        onClose();
+    };
 
-	return (
-		<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-			<div className="bg-white p-6 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-				<div className="flex justify-between items-start mb-4">
-					<h3 className="text-xl font-bold">Короткий привал: рефлексия после этапа «Я»</h3>
-					<button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
-						✕
-					</button>
-				</div>
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white p-6 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-xl font-bold">Короткий привал: рефлексия после этапа «Я»</h3>
+                    <button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
+                        ✕
+                    </button>
+                </div>
 
-				<div className="space-y-6">
-					<label className="block mb-2 font-medium">Вы отлично поработали индивидуально! Давайте зафиксируем ваши ощущения.</label>
+                <div className="space-y-6">
+                    <label className="block mb-2 font-medium">Вы отлично поработали индивидуально! Давайте зафиксируем ваши ощущения.</label>
 
-					<div>
-						<label className="block mb-2 font-medium">1. Оцените вашу УВЕРЕННОСТЬ в работе с ИИ прямо сейчас, после этапа «Я – Цифровой Эксперт»:</label>
-						<div className="flex items-center gap-4">
-							<span className="text-sm">1 (не уверен)</span>
-							<input type="range" min="1" max="10" value={confidence} onChange={(e) => setConfidence(parseInt(e.target.value))} className="w-full" />
-							<span className="text-sm">10 (очень уверен)</span>
-						</div>
-						<div className="text-center mt-2 font-medium">{confidence}</div>
-					</div>
+                    <div>
+                        <label className="block mb-2 font-medium">1. Оцените вашу УВЕРЕННОСТЬ в работе с ИИ прямо сейчас, после этапа «Я – Цифровой Эксперт»:</label>
+                        <div className="flex items-center gap-4">
+                            <span className="text-sm">1 (не уверен)</span>
+                            <input type="range" min="1" max="10" value={confidence} onChange={(e) => setConfidence(parseInt(e.target.value))} className="w-full" />
+                            <span className="text-sm">10 (очень уверен)</span>
+                        </div>
+                        <div className="text-center mt-2 font-medium">{confidence}</div>
+                    </div>
 
-					<div>
-						<label className="block mb-2 font-medium">2. Насколько вы поняли и готовы применять на практике фреймворк «МАЯК ОКО»?</label>
-						<div className="flex items-center gap-4">
-							<span className="text-sm">1 (ничего не понял)</span>
-							<input type="range" min="1" max="10" value={understanding} onChange={(e) => setUnderstanding(parseInt(e.target.value))} className="w-full" />
-							<span className="text-sm">10 (всё ясно)</span>
-						</div>
-						<div className="text-center mt-2 font-medium">{understanding}</div>
-					</div>
+                    <div>
+                        <label className="block mb-2 font-medium">2. Насколько вы поняли и готовы применять на практике фреймворк «МАЯК ОКО»?</label>
+                        <div className="flex items-center gap-4">
+                            <span className="text-sm">1 (ничего не понял)</span>
+                            <input type="range" min="1" max="10" value={understanding} onChange={(e) => setUnderstanding(parseInt(e.target.value))} className="w-full" />
+                            <span className="text-sm">10 (всё ясно)</span>
+                        </div>
+                        <div className="text-center mt-2 font-medium">{understanding}</div>
+                    </div>
 
-					<div>
-						<label className="block mb-2 font-medium">3. Ваш главный вывод или «инсайт» о себе на данный момент?</label>
-						<textarea value={insight} onChange={(e) => setInsight(e.target.value)} className="w-full p-3 border border-gray-300 rounded-md h-24" placeholder="Опишите ваш главный вывод..." />
-					</div>
+                    <div>
+                        <label className="block mb-2 font-medium">3. Ваш главный вывод или «инсайт» о себе на данный момент?</label>
+                        <textarea value={insight} onChange={(e) => setInsight(e.target.value)} className="w-full p-3 border border-gray-300 rounded-md h-24" placeholder="Опишите ваш главный вывод..." />
+                    </div>
 
-					<div className="mt-6 flex justify-end gap-2">
-						<Button onClick={onClose} className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
-							Пропустить
-						</Button>
-						<Button onClick={handleSubmit} className="!bg-blue-500 !text-white hover:!bg-blue-600">
-							Сохранить ответы
-						</Button>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+                    <div className="mt-6 flex justify-end gap-2">
+                        <Button onClick={onClose} className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
+                            Пропустить
+                        </Button>
+                        <Button onClick={handleSubmit} className="!bg-blue-500 !text-white hover:!bg-blue-600">
+                            Сохранить ответы
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 });
 
 const ThirdQuestionnairePopup = memo(function ThirdQuestionnairePopup({ onClose, onSave }) {
-	// --- НАЧАЛО ВАЖНОЙ ЛОГИКИ ---
-	// 1. Создаем состояние 'levels', чтобы хранить значения из полей ввода.
-	//    Без этой строки переменной 'levels' просто не существует.
-	const [levels, setLevels] = useState({
-		level1: "",
-		level2: "",
-		level3: "",
-		level4: "",
-		level5: "",
-	});
+    // --- НАЧАЛО ВАЖНОЙ ЛОГИКИ ---
+    // 1. Создаем состояние 'levels', чтобы хранить значения из полей ввода.
+    //    Без этой строки переменной 'levels' просто не существует.
+    const [levels, setLevels] = useState({
+        level1: "",
+        level2: "",
+        level3: "",
+        level4: "",
+        level5: "",
+    });
 
-	// 2. Создаем функцию для обновления состояния при вводе текста.
-	const handleLevelChange = (level, value) => {
-		setLevels((prev) => ({
-			...prev,
-			[level]: value,
-		}));
-	};
+    // 2. Создаем функцию для обновления состояния при вводе текста.
+    const handleLevelChange = (level, value) => {
+        setLevels((prev) => ({
+            ...prev,
+            [level]: value,
+        }));
+    };
 
-	// 3. Создаем переменную для проверки, можно ли нажимать кнопку "Сохранить".
-	const isSaveDisabled = !Object.values(levels).some((level) => level !== "");
-	// --- КОНЕЦ ВАЖНОЙ ЛОГИКИ ---
+    // 3. Создаем переменную для проверки, можно ли нажимать кнопку "Сохранить".
+    const isSaveDisabled = !Object.values(levels).some((level) => level !== "");
+    // --- КОНЕЦ ВАЖНОЙ ЛОГИКИ ---
 
-	// Теперь в JSX можно без ошибок использовать 'levels', 'handleLevelChange' и 'isSaveDisabled'
-	return (
-		<div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
-			<div className="relative bg-white p-6 rounded-lg max-w-md w-full shadow-2xl border border-gray-200 pointer-events-auto">
-				<div className="mb-4">
-					<h3 className="text-xl font-bold">Завершение сессии</h3>
-				</div>
+    // Теперь в JSX можно без ошибок использовать 'levels', 'handleLevelChange' и 'isSaveDisabled'
+    return (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
+            <div className="relative bg-white p-6 rounded-lg max-w-md w-full shadow-2xl border border-gray-200 pointer-events-auto">
+                <div className="mb-4">
+                    <h3 className="text-xl font-bold">Завершение сессии</h3>
+                </div>
 
-				<>
-					<div className="space-y-4">
-						<p>Пожалуйста, заполните измерения Delta для завершения сессии:</p>
-						<div className="grid grid-cols-2 gap-2">
-							<Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
-							<Input type="number" placeholder="Уровень 2" value={levels.level2} onChange={(e) => handleLevelChange("level2", e.target.value)} />
-							<Input type="number" placeholder="Уровень 3" value={levels.level3} onChange={(e) => handleLevelChange("level3", e.target.value)} />
-							<Input type="number" placeholder="Уровень 4" value={levels.level4} onChange={(e) => handleLevelChange("level4", e.target.value)} />
-							<Input type="number" placeholder="Уровень 5" value={levels.level5} onChange={(e) => handleLevelChange("level5", e.target.value)} />
-						</div>
-					</div>
-					<div className="mt-6 flex justify-center gap-2">
-						<Button onClick={onClose} className="!bg-gray-200 !text-gray-800 hover:!bg-gray-300 flex-1">
-							Отмена
-						</Button>
-						<Button
-							as="a"
-							href={"https://prompt-mastery-trainer-spo.lovable.app/"}
-							target="_blank"
-							onClick={(e) => {
-								e.preventDefault();
-								window.open("https://prompt-mastery-trainer-spo.lovable.app/", "_blank");
-							}}
-							className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200 flex-1">
-							Пройти Тестирование
-						</Button>
-						<span className="flex-1" title={isSaveDisabled ? "Сначала заполните хотя бы одно поле Дельта" : ""}>
-							<Button onClick={() => onSave(levels)} className="!bg-blue-500 !text-white hover!bg-blue-600 w-full" disabled={isSaveDisabled}>
-								Сохранить и завершить
-							</Button>
-						</span>
-					</div>
-				</>
-			</div>
-		</div>
-	);
+                <>
+                    <div className="space-y-4">
+                        <p>Пожалуйста, заполните измерения Delta для завершения сессии:</p>
+                        <div className="grid grid-cols-2 gap-2">
+                            <Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
+                            <Input type="number" placeholder="Уровень 2" value={levels.level2} onChange={(e) => handleLevelChange("level2", e.target.value)} />
+                            <Input type="number" placeholder="Уровень 3" value={levels.level3} onChange={(e) => handleLevelChange("level3", e.target.value)} />
+                            <Input type="number" placeholder="Уровень 4" value={levels.level4} onChange={(e) => handleLevelChange("level4", e.target.value)} />
+                            <Input type="number" placeholder="Уровень 5" value={levels.level5} onChange={(e) => handleLevelChange("level5", e.target.value)} />
+                        </div>
+                    </div>
+                    <div className="mt-6 flex justify-center gap-2">
+                        <Button onClick={onClose} className="!bg-gray-200 !text-gray-800 hover:!bg-gray-300 flex-1">
+                            Отмена
+                        </Button>
+                        <Button
+                            as="a"
+                            href={"https://prompt-mastery-trainer-spo.lovable.app/"}
+                            target="_blank"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.open("https://prompt-mastery-trainer-spo.lovable.app/", "_blank");
+                            }}
+                            className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200 flex-1">
+                            Пройти Тестирование
+                        </Button>
+                        <span className="flex-1" title={isSaveDisabled ? "Сначала заполните хотя бы одно поле Дельта" : ""}>
+                            <Button onClick={() => onSave(levels)} className="!bg-blue-500 !text-white hover!bg-blue-600 w-full" disabled={isSaveDisabled}>
+                                Сохранить и завершить
+                            </Button>
+                        </span>
+                    </div>
+                </>
+            </div>
+        </div>
+    );
 });
 
 const SessionCompletionPopup = memo(function SessionCompletionPopup({ onClose, onSave }) {
-	const [levels, setLevels] = useState({
-		level1: "",
-		level2: "",
-		level3: "",
-		level4: "",
-		level5: "",
-	});
+    const [levels, setLevels] = useState({
+        level1: "",
+        level2: "",
+        level3: "",
+        level4: "",
+        level5: "",
+    });
 
-	const handleLevelChange = (level, value) => {
-		setLevels((prev) => ({
-			...prev,
-			[level]: value,
-		}));
-	};
+    const handleLevelChange = (level, value) => {
+        setLevels((prev) => ({
+            ...prev,
+            [level]: value,
+        }));
+    };
 
-	return (
-		<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-			<div className="bg-white p-6 rounded-lg max-w-md w-full">
-				<div className="flex justify-between items-start mb-4">
-					<h3 className="text-xl font-bold">Завершение сессии</h3>
-					<button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
-						✕
-					</button>
-				</div>
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white p-6 rounded-lg max-w-md w-full">
+                <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-xl font-bold">Завершение сессии</h3>
+                    <button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
+                        ✕
+                    </button>
+                </div>
 
-				<div className="space-y-4">
-					<p>Пожалуйста, заполните измерения Delta для завершения сессии:</p>
+                <div className="space-y-4">
+                    <p>Пожалуйста, заполните измерения Delta для завершения сессии:</p>
 
-					<div className="grid grid-cols-2 gap-2">
-						<Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
-						<Input type="number" placeholder="Уровень 2" value={levels.level2} onChange={(e) => handleLevelChange("level2", e.target.value)} />
-						<Input type="number" placeholder="Уровень 3" value={levels.level3} onChange={(e) => handleLevelChange("level3", e.target.value)} />
-						<Input type="number" placeholder="Уровень 4" value={levels.level4} onChange={(e) => handleLevelChange("level4", e.target.value)} />
-						<Input type="number" placeholder="Уровень 5" value={levels.level5} onChange={(e) => handleLevelChange("level5", e.target.value)} />
-					</div>
-				</div>
+                    <div className="grid grid-cols-2 gap-2">
+                        <Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
+                        <Input type="number" placeholder="Уровень 2" value={levels.level2} onChange={(e) => handleLevelChange("level2", e.target.value)} />
+                        <Input type="number" placeholder="Уровень 3" value={levels.level3} onChange={(e) => handleLevelChange("level3", e.target.value)} />
+                        <Input type="number" placeholder="Уровень 4" value={levels.level4} onChange={(e) => handleLevelChange("level4", e.target.value)} />
+                        <Input type="number" placeholder="Уровень 5" value={levels.level5} onChange={(e) => handleLevelChange("level5", e.target.value)} />
+                    </div>
+                </div>
 
-				<div className="mt-6 flex justify-end gap-2">
-					<Button
-						as="a"
-						href={"https://prompt-mastery-trainer-spo.lovable.app/"}
-						target="_blank"
-						onClick={(e) => {
-							e.preventDefault();
-							window.open("https://prompt-mastery-trainer-spo.lovable.app/", "_blank");
-						}}
-						className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
-						Пройти Тестирование
-					</Button>
-					<Button onClick={() => onSave(levels)} className="!bg-blue-500 !text-white hover:!bg-blue-600">
-						Сохранить и завершить
-					</Button>
-				</div>
-			</div>
-		</div>
-	);
+                <div className="mt-6 flex justify-end gap-2">
+                    <Button
+                        as="a"
+                        href={"https://prompt-mastery-trainer-spo.lovable.app/"}
+                        target="_blank"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            window.open("https://prompt-mastery-trainer-spo.lovable.app/", "_blank");
+                        }}
+                        className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
+                        Пройти Тестирование
+                    </Button>
+                    <Button onClick={() => onSave(levels)} className="!bg-blue-500 !text-white hover:!bg-blue-600">
+                        Сохранить и завершить
+                    </Button>
+                </div>
+            </div>
+        </div>
+    );
 });
 
 const TaskCompletionPopup = memo(function TaskCompletionPopup({ taskData, onClose, elapsedTime }) {
@@ -854,9 +854,9 @@ const TrainerControls = memo(function TrainerControls({
                         <span value="teacher">Преподаватель</span>
                     </Switcher>
                     <Switcher
-                         value={who}
-						 onChange={onWhoChange} // ✅ Правильно: используем функцию из пропсов
-						 className="!w-full">
+                        value={who}
+                        onChange={onWhoChange} // ✅ Правильно: используем функцию из пропсов
+                        className="!w-full">
                         <span value="im">Я</span>
                         <span value="we">Мы</span>
                     </Switcher>
@@ -973,7 +973,7 @@ export default function TrainerPage({ goTo }) {
     const debounceTimeoutRef = useRef(null);
 
     const [hasCompletedSecondQuestionnaire, setHasCompletedSecondQuestionnaire] = useState(localStorage.getItem(getStorageKey("hasCompletedSecondQuestionnaire")) === "true");
-	const [selectedRole, setSelectedRole] = useState(localStorage.getItem(getStorageKey("userRole")) || null);
+    const [selectedRole, setSelectedRole] = useState(localStorage.getItem(getStorageKey("userRole")) || null);
     const [showRolePopup, setShowRolePopup] = useState(false);
     const [taskVersion, setTaskVersion] = useState(localStorage.getItem(getStorageKey("taskVersion")) || "v2");
 
@@ -983,7 +983,7 @@ export default function TrainerPage({ goTo }) {
 
     const handleRoleConfirm = (role) => {
         setSelectedRole(role);
-		localStorage.setItem(getStorageKey("userRole"), role);
+        localStorage.setItem(getStorageKey("userRole"), role);
         setShowRolePopup(false);
     };
 
@@ -1037,7 +1037,7 @@ export default function TrainerPage({ goTo }) {
         isTokenValid,
     });
 
-	useEffect(() => {
+    useEffect(() => {
         if (currentTask) {
             setShowLevelsInput(currentTask.toolName1 === "Пройти Тестирование");
         } else {
@@ -1069,7 +1069,7 @@ export default function TrainerPage({ goTo }) {
     const [showBuffer, setShowBuffer] = useState(false);
     const [currentField, setCurrentField] = useState(null);
 
-	useEffect(() => {
+    useEffect(() => {
         // Проверяем, есть ли наш одноразовый флаг
         const isCompletionPending = localStorage.getItem(getStorageKey("sessionCompletionPending")) === "true";
 
@@ -1080,7 +1080,7 @@ export default function TrainerPage({ goTo }) {
             // 2. Перенаправляем на главную страницу
             goTo("index");
         }
-    }, [goTo]); 
+    }, [goTo]);
 
     const [mayakData, setMayakData] = useState({
         fieldsList: [],
@@ -1269,12 +1269,11 @@ export default function TrainerPage({ goTo }) {
             setSelectedRole(null);
             removeKeyCookie();
 
-			localStorage.setItem("trainer_v2_sessionCompletionPending", "true");
+            localStorage.setItem("trainer_v2_sessionCompletionPending", "true");
             goTo("index");
 
             // 3. Возвращаемся на главную страницу
-            window.location.href = '/';
-            
+            window.location.href = "/";
         } catch (error) {
             console.error("Ошибка при сохранении измерений:", error);
             alert("Произошла ошибка при сохранении измерений");
@@ -1415,9 +1414,12 @@ export default function TrainerPage({ goTo }) {
         }));
     };
 
-    const handleChange = useCallback((code, value) => {
-        setFields((prev) => ({ ...prev, [code]: value }));
-    }, [setFields]);;
+    const handleChange = useCallback(
+        (code, value) => {
+            setFields((prev) => ({ ...prev, [code]: value }));
+        },
+        [setFields]
+    );
 
     const handleCopy = (value) => {
         if (!value) return;
@@ -1577,7 +1579,7 @@ export default function TrainerPage({ goTo }) {
     const createPrompt = () => {
         const values = fields;
         // Проверяем, что ни одно поле не пустое (с учетом пробелов)
-        if (Object.values(values).some(v => !v.trim())) {
+        if (Object.values(values).some((v) => !v.trim())) {
             setPrompt('Пожалуйста, заполните все поля (или используйте "кубики").');
             return;
         }
