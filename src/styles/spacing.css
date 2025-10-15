@@ -502,3 +502,29 @@ meter {
         justify-content: space-between;
     }
 }
+
+/* Custom button sizes for task page */
+.btn-submit {
+    width: 10rem !important;
+    height: 2.5rem !important;
+}
+
+.btn-start {
+    width: 9rem !important;
+    height: 2.5rem !important;
+}
+
+.btn-material-tz {
+    width: 12rem !important;
+    height: 1.875rem !important;
+}
+
+.btn-material-examples {
+    width: 5.875rem !important;
+    height: 1.875rem !important;
+}
+
+.btn-material-security {
+    width: 12.5rem !important;
+    height: 1.875rem !important;
+}

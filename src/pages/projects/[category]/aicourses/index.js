@@ -24,9 +24,9 @@ const AICourses = () => {
       <Layout>
         <Header>
           <Header.Heading>Проекты / Знания и навыки / Курсы для студентов</Header.Heading>
-          <button icon>
+          <Button icon>
             <Notify />
-          </button>
+          </Button>
         </Header>
         <div className="flex h-full items-center justify-center">
           <p>Загрузка данных...</p>
@@ -40,9 +40,9 @@ const AICourses = () => {
       <Layout>
         <Header>
           <Header.Heading>Проекты / Знания и навыки / Курсы для студентов</Header.Heading>
-          <button>
+          <Button icon>
             <Notify />
-          </button>
+          </Button>
         </Header>
         <div className="flex h-full items-center justify-center">
           <p className="text-red-500">Ошибка: {error}</p>
@@ -126,24 +126,9 @@ const AICourses = () => {
               Сайт с обучающими материалами и тестами
             </h5>
             <Link href="/projects/KNOWLEDGE/aicourses/task">
-              <button style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '2.5rem',
-                paddingLeft: '0.75rem',
-                paddingRight: '0.75rem',
-                borderRadius: '6.25rem',
-                backgroundColor: 'var(--color-green-noise)',
-                color: '#364A07',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '0.75rem',
-                fontWeight: '600',
-                fontFamily: 'Manrope'
-              }}>
+              <Button className="approve-button roundeful small h-[2.5rem] px-[0.75rem] font-manrope font-semibold text-[0.75rem]">
                 Выполнено
-              </button>
+              </Button>
             </Link>
           </div>
 
@@ -153,53 +138,18 @@ const AICourses = () => {
               Приложение с подборкой ИИ инструментов<br />для учебы
             </h5>
             <div className="flex items-center gap-[0.5rem]">
-              <button style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '0.75rem',
-                width: '5.1875rem',
-                height: '2.5rem',
-                backgroundColor: '#E0E8FF',
-                borderRadius: '6.25rem',
-                border: 'none',
-                cursor: 'pointer'
-              }}>
-                <div style={{ width: '1rem', height: '1rem' }}>
+              <div className="flex justify-center items-center gap-[0.75rem] w-[5.1875rem] h-[2.5rem] bg-[#E0E8FF] rounded-[6.25rem]">
+                <div className="w-[1rem] h-[1rem]">
                   <PointsIcon />
                 </div>
-                <span style={{
-                  fontSize: '0.75rem',
-                  lineHeight: '1rem',
-                  fontWeight: '600',
-                  fontFamily: 'Manrope',
-                  color: '#3A6BFF'
-                }}>
+                <span className="text-[0.75rem] leading-[1rem] font-semibold font-manrope text-[#3A6BFF]">
                   300
                 </span>
-              </button>
+              </div>
               <Link href="/projects/KNOWLEDGE/aicourses/task">
-                <button style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '5.1875rem',
-                  height: '2.5rem',
-                  backgroundColor: '#F3F4F5',
-                  borderRadius: '6.25rem',
-                  border: 'none',
-                  cursor: 'pointer'
-                }}>
-                  <span style={{
-                    fontSize: '0.75rem',
-                    lineHeight: '1rem',
-                    fontWeight: '600',
-                    fontFamily: 'Manrope',
-                    color: '#08090A'
-                  }}>
-                    Открыть
-                  </span>
-                </button>
+                <Button className="inverted roundeful small w-[5.1875rem] h-[2.5rem] font-manrope font-semibold text-[0.75rem]">
+                  Открыть
+                </Button>
               </Link>
             </div>
           </div>
@@ -210,53 +160,18 @@ const AICourses = () => {
               Телеграм бот для помози в освоении тем и<br />поиска полезных ресурсов
             </h5>
             <div className="flex items-center gap-[0.5rem]">
-              <button style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '0.75rem',
-                width: '5rem',
-                height: '2.5rem',
-                backgroundColor: '#E0E8FF',
-                borderRadius: '6.25rem',
-                border: 'none',
-                cursor: 'pointer'
-              }}>
-                <div style={{ width: '1rem', height: '1rem' }}>
+              <div className="flex justify-center items-center gap-[0.75rem] w-[5rem] h-[2.5rem] bg-[#E0E8FF] rounded-[6.25rem]">
+                <div className="w-[1rem] h-[1rem]">
                   <PointsIcon />
                 </div>
-                <span style={{
-                  fontSize: '0.75rem',
-                  lineHeight: '1rem',
-                  fontWeight: '600',
-                  fontFamily: 'Manrope',
-                  color: '#3A6BFF'
-                }}>
+                <span className="text-[0.75rem] leading-[1rem] font-semibold font-manrope text-[#3A6BFF]">
                   150
                 </span>
-              </button>
+              </div>
               <Link href="/projects/KNOWLEDGE/aicourses/task">
-                <button style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  width: '5.1875rem',
-                  height: '2.5rem',
-                  backgroundColor: '#F3F4F5',
-                  borderRadius: '6.25rem',
-                  border: 'none',
-                  cursor: 'pointer'
-                }}>
-                  <span style={{
-                    fontSize: '0.75rem',
-                    lineHeight: '1rem',
-                    fontWeight: '600',
-                    fontFamily: 'Manrope',
-                    color: '#08090A'
-                  }}>
-                    Открыть
-                  </span>
-                </button>
+                <Button className="inverted roundeful small w-[5.1875rem] h-[2.5rem] font-manrope font-semibold text-[0.75rem]">
+                  Открыть
+                </Button>
               </Link>
             </div>
           </div>

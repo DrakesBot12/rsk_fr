@@ -25,122 +25,35 @@ const TaskPage = () => {
           
           <div className="flex justify-between items-center w-full">
             <div className="flex items-center gap-[0.5rem]">
-              <div 
-                // className="flex items-center px-[0.875rem] py-[0.5rem] gap-[0.375rem] w-[8rem] h-[2.5rem] bg-[#E0E8FF] rounded-[6.25rem]"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '0.5rem 0.875rem',
-                  gap: '0.375rem',
-                  width: '8rem',
-                  height: '2.5rem',
-                  backgroundColor: '#E0E8FF',
-                  borderRadius: '6.25rem'
-                }}
-              >
-                <span 
-                  // className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-[#3A6BFF]"
-                  style={{
-                    fontFamily: 'Manrope',
-                    fontWeight: '600',
-                    fontSize: '0.8rem',
-                    lineHeight: '1.2rem',
-                    color: '#3A6BFF'
-                  }}
-                >
+              <div className="flex items-center justify-center px-[0.875rem] py-[0.5rem] w-[8rem] h-[2.5rem] bg-[#E0E8FF] rounded-[6.25rem]">
+                <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-[#3A6BFF]">
                   150 баллов
                 </span>
               </div>
-              <div 
-                // className="flex items-center px-[0.875rem] py-[0.5rem] gap-[0.375rem] w-[8.5rem] h-[2.5rem] bg-[#F3F4F5] rounded-[6.25rem]"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '0.5rem 0.875rem',
-                  gap: '0.375rem',
-                  width: '8.5rem',
-                  height: '2.5rem',
-                  backgroundColor: '#F3F4F5',
-                  borderRadius: '6.25rem'
-                }}
-              >
-                <span 
-                  // className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-[#909399]"
-                  style={{
-                    fontFamily: 'Manrope',
-                    fontWeight: '600',
-                    fontSize: '0.8rem',
-                    lineHeight: '1.2rem',
-                    color: '#909399'
-                  }}
-                >
+              <div className="flex items-center px-[0.875rem] py-[0.5rem] gap-[0.375rem] w-[8.5rem] h-[2.5rem] bg-[#F3F4F5] rounded-[6.25rem]">
+                <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-[#909399]">
                   Знания и навыки
                 </span>
               </div>
             </div>
             
             <div className="flex items-center gap-[0.5rem]">
-              <button 
-                // className="flex flex-row justify-center items-center px-[0.875rem] py-[0.5rem] gap-[0.375rem] w-[10rem] h-[2.5rem] bg-[#3A6BFF] rounded-[6.25rem] border-none cursor-pointer"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  padding: '0.5rem 0.875rem',
-                  gap: '0.375rem',
-                  width: '10rem',
-                  height: '2.5rem',
-                  backgroundColor: '#3A6BFF',
-                  borderRadius: '6.25rem',
-                  border: 'none',
-                  cursor: 'pointer'
-                }}
-              >
-                <span 
-                  // className="w-[6rem] h-[1.2rem] font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-center text-white"
-                  style={{
-                    width: '6rem',
-                    height: '1.2rem',
-                    fontFamily: 'Manrope',
-                    fontWeight: '600',
-                    fontSize: '0.8rem',
-                    lineHeight: '1.2rem',
-                    textAlign: 'center',
-                    color: '#FFFFFF'
-                  }}
-                >
+              <Button className="blue roundeful small btn-submit gap-[0.375rem] px-[0.875rem] py-[0.5rem] transition-all duration-300 hover:shadow-lg">
+                <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-center whitespace-nowrap">
                   Сдать задание
                 </span>
-                <SubmitTask />
-              </button>
-              <button 
-                // className="flex items-center px-[0.875rem] py-[0.5rem] gap-[0.375rem] bg-[#F3F4F5] rounded-[6.25rem] border-none cursor-pointer"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '0.5rem 0.875rem',
-                  gap: '0.375rem',
-                  backgroundColor: '#F3F4F5',
-                  borderRadius: '6.25rem',
-                  border: 'none',
-                  cursor: 'pointer'
-                }}
-              >
-                <span 
-                  // className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-[#08090A]"
-                  style={{
-                    fontFamily: 'Manrope',
-                    fontWeight: '600',
-                    fontSize: '0.8rem',
-                    lineHeight: '1.2rem',
-                    color: '#08090A'
-                  }}
-                >
+                <div className="w-[0.875rem] h-[0.875rem]">
+                  <SubmitTask />
+                </div>
+              </Button>
+              <Button className="inverted roundeful small btn-start gap-[0.375rem] px-[0.875rem] py-[0.5rem] transition-all duration-300 hover:shadow-lg">
+                <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] whitespace-nowrap">
                   Начать работу
                 </span>
-                <StartWork />
-              </button>
+                <div className="w-[0.875rem] h-[0.875rem]">
+                  <StartWork />
+                </div>
+              </Button>
             </div>
           </div>
           
@@ -171,96 +84,27 @@ const TaskPage = () => {
               
               <div className="flex flex-col gap-[0.5rem]">
                 <h6 className="text-[1rem] font-medium text-[#08090A]">Материалы</h6>
-                <div className="flex flex-col gap-[0.25rem]">
-                  <div className="flex gap-[0.25rem]">
-                    <button 
-                      // className="flex items-center px-[0.875rem] py-[0.5rem] gap-[0.375rem] w-[14rem] h-[2.5rem] bg-[#F3F4F5] rounded-[6.25rem] border-none cursor-pointer"
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        padding: '0.5rem 0.875rem',
-                        gap: '0.375rem',
-                        width: '14rem',
-                        height: '2.5rem',
-                        backgroundColor: '#F3F4F5',
-                        borderRadius: '6.25rem',
-                        border: 'none',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      <span 
-                        // className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-[#08090A]"
-                        style={{
-                          fontFamily: 'Manrope',
-                          fontWeight: '600',
-                          fontSize: '0.8rem',
-                          lineHeight: '1.2rem',
-                          color: '#08090A'
-                        }}
-                      >
+                <div className="flex flex-col gap-[0.5rem]">
+                  <div className="flex gap-[0.5rem]">
+                    <Button className="inverted roundeful small btn-material-tz gap-[0.375rem] px-[0.875rem] py-[0.5rem]">
+                      <span className="font-manrope font-semibold text-[0.625rem] leading-[1rem] whitespace-nowrap">
                         Полноценный вариант ТЗ
                       </span>
                       <LinkArrow />
-                    </button>
-                    <button 
-                      // className="flex items-center px-[0.875rem] py-[0.5rem] gap-[0.375rem] w-[7.5rem] h-[2.5rem] bg-[#F3F4F5] rounded-[6.25rem] border-none cursor-pointer"
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        padding: '0.5rem 0.875rem',
-                        gap: '0.375rem',
-                        width: '7.5rem',
-                        height: '2.5rem',
-                        backgroundColor: '#F3F4F5',
-                        borderRadius: '6.25rem',
-                        border: 'none',
-                        cursor: 'pointer'
-                      }}
-                    >
-                      <span 
-                        // className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-[#08090A]"
-                        style={{
-                          fontFamily: 'Manrope',
-                          fontWeight: '600',
-                          fontSize: '0.8rem',
-                          lineHeight: '1.2rem',
-                          color: '#08090A'
-                        }}
-                      >
+                    </Button>
+                    <Button className="inverted roundeful small btn-material-examples gap-[0.375rem] px-[0.875rem] py-[0.5rem]">
+                      <span className="font-manrope font-semibold text-[0.625rem] leading-[1rem] whitespace-nowrap">
                         Примеры
                       </span>
                       <LinkArrow />
-                    </button>
+                    </Button>
                   </div>
-                  <button 
-                    // className="flex items-center px-[0.875rem] py-[0.5rem] gap-[0.375rem] w-[14.5rem] h-[2.5rem] bg-[#F3F4F5] rounded-[6.25rem] border-none cursor-pointer"
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      padding: '0.5rem 0.875rem',
-                      gap: '0.375rem',
-                      width: '14.5rem',
-                      height: '2.5rem',
-                      backgroundColor: '#F3F4F5',
-                      borderRadius: '6.25rem',
-                      border: 'none',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    <span 
-                      // className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-[#08090A]"
-                      style={{
-                        fontFamily: 'Manrope',
-                        fontWeight: '600',
-                        fontSize: '0.8rem',
-                        lineHeight: '1.2rem',
-                        color: '#08090A'
-                      }}
-                    >
+                  <Button className="inverted roundeful small btn-material-security gap-[0.375rem] px-[0.875rem] py-[0.5rem] mt-[0.25rem]">
+                    <span className="font-manrope font-semibold text-[0.625rem] leading-[1rem] whitespace-nowrap">
                       Требования безопасности
                     </span>
                     <LinkArrow />
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
