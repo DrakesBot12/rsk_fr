@@ -23,7 +23,7 @@ export default function CategoryPage() {
 
     useEffect(() => {
         fetchProjects(dataProfile.Organization);
-    }, [dataProfile.Organization]);
+    }, [dataProfile.Organization, fetchProjects]);
 
     if (!router.isReady || !url)
         return (
@@ -74,7 +74,7 @@ export default function CategoryPage() {
                 </Header>
                 <div className="hero" style={{ placeItems: "center" }}>
                     <div className="flex flex-col gap-[1rem] col-start-4 col-end-10">
-                        <h1>Категория "{url}" не найдена</h1>
+                        <h1>Категория &quot;{url}&quot; не найдена</h1>
                         <Button big onClick={() => router.push("/projects")}>
                             Вернуться назад
                         </Button>
@@ -94,7 +94,7 @@ export default function CategoryPage() {
                 </Header>
                 <div className="hero" style={{ placeItems: "center" }}>
                     <div className="flex flex-col gap-[1rem] col-start-4 col-end-10">
-                        <h1>Проекты в категории "{url}" не найдены</h1>
+                        <h1>Проекты в категории &quot;{url}&quot; не найдены</h1>
                         <Button big onClick={() => router.push("/projects")}>
                             Вернуться назад
                         </Button>
