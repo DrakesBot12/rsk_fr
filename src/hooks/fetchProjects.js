@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 const CATEGORY_NAMES = {
@@ -21,38 +21,44 @@ const CATEGORY_DESCRIPTIONS = {
 
 export function useProjects(org_name = undefined) {
     const router = useRouter();
-    const [categories, setСategories] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const fetchProjects = async (orgName) => {
-        try {
-            if (orgName != null || orgName != undefined) {
-                const response = await fetch(`/api/projects/all/${orgName}`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                });
+    const fetchProjects = useCallback(
+        async (orgName) => {
+            try {
+                if (orgName !== null && orgName !== undefined) {
+                    setLoading(true);
+                    const response = await fetch(`/api/projects/all/${orgName}`, {
+                        method: "GET",
+                        headers: { "Content-Type": "application/json" },
+                        credentials: "include",
+                    });
 
-                if (!response.ok) {
-                    if ([401, 403].includes(response.status)) {
-                        router.push("/auth");
-                        return;
+                    if (!response.ok) {
+                        if ([401, 403].includes(response.status)) {
+                            router.push("/auth");
+                            return;
+                        }
+                        throw new Error("Не удалось получить проекты");
                     }
-                    throw new Error("Не удалось получить проекты");
-                }
 
-                const result = await response.json();
-                if (result.success) setСategories(result.data);
-                else throw new Error(result.error || "Ошибка загрузки проектов");
-            } else throw new Error("Ошибка получения организации");
-        } catch (err) {
-            console.error("Projects fetch error:", err);
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+                    const result = await response.json();
+                    if (result.success) setCategories(result.data);
+                    else throw new Error(result.error || "Ошибка загрузки проектов");
+                } else {
+                    throw new Error("Ошибка получения организации");
+                }
+            } catch (err) {
+                console.error("Projects fetch error:", err);
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        },
+        [router]
+    ); // 👈 теперь функция стабильна
 
     return { loading, categories, error, fetchProjects };
 }

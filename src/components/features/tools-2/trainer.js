@@ -24,6 +24,9 @@ import Switcher from "@/components/ui/Switcher";
 
 import Block from "@/components/features/public/Block";
 
+const TRAINER_PREFIX = 'trainer_v2'; // Уникальный префикс для этого тренажера
+const getStorageKey = (key) => `${TRAINER_PREFIX}_${key}`;
+
 const CONSTANTS = {
     STORAGE_KEYS: {
         USER_ROLE: "userRole",
@@ -174,7 +177,7 @@ const useTaskManager = ({ userType, who, taskVersion, isTokenValid }) => {
                 setCurrentTaskIndex(index);
             }
         },
-        [tasks.length]
+        [tasks.length, setCurrentTaskIndex] 
     );
 
     const nextTask = useCallback(() => goToTask(currentTaskIndex + 1), [currentTaskIndex, goToTask]);
@@ -462,6 +465,291 @@ const FirstQuestionnairePopup = memo(function FirstQuestionnairePopup({ onClose,
     );
 });
 
+const SecondQuestionnairePopup = memo(function SecondQuestionnairePopup({ onClose, onSubmit }) {
+	const [confidence, setConfidence] = useState(5);
+	const [understanding, setUnderstanding] = useState(5);
+	const [insight, setInsight] = useState("");
+
+	const handleSubmit = () => {
+		if (!insight.trim()) {
+			alert('Пожалуйста, заполните поле "Главный вывод"');
+			return;
+		}
+		onSubmit({
+			confidence,
+			understanding,
+			insight,
+		});
+		onClose();
+	};
+
+	return (
+		<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+			<div className="bg-white p-6 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+				<div className="flex justify-between items-start mb-4">
+					<h3 className="text-xl font-bold">Короткий привал: рефлексия после этапа «Я»</h3>
+					<button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
+						✕
+					</button>
+				</div>
+
+				<div className="space-y-6">
+					<label className="block mb-2 font-medium">Вы отлично поработали индивидуально! Давайте зафиксируем ваши ощущения.</label>
+
+					<div>
+						<label className="block mb-2 font-medium">1. Оцените вашу УВЕРЕННОСТЬ в работе с ИИ прямо сейчас, после этапа «Я – Цифровой Эксперт»:</label>
+						<div className="flex items-center gap-4">
+							<span className="text-sm">1 (не уверен)</span>
+							<input type="range" min="1" max="10" value={confidence} onChange={(e) => setConfidence(parseInt(e.target.value))} className="w-full" />
+							<span className="text-sm">10 (очень уверен)</span>
+						</div>
+						<div className="text-center mt-2 font-medium">{confidence}</div>
+					</div>
+
+					<div>
+						<label className="block mb-2 font-medium">2. Насколько вы поняли и готовы применять на практике фреймворк «МАЯК ОКО»?</label>
+						<div className="flex items-center gap-4">
+							<span className="text-sm">1 (ничего не понял)</span>
+							<input type="range" min="1" max="10" value={understanding} onChange={(e) => setUnderstanding(parseInt(e.target.value))} className="w-full" />
+							<span className="text-sm">10 (всё ясно)</span>
+						</div>
+						<div className="text-center mt-2 font-medium">{understanding}</div>
+					</div>
+
+					<div>
+						<label className="block mb-2 font-medium">3. Ваш главный вывод или «инсайт» о себе на данный момент?</label>
+						<textarea value={insight} onChange={(e) => setInsight(e.target.value)} className="w-full p-3 border border-gray-300 rounded-md h-24" placeholder="Опишите ваш главный вывод..." />
+					</div>
+
+					<div className="mt-6 flex justify-end gap-2">
+						<Button onClick={onClose} className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
+							Пропустить
+						</Button>
+						<Button onClick={handleSubmit} className="!bg-blue-500 !text-white hover:!bg-blue-600">
+							Сохранить ответы
+						</Button>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+});
+
+const ThirdQuestionnairePopup = memo(function ThirdQuestionnairePopup({ onClose, onSave }) {
+	// --- НАЧАЛО ВАЖНОЙ ЛОГИКИ ---
+	// 1. Создаем состояние 'levels', чтобы хранить значения из полей ввода.
+	//    Без этой строки переменной 'levels' просто не существует.
+	const [levels, setLevels] = useState({
+		level1: "",
+		level2: "",
+		level3: "",
+		level4: "",
+		level5: "",
+	});
+
+	// 2. Создаем функцию для обновления состояния при вводе текста.
+	const handleLevelChange = (level, value) => {
+		setLevels((prev) => ({
+			...prev,
+			[level]: value,
+		}));
+	};
+
+	// 3. Создаем переменную для проверки, можно ли нажимать кнопку "Сохранить".
+	const isSaveDisabled = !Object.values(levels).some((level) => level !== "");
+	// --- КОНЕЦ ВАЖНОЙ ЛОГИКИ ---
+
+	// Теперь в JSX можно без ошибок использовать 'levels', 'handleLevelChange' и 'isSaveDisabled'
+	return (
+		<div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
+			<div className="relative bg-white p-6 rounded-lg max-w-md w-full shadow-2xl border border-gray-200 pointer-events-auto">
+				<div className="mb-4">
+					<h3 className="text-xl font-bold">Завершение сессии</h3>
+				</div>
+
+				<>
+					<div className="space-y-4">
+						<p>Пожалуйста, заполните измерения Delta для завершения сессии:</p>
+						<div className="grid grid-cols-2 gap-2">
+							<Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
+							<Input type="number" placeholder="Уровень 2" value={levels.level2} onChange={(e) => handleLevelChange("level2", e.target.value)} />
+							<Input type="number" placeholder="Уровень 3" value={levels.level3} onChange={(e) => handleLevelChange("level3", e.target.value)} />
+							<Input type="number" placeholder="Уровень 4" value={levels.level4} onChange={(e) => handleLevelChange("level4", e.target.value)} />
+							<Input type="number" placeholder="Уровень 5" value={levels.level5} onChange={(e) => handleLevelChange("level5", e.target.value)} />
+						</div>
+					</div>
+					<div className="mt-6 flex justify-center gap-2">
+						<Button onClick={onClose} className="!bg-gray-200 !text-gray-800 hover:!bg-gray-300 flex-1">
+							Отмена
+						</Button>
+						<Button
+							as="a"
+							href={"https://prompt-mastery-trainer-spo.lovable.app/"}
+							target="_blank"
+							onClick={(e) => {
+								e.preventDefault();
+								window.open("https://prompt-mastery-trainer-spo.lovable.app/", "_blank");
+							}}
+							className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200 flex-1">
+							Пройти Тестирование
+						</Button>
+						<span className="flex-1" title={isSaveDisabled ? "Сначала заполните хотя бы одно поле Дельта" : ""}>
+							<Button onClick={() => onSave(levels)} className="!bg-blue-500 !text-white hover!bg-blue-600 w-full" disabled={isSaveDisabled}>
+								Сохранить и завершить
+							</Button>
+						</span>
+					</div>
+				</>
+			</div>
+		</div>
+	);
+});
+
+const SessionCompletionPopup = memo(function SessionCompletionPopup({ onClose, onSave }) {
+	const [levels, setLevels] = useState({
+		level1: "",
+		level2: "",
+		level3: "",
+		level4: "",
+		level5: "",
+	});
+
+	const handleLevelChange = (level, value) => {
+		setLevels((prev) => ({
+			...prev,
+			[level]: value,
+		}));
+	};
+
+	return (
+		<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+			<div className="bg-white p-6 rounded-lg max-w-md w-full">
+				<div className="flex justify-between items-start mb-4">
+					<h3 className="text-xl font-bold">Завершение сессии</h3>
+					<button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
+						✕
+					</button>
+				</div>
+
+				<div className="space-y-4">
+					<p>Пожалуйста, заполните измерения Delta для завершения сессии:</p>
+
+					<div className="grid grid-cols-2 gap-2">
+						<Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
+						<Input type="number" placeholder="Уровень 2" value={levels.level2} onChange={(e) => handleLevelChange("level2", e.target.value)} />
+						<Input type="number" placeholder="Уровень 3" value={levels.level3} onChange={(e) => handleLevelChange("level3", e.target.value)} />
+						<Input type="number" placeholder="Уровень 4" value={levels.level4} onChange={(e) => handleLevelChange("level4", e.target.value)} />
+						<Input type="number" placeholder="Уровень 5" value={levels.level5} onChange={(e) => handleLevelChange("level5", e.target.value)} />
+					</div>
+				</div>
+
+				<div className="mt-6 flex justify-end gap-2">
+					<Button
+						as="a"
+						href={"https://prompt-mastery-trainer-spo.lovable.app/"}
+						target="_blank"
+						onClick={(e) => {
+							e.preventDefault();
+							window.open("https://prompt-mastery-trainer-spo.lovable.app/", "_blank");
+						}}
+						className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
+						Пройти Тестирование
+					</Button>
+					<Button onClick={() => onSave(levels)} className="!bg-blue-500 !text-white hover:!bg-blue-600">
+						Сохранить и завершить
+					</Button>
+				</div>
+			</div>
+		</div>
+	);
+});
+
+const TaskCompletionPopup = memo(function TaskCompletionPopup({ taskData, onClose, elapsedTime }) {
+    // --- НАЧАЛО ДОБАВЛЕННОЙ ЛОГИКИ ---
+    const [levels, setLevels] = useState({
+        level1: "",
+        level2: "",
+        level3: "",
+        level4: "",
+        level5: "",
+    });
+
+    const handleLevelChange = (level, value) => {
+        setLevels((prev) => ({
+            ...prev,
+            [level]: value,
+        }));
+    };
+
+    const isSaveDisabled = !Object.values(levels).some((level) => level !== "");
+    // --- КОНЕЦ ДОБАВЛЕННОЙ ЛОГИКИ ---
+
+    const [isCopied, setIsCopied] = useState(false);
+
+    if (!taskData) return null;
+
+    const formatTaskTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+    };
+
+    const handleCopyClick = () => {
+        const textToCopy = `Задание №${taskData.number}\n\nОписание:\n${taskData.description}\n\nЗадача:\n${taskData.task}\n\nРезультат:\n\n`;
+        copyToClipboard(textToCopy)
+            .then(() => {
+                setIsCopied(true);
+                setTimeout(() => setIsCopied(false), 2000);
+            })
+            .catch((err) => {
+                console.error("Ошибка копирования:", err);
+                alert("Не удалось скопировать текст.");
+            });
+    };
+
+    return (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
+            <div className="bg-white p-6 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto pointer-events-auto">
+                <div className="mb-4">
+                    <h3 className="text-xl font-bold">Задание завершено за {formatTaskTime(elapsedTime)}</h3>
+                </div>
+
+                {/* Здесь вы, вероятно, вставили свой код с полями Input. */}
+                {/* Теперь он будет работать, так как переменная 'levels' определена. */}
+                {/* Например: */}
+                {/* <div className="grid grid-cols-2 gap-2">
+                      <Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
+                      ... и так далее для остальных уровней
+                    </div> */}
+
+                <div className="space-y-4">
+                    <Button onClick={handleCopyClick} className="!py-2 !px-4" disabled={isCopied}>
+                        {isCopied ? "Скопировано!" : "Скопировать задание"}
+                    </Button>
+                    <div className="flex items-center justify-between bg-yellow-50 p-3 rounded-lg">
+                        <h4 className="font-semibold text-yellow-800">Задание №{taskData.number}</h4>
+                    </div>
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-blue-800 mb-2">Описание ситуации:</h4>
+                        <p className="whitespace-pre-line">{taskData.description}</p>
+                    </div>
+
+                    <div className="bg-green-50 p-4 rounded-lg">
+                        <h4 className="font-semibold text-green-800 mb-2">Вашей задачей было:</h4>
+                        <p className="whitespace-pre-line">{taskData.task}</p>
+                    </div>
+                </div>
+
+                <div className="mt-6 flex justify-end gap-2">
+                    <Button onClick={onClose} className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
+                        Закрыть
+                    </Button>
+                </div>
+            </div>
+        </div>
+    );
+});
+
 const MayakField = memo(function MayakField({ field, value, isMobile, disabled, onChange, onShowBuffer, onAddToBuffer, onRandom }) {
     const { code, label } = field;
     const placeholder = label.split(" - ")[1];
@@ -566,14 +854,9 @@ const TrainerControls = memo(function TrainerControls({
                         <span value="teacher">Преподаватель</span>
                     </Switcher>
                     <Switcher
-                        value={who}
-                        onChange={(value) => {
-                            setWho(value);
-                            if (value === "we") {
-                                handleSwitchToWe();
-                            }
-                        }}
-                        className="!w-full">
+                         value={who}
+						 onChange={onWhoChange} // ✅ Правильно: используем функцию из пропсов
+						 className="!w-full">
                         <span value="im">Я</span>
                         <span value="we">Мы</span>
                     </Switcher>
@@ -689,24 +972,23 @@ export default function TrainerPage({ goTo }) {
     const [taskInputValue, setTaskInputValue] = useState("");
     const debounceTimeoutRef = useRef(null);
 
-    const [hasCompletedSecondQuestionnaire, setHasCompletedSecondQuestionnaire] = useState(localStorage.getItem("hasCompletedSecondQuestionnaire") === "true");
-
-    const [selectedRole, setSelectedRole] = useState(localStorage.getItem("userRole") || null);
+    const [hasCompletedSecondQuestionnaire, setHasCompletedSecondQuestionnaire] = useState(localStorage.getItem(getStorageKey("hasCompletedSecondQuestionnaire")) === "true");
+	const [selectedRole, setSelectedRole] = useState(localStorage.getItem(getStorageKey("userRole")) || null);
     const [showRolePopup, setShowRolePopup] = useState(false);
-    const [taskVersion, setTaskVersion] = useState(localStorage.getItem("taskVersion") || "v2");
+    const [taskVersion, setTaskVersion] = useState(localStorage.getItem(getStorageKey("taskVersion")) || "v2");
 
     useEffect(() => {
-        localStorage.setItem("taskVersion", taskVersion);
+        localStorage.setItem(getStorageKey("taskVersion"), taskVersion);
     }, [taskVersion]);
 
     const handleRoleConfirm = (role) => {
         setSelectedRole(role);
-        localStorage.setItem("userRole", role);
+		localStorage.setItem(getStorageKey("userRole"), role);
         setShowRolePopup(false);
     };
 
     useEffect(() => {
-        const completed = localStorage.getItem("hasCompletedSecondQuestionnaire") === "true";
+        const completed = localStorage.getItem(getStorageKey("hasCompletedSecondQuestionnaire")) === "true";
         setHasCompletedSecondQuestionnaire(completed);
     }, []);
     const [showConfirmation, setShowConfirmation] = useState(false);
@@ -755,6 +1037,14 @@ export default function TrainerPage({ goTo }) {
         isTokenValid,
     });
 
+	useEffect(() => {
+        if (currentTask) {
+            setShowLevelsInput(currentTask.toolName1 === "Пройти Тестирование");
+        } else {
+            setShowLevelsInput(false);
+        }
+    }, [currentTask]);
+
     useEffect(() => {
         // Этот хук синхронизирует значение в поле ввода с реальным индексом задания.
         // Он сработает, когда задание меняется по клику на стрелки.
@@ -778,6 +1068,19 @@ export default function TrainerPage({ goTo }) {
     const [history, setHistory] = useState([]);
     const [showBuffer, setShowBuffer] = useState(false);
     const [currentField, setCurrentField] = useState(null);
+
+	useEffect(() => {
+        // Проверяем, есть ли наш одноразовый флаг
+        const isCompletionPending = localStorage.getItem(getStorageKey("sessionCompletionPending")) === "true";
+
+        if (isCompletionPending) {
+            // Если да, значит пользователь вернулся с Яндекс.Формы
+            // 1. Сразу удаляем флаг, чтобы это не повторилось при перезагрузке
+            localStorage.removeItem(getStorageKey("sessionCompletionPending"));
+            // 2. Перенаправляем на главную страницу
+            goTo("index");
+        }
+    }, [goTo]); 
 
     const [mayakData, setMayakData] = useState({
         fieldsList: [],
@@ -874,7 +1177,7 @@ export default function TrainerPage({ goTo }) {
                         },
                     };
                     setCompletedTasks(newTasks);
-                    localStorage.setItem("completedTasks", JSON.stringify(newTasks));
+                    localStorage.setItem(getStorageKey("completedTasks"), JSON.stringify(newTasks));
                 }
             } catch (err) {
                 console.error("Error saving task data:", err);
@@ -903,7 +1206,7 @@ export default function TrainerPage({ goTo }) {
     };
 
     useEffect(() => {
-        const savedTasks = localStorage.getItem("completedTasks");
+        const savedTasks = localStorage.getItem(getStorageKey("completedTasks"));
         if (savedTasks) {
             setCompletedTasks(JSON.parse(savedTasks));
         }
@@ -912,12 +1215,6 @@ export default function TrainerPage({ goTo }) {
     const removeKeyCookie = () => {
         document.cookie = "activated_key=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     };
-
-    useEffect(() => {
-        if (tasks.length > 0 && currentTaskIndex >= 0 && currentTaskIndex < tasks.length) {
-            loadTaskDetails(tasks[currentTaskIndex]);
-        }
-    }, [currentTaskIndex, tasks, loadTaskDetails]);
 
     const handleSaveSessionCompletion = async (levels) => {
         try {
@@ -960,57 +1257,29 @@ export default function TrainerPage({ goTo }) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
+            // Закрываем все модальные окна, связанные с завершением
             setShowSessionCompletionPopup(false);
+            setShowThirdQuestionnaire(false);
 
-            localStorage.removeItem("userRole");
+            // 1. Открываем Яндекс.Форму в новом окне
+            window.open("https://forms.yandex.ru/u/6891bb8002848f2a56f5e978/", "_blank");
+
+            // 2. Выходим из сессии: удаляем роль и токен
+            localStorage.removeItem(getStorageKey("userRole"));
             setSelectedRole(null);
+            removeKeyCookie();
 
-            localStorage.setItem("sessionCompletionPending", "true");
+			localStorage.setItem("trainer_v2_sessionCompletionPending", "true");
+            goTo("index");
 
-            window.location.href = "https://forms.yandex.ru/u/6891bb8002848f2a56f5e978/";
+            // 3. Возвращаемся на главную страницу
+            window.location.href = '/';
+            
         } catch (error) {
             console.error("Ошибка при сохранении измерений:", error);
             alert("Произошла ошибка при сохранении измерений");
         }
     };
-
-    const loadTaskDetails = useCallback(
-        async (task) => {
-            try {
-                const basePath = `/tasks-2/${taskVersion}/${userType}/${who}`;
-                setCurrentTask(task);
-
-                setShowLevelsInput(task.toolName1 === "Пройти Тестирование");
-
-                if (task.instruction) {
-                    setInstructionFileUrl(`${basePath}/Instructions/${task.instruction}`);
-                } else {
-                    setInstructionFileUrl("");
-                }
-
-                if (task.file) {
-                    setTaskFileUrl(`${basePath}/Files/${task.file}`);
-                } else {
-                    setTaskFileUrl("");
-                }
-
-                if (task.photo) {
-                    setCurrentImage(`${basePath}/${task.photo}`);
-                } else {
-                    setCurrentImage("");
-                }
-            } catch (err) {
-                setError(`Ошибка загрузки задания: ${err.message}`);
-            }
-        },
-        [taskVersion, userType, who, setError]
-    );
-
-    useEffect(() => {
-        if (tasks && tasks.length > 0 && currentTaskIndex < tasks.length) {
-            loadTaskDetails(tasks[currentTaskIndex]);
-        }
-    }, [currentTaskIndex, tasks, loadTaskDetails]);
 
     const showSwitchToWeConfirmation = () => {
         setConfirmationConfig({
@@ -1052,146 +1321,6 @@ export default function TrainerPage({ goTo }) {
         }
     };
 
-    const SecondQuestionnairePopup = memo(function SecondQuestionnairePopup({ onClose, onSubmit }) {
-        const [confidence, setConfidence] = useState(5);
-        const [understanding, setUnderstanding] = useState(5);
-        const [insight, setInsight] = useState("");
-
-        const handleSubmit = () => {
-            if (!insight.trim()) {
-                alert('Пожалуйста, заполните поле "Главный вывод"');
-                return;
-            }
-            onSubmit({
-                confidence,
-                understanding,
-                insight,
-            });
-            onClose();
-        };
-
-        return (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                <div className="bg-white p-6 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-                    <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-xl font-bold">Короткий привал: рефлексия после этапа «Я»</h3>
-                        <button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
-                            ✕
-                        </button>
-                    </div>
-
-                    <div className="space-y-6">
-                        <label className="block mb-2 font-medium">Вы отлично поработали индивидуально! Давайте зафиксируем ваши ощущения.</label>
-
-                        <div>
-                            <label className="block mb-2 font-medium">1. Оцените вашу УВЕРЕННОСТЬ в работе с ИИ прямо сейчас, после этапа «Я – Цифровой Эксперт»:</label>
-                            <div className="flex items-center gap-4">
-                                <span className="text-sm">1 (не уверен)</span>
-                                <input type="range" min="1" max="10" value={confidence} onChange={(e) => setConfidence(parseInt(e.target.value))} className="w-full" />
-                                <span className="text-sm">10 (очень уверен)</span>
-                            </div>
-                            <div className="text-center mt-2 font-medium">{confidence}</div>
-                        </div>
-
-                        <div>
-                            <label className="block mb-2 font-medium">2. Насколько вы поняли и готовы применять на практике фреймворк «МАЯК ОКО»?</label>
-                            <div className="flex items-center gap-4">
-                                <span className="text-sm">1 (ничего не понял)</span>
-                                <input type="range" min="1" max="10" value={understanding} onChange={(e) => setUnderstanding(parseInt(e.target.value))} className="w-full" />
-                                <span className="text-sm">10 (всё ясно)</span>
-                            </div>
-                            <div className="text-center mt-2 font-medium">{understanding}</div>
-                        </div>
-
-                        <div>
-                            <label className="block mb-2 font-medium">3. Ваш главный вывод или «инсайт» о себе на данный момент?</label>
-                            <textarea value={insight} onChange={(e) => setInsight(e.target.value)} className="w-full p-3 border border-gray-300 rounded-md h-24" placeholder="Опишите ваш главный вывод..." />
-                        </div>
-
-                        <div className="mt-6 flex justify-end gap-2">
-                            <Button onClick={onClose} className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
-                                Пропустить
-                            </Button>
-                            <Button onClick={handleSubmit} className="!bg-blue-500 !text-white hover:!bg-blue-600">
-                                Сохранить ответы
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    });
-
-    const ThirdQuestionnairePopup = memo(function ThirdQuestionnairePopup({ onClose, onSave }) {
-        // --- НАЧАЛО ВАЖНОЙ ЛОГИКИ ---
-        // 1. Создаем состояние 'levels', чтобы хранить значения из полей ввода.
-        //    Без этой строки переменной 'levels' просто не существует.
-        const [levels, setLevels] = useState({
-            level1: "",
-            level2: "",
-            level3: "",
-            level4: "",
-            level5: "",
-        });
-
-        // 2. Создаем функцию для обновления состояния при вводе текста.
-        const handleLevelChange = (level, value) => {
-            setLevels((prev) => ({
-                ...prev,
-                [level]: value,
-            }));
-        };
-
-        // 3. Создаем переменную для проверки, можно ли нажимать кнопку "Сохранить".
-        const isSaveDisabled = !Object.values(levels).some((level) => level !== "");
-        // --- КОНЕЦ ВАЖНОЙ ЛОГИКИ ---
-
-        // Теперь в JSX можно без ошибок использовать 'levels', 'handleLevelChange' и 'isSaveDisabled'
-        return (
-            <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
-                <div className="relative bg-white p-6 rounded-lg max-w-md w-full shadow-2xl border border-gray-200 pointer-events-auto">
-                    <div className="mb-4">
-                        <h3 className="text-xl font-bold">Завершение сессии</h3>
-                    </div>
-
-                    <>
-                        <div className="space-y-4">
-                            <p>Пожалуйста, заполните измерения Delta для завершения сессии:</p>
-                            <div className="grid grid-cols-2 gap-2">
-                                <Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
-                                <Input type="number" placeholder="Уровень 2" value={levels.level2} onChange={(e) => handleLevelChange("level2", e.target.value)} />
-                                <Input type="number" placeholder="Уровень 3" value={levels.level3} onChange={(e) => handleLevelChange("level3", e.target.value)} />
-                                <Input type="number" placeholder="Уровень 4" value={levels.level4} onChange={(e) => handleLevelChange("level4", e.target.value)} />
-                                <Input type="number" placeholder="Уровень 5" value={levels.level5} onChange={(e) => handleLevelChange("level5", e.target.value)} />
-                            </div>
-                        </div>
-                        <div className="mt-6 flex justify-center gap-2">
-                            <Button onClick={onClose} className="!bg-gray-200 !text-gray-800 hover:!bg-gray-300 flex-1">
-                                Отмена
-                            </Button>
-                            <Button
-                                as="a"
-                                href={"https://prompt-mastery-trainer-spo.lovable.app/"}
-                                target="_blank"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    window.open("https://prompt-mastery-trainer-spo.lovable.app/", "_blank");
-                                }}
-                                className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200 flex-1">
-                                Пройти Тестирование
-                            </Button>
-                            <span className="flex-1" title={isSaveDisabled ? "Сначала заполните хотя бы одно поле Дельта" : ""}>
-                                <Button onClick={() => onSave(levels)} className="!bg-blue-500 !text-white hover!bg-blue-600 w-full" disabled={isSaveDisabled}>
-                                    Сохранить и завершить
-                                </Button>
-                            </span>
-                        </div>
-                    </>
-                </div>
-            </div>
-        );
-    });
-
     const saveQuestionnaire = async (questionnaireType, data) => {
         try {
             const activeUser =
@@ -1215,7 +1344,7 @@ export default function TrainerPage({ goTo }) {
             if (!response.ok) throw new Error("Ошибка сохранения");
 
             if (questionnaireType === "Second") {
-                localStorage.setItem("hasCompletedSecondQuestionnaire", "true");
+                localStorage.setItem(getStorageKey("hasCompletedSecondQuestionnaire"), "true");
                 setHasCompletedSecondQuestionnaire(true);
             }
 
@@ -1279,65 +1408,6 @@ export default function TrainerPage({ goTo }) {
         }
     };
 
-    const SessionCompletionPopup = memo(function SessionCompletionPopup({ onClose, onSave }) {
-        const [levels, setLevels] = useState({
-            level1: "",
-            level2: "",
-            level3: "",
-            level4: "",
-            level5: "",
-        });
-
-        const handleLevelChange = (level, value) => {
-            setLevels((prev) => ({
-                ...prev,
-                [level]: value,
-            }));
-        };
-
-        return (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                <div className="bg-white p-6 rounded-lg max-w-md w-full">
-                    <div className="flex justify-between items-start mb-4">
-                        <h3 className="text-xl font-bold">Завершение сессии</h3>
-                        <button onClick={onClose} className="square text-gray-500 hover:text-gray-700">
-                            ✕
-                        </button>
-                    </div>
-
-                    <div className="space-y-4">
-                        <p>Пожалуйста, заполните измерения Delta для завершения сессии:</p>
-
-                        <div className="grid grid-cols-2 gap-2">
-                            <Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
-                            <Input type="number" placeholder="Уровень 2" value={levels.level2} onChange={(e) => handleLevelChange("level2", e.target.value)} />
-                            <Input type="number" placeholder="Уровень 3" value={levels.level3} onChange={(e) => handleLevelChange("level3", e.target.value)} />
-                            <Input type="number" placeholder="Уровень 4" value={levels.level4} onChange={(e) => handleLevelChange("level4", e.target.value)} />
-                            <Input type="number" placeholder="Уровень 5" value={levels.level5} onChange={(e) => handleLevelChange("level5", e.target.value)} />
-                        </div>
-                    </div>
-
-                    <div className="mt-6 flex justify-end gap-2">
-                        <Button
-                            as="a"
-                            href={"https://prompt-mastery-trainer-spo.lovable.app/"}
-                            target="_blank"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                window.open("https://prompt-mastery-trainer-spo.lovable.app/", "_blank");
-                            }}
-                            className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
-                            Пройти Тестирование
-                        </Button>
-                        <Button onClick={() => onSave(levels)} className="!bg-blue-500 !text-white hover:!bg-blue-600">
-                            Сохранить и завершить
-                        </Button>
-                    </div>
-                </div>
-            </div>
-        );
-    });
-
     const handleLevelChange = (level, value) => {
         setLevels((prev) => ({
             ...prev,
@@ -1347,7 +1417,7 @@ export default function TrainerPage({ goTo }) {
 
     const handleChange = useCallback((code, value) => {
         setFields((prev) => ({ ...prev, [code]: value }));
-    }, []);
+    }, [setFields]);;
 
     const handleCopy = (value) => {
         if (!value) return;
@@ -1382,7 +1452,7 @@ export default function TrainerPage({ goTo }) {
             const updatedBuffer = [trimmedValue, ...currentBuffer].slice(0, 6);
             newBuffer[code] = updatedBuffer;
             setBuffer(newBuffer);
-            setCookie("buffer", JSON.stringify(newBuffer));
+            setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
         }
     };
 
@@ -1423,7 +1493,7 @@ export default function TrainerPage({ goTo }) {
                         const newBuffer = { ...buffer };
                         newBuffer[code] = randomValues;
                         setBuffer(newBuffer);
-                        setCookie("buffer", JSON.stringify(newBuffer));
+                        setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
                     }
                 }
             }
@@ -1462,7 +1532,7 @@ export default function TrainerPage({ goTo }) {
                             const newBuffer = { ...buffer };
                             newBuffer[code] = combinedBuffer;
                             setBuffer(newBuffer);
-                            setCookie("buffer", JSON.stringify(newBuffer));
+                            setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
                         }
                     }
                 }
@@ -1496,44 +1566,32 @@ export default function TrainerPage({ goTo }) {
         }
     };
 
-    const pickOne = (arr) => {
-        return arr[Math.floor(Math.random() * arr.length)];
-    };
-
     const cleanupPrompt = (str) => {
         return str
-            .replace(/\s{2,}/g, " ")
-            .replace(/,\s*,/g, ", ")
-            .replace(/\.\s*\./g, ".")
+            .replace(/\s{2,}/g, " ") // Убирает двойные пробелы
+            .replace(/ ,/g, ",") // Убирает пробел перед запятой
+            .replace(/ \./g, ".") // Убирает пробел перед точкой
             .trim();
     };
 
     const createPrompt = () => {
         const values = fields;
-        if (!Object.values(values).every((v) => v)) {
+        // Проверяем, что ни одно поле не пустое (с учетом пробелов)
+        if (Object.values(values).some(v => !v.trim())) {
             setPrompt('Пожалуйста, заполните все поля (или используйте "кубики").');
             return;
         }
 
-        // Убедимся, что синонимы загружены
-        const { synonyms } = mayakData;
-        if (!synonyms || Object.keys(synonyms).length === 0) {
-            setPrompt("Данные для генерации еще загружаются, подождите...");
-            return;
-        }
-
-        let draftPrompt = `${pickOne(synonyms.imagine)} ${values.y}, ${pickOne(synonyms.isKnown)} ${values.m.toLowerCase()}. ${pickOne(synonyms.needTo)} создать контент ${pickOne(synonyms.forAudience)}: ${values.a.toLowerCase()}. ${pickOne(
-            synonyms.withLimit
-        )} ${values.o1.toLowerCase()}. Готовый результат должен соответствовать следующим критериям: ${values.k.toLowerCase()}. Этот материал будет ${pickOne(synonyms.inContext)}: ${values.k2.toLowerCase()}. ${pickOne(
-            synonyms.finalFormat
-        )}: ${values.o2.toLowerCase()}.`;
+        // Используем предоставленный статичный шаблон
+        let draftPrompt = `Представь, что ты ${values.y}. Твоя миссия — ${values.m.toLowerCase()}. Ты создаешь контент для следующей аудитории: ${values.a.toLowerCase()}. При работе ты должен учитывать такие ограничения: ${values.o1.toLowerCase()}. Готовый результат должен соответствовать следующим критериям: ${values.k.toLowerCase()}. Этот материал будет использоваться в следующем контексте: ${values.k2.toLowerCase()}. Финальное оформление должно быть таким: ${values.o2.toLowerCase()}.`;
 
         let finalPrompt = cleanupPrompt(draftPrompt);
         setPrompt(finalPrompt);
 
+        // Сохраняем результат в историю
         const entry = { date: new Date().toISOString(), type, prompt: finalPrompt };
-        const newHist = [entry, ...JSON.parse(localStorage.getItem("history") || "[]")].slice(0, 50);
-        localStorage.setItem("history", JSON.stringify(newHist));
+        const newHist = [entry, ...JSON.parse(localStorage.getItem(getStorageKey("history")) || "[]")].slice(0, 50);
+        localStorage.setItem(getStorageKey("history"), JSON.stringify(newHist));
         setHistory(newHist);
     };
 
@@ -1565,7 +1623,7 @@ export default function TrainerPage({ goTo }) {
             }
         }
         checkToken();
-    }, [goTo]);
+    }, [goTo, setIsTokenValid]);
 
     const isCreateDisabled = Object.values(fields).some((v) => !v);
     const miscCategory = (mayakData.defaultTypes || []).find((t) => t.key === "misc");
@@ -1721,14 +1779,14 @@ export default function TrainerPage({ goTo }) {
                                                 setType(newType);
                                                 // Очищаем буфер, чтобы подтянулись новые варианты для полей
                                                 setBuffer({});
-                                                setCookie("buffer", JSON.stringify({}));
+                                                setCookie(getStorageKey("buffer"), JSON.stringify({}));
                                             }
                                         } else {
                                             // Логика для всех остальных кнопок
                                             if (newType !== type) {
                                                 setType(newType);
                                                 setBuffer({});
-                                                setCookie("buffer", JSON.stringify({}));
+                                                setCookie(getStorageKey("buffer"), JSON.stringify({}));
                                             }
                                             setIsMiscAccordionOpen(false); // Закрываем аккордеон, если он был открыт
                                         }
@@ -1759,8 +1817,8 @@ export default function TrainerPage({ goTo }) {
                                 ))}
                             </div>
                         </div>
-                        <span className="block w-full mt-4" title={!timerState.isRunning ? "Сначала начните задание" : isCreateDisabled ? "Сначала заполните все поля" : ""}>
-                            <Button className="blue w-full" type="button" onClick={createPrompt} disabled={!timerState.isRunning || isCreateDisabled}>
+                        <span className="block w-full mt-4" title={isCreateDisabled ? "Сначала заполните все поля" : ""}>
+                            <Button className="blue w-full" type="button" onClick={createPrompt} disabled={isCreateDisabled}>
                                 Создать&nbsp;запрос
                             </Button>
                         </span>
@@ -1874,92 +1932,6 @@ export default function TrainerPage({ goTo }) {
         </>
     );
 }
-
-const TaskCompletionPopup = memo(function TaskCompletionPopup({ taskData, onClose, elapsedTime }) {
-    // --- НАЧАЛО ДОБАВЛЕННОЙ ЛОГИКИ ---
-    const [levels, setLevels] = useState({
-        level1: "",
-        level2: "",
-        level3: "",
-        level4: "",
-        level5: "",
-    });
-
-    const handleLevelChange = (level, value) => {
-        setLevels((prev) => ({
-            ...prev,
-            [level]: value,
-        }));
-    };
-
-    const isSaveDisabled = !Object.values(levels).some((level) => level !== "");
-    // --- КОНЕЦ ДОБАВЛЕННОЙ ЛОГИКИ ---
-
-    const [isCopied, setIsCopied] = useState(false);
-
-    if (!taskData) return null;
-
-    const formatTaskTime = (seconds) => {
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
-    };
-
-    const handleCopyClick = () => {
-        const textToCopy = `Задание №${taskData.number}\n\nОписание:\n${taskData.description}\n\nЗадача:\n${taskData.task}\n\nРезультат:\n\n`;
-        copyToClipboard(textToCopy)
-            .then(() => {
-                setIsCopied(true);
-                setTimeout(() => setIsCopied(false), 2000);
-            })
-            .catch((err) => {
-                console.error("Ошибка копирования:", err);
-                alert("Не удалось скопировать текст.");
-            });
-    };
-
-    return (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
-            <div className="bg-white p-6 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto pointer-events-auto">
-                <div className="mb-4">
-                    <h3 className="text-xl font-bold">Задание завершено за {formatTaskTime(elapsedTime)}</h3>
-                </div>
-
-                {/* Здесь вы, вероятно, вставили свой код с полями Input. */}
-                {/* Теперь он будет работать, так как переменная 'levels' определена. */}
-                {/* Например: */}
-                {/* <div className="grid grid-cols-2 gap-2">
-                      <Input type="number" placeholder="Уровень 1" value={levels.level1} onChange={(e) => handleLevelChange("level1", e.target.value)} />
-                      ... и так далее для остальных уровней
-                    </div> */}
-
-                <div className="space-y-4">
-                    <Button onClick={handleCopyClick} className="!py-2 !px-4" disabled={isCopied}>
-                        {isCopied ? "Скопировано!" : "Скопировать задание"}
-                    </Button>
-                    <div className="flex items-center justify-between bg-yellow-50 p-3 rounded-lg">
-                        <h4 className="font-semibold text-yellow-800">Задание №{taskData.number}</h4>
-                    </div>
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                        <h4 className="font-semibold text-blue-800 mb-2">Описание ситуации:</h4>
-                        <p className="whitespace-pre-line">{taskData.description}</p>
-                    </div>
-
-                    <div className="bg-green-50 p-4 rounded-lg">
-                        <h4 className="font-semibold text-green-800 mb-2">Вашей задачей было:</h4>
-                        <p className="whitespace-pre-line">{taskData.task}</p>
-                    </div>
-                </div>
-
-                <div className="mt-6 flex justify-end gap-2">
-                    <Button onClick={onClose} className="!bg-gray-100 !text-gray-800 hover:!bg-gray-200">
-                        Закрыть
-                    </Button>
-                </div>
-            </div>
-        </div>
-    );
-});
 
 async function saveToJson({ taskName, minutes, currentTaskIndex, type, userType, who, taskElapsedTime }) {
     try {

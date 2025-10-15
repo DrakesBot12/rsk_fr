@@ -22,6 +22,9 @@ import Button from "@/components/ui/Button";
 import Switcher from "@/components/ui/Switcher";
 import Block from "@/components/features/public/Block";
 
+const STORAGE_PREFIX = 'trainer_v1_'; // Префикс для старой версии
+const getStorageKey = (key) => `${STORAGE_PREFIX}${key}`;
+
 const CORRECT_TOKENS = [
     "MA8YQ-OKO2V-P3XZM-LR9QD-K7N4E",
     "JX3FQ-7B2WK-9PL8D-M4R6T-VN5YH",
@@ -496,7 +499,7 @@ export default function IndexPage({ goTo }) {
 
     useEffect(() => {
         // Читаем буфер из cookie
-        const buf = getCookie("buffer");
+        const buf = getCookie(getStorageKey("buffer"));
         if (buf) {
             try {
                 setBuffer(JSON.parse(buf));
@@ -505,7 +508,8 @@ export default function IndexPage({ goTo }) {
             }
         }
         // Читаем историю из cookie
-        const hist = getCookie("history");
+        const hist = localStorage.getItem(getStorageKey("history"));
+
 
         if (hist) {
             try {
@@ -540,7 +544,7 @@ export default function IndexPage({ goTo }) {
     // Добавьте эту функцию в ваш компонент
     function handleUpdateBuffer(newBuffer) {
         setBuffer(newBuffer);
-        setCookie("buffer", JSON.stringify(newBuffer));
+        setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
     }
 
     // И обновите вызов Buffer:
@@ -626,7 +630,7 @@ export default function IndexPage({ goTo }) {
             const updatedBuffer = [trimmedValue, ...currentBuffer].slice(0, 6);
             newBuffer[code] = updatedBuffer;
             setBuffer(newBuffer);
-            setCookie("buffer", JSON.stringify(newBuffer));
+            setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
         }
     }
 
@@ -670,7 +674,7 @@ export default function IndexPage({ goTo }) {
                         const newBuffer = { ...buffer };
                         newBuffer[code] = randomValues;
                         setBuffer(newBuffer);
-                        setCookie("buffer", JSON.stringify(newBuffer));
+                        setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
                     }
                 }
             }
@@ -715,7 +719,7 @@ export default function IndexPage({ goTo }) {
                             const newBuffer = { ...buffer };
                             newBuffer[code] = combinedBuffer;
                             setBuffer(newBuffer);
-                            setCookie("buffer", JSON.stringify(newBuffer));
+                            setCookie(getStorageKey("buffer"), JSON.stringify(newBuffer));
                         }
                     }
                 }
@@ -783,7 +787,7 @@ export default function IndexPage({ goTo }) {
         // Запись в историю
         const entry = { date: new Date().toISOString(), type, prompt: finalPrompt };
         const newHist = [entry, ...JSON.parse(localStorage.getItem("history") || "[]")].slice(0, 50);
-        localStorage.setItem("history", JSON.stringify(newHist));
+        localStorage.setItem(getStorageKey("history"), JSON.stringify(newHist));
         setHistory(newHist);
     }
 

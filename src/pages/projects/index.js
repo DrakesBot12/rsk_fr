@@ -28,7 +28,7 @@ export default function Projects() {
 
     useEffect(() => {
         fetchProjects(dataProfile.Organization);
-    }, []);
+    }, [dataProfile.Organization, fetchProjects]);
 
     useEffect(() => {
         if (!loading && !error && projects) {

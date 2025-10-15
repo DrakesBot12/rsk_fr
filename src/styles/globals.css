@@ -5,6 +5,7 @@
 @import "./typoghaphy.css";
 @import "./spacing.css";
 @import "./colour.css";
+@import "./projects.css";
 
 * {
     text-wrap: balance;
