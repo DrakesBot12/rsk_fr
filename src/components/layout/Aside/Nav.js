@@ -96,7 +96,7 @@ export function useNavLinks() {
             }
 
             // Если токен есть, но роль и learn уже в куках
-            if (existingRole && existingLearn !== undefined) {
+            if (existingRole && existingLearn !== null) {
                 updateNavLinks(existingRole, existingLearn === "true", true);
                 setIsLoading(false);
                 return;

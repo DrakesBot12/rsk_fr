@@ -53,10 +53,9 @@ export default function OrganIndexPage() {
                 setOrgans([]);
             }
         },
-        [searchQuery, limit] // зависимости, которые используются внутри функции
+        [searchQuery, limit]
     );
 
-    // получаем общее количество организаций для пагинации
     const getTotalCount = async () => {
         try {
             const res = await fetch("/api/profile/getOrg");

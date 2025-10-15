@@ -8,7 +8,6 @@ import Button from "@/components/ui/Button";
 import Index from "@/assets/general/index.svg";
 import Notify from "@/assets/general/notify.svg";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { useProfile } from "@/hooks/fetchProfile";
 import { useProjects } from "@/hooks/fetchProjects";
 import { categories as staticCategories } from "@/pages/projects/_categories";

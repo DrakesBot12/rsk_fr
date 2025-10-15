@@ -164,7 +164,7 @@ export default function CategoryPage() {
                                 <p className="text-[var(--color-gray-black)]">{project.description}</p>
                             </div>
 
-                            <Link href={`/projects/${url}/aicourses`}>
+                            <Link href={`/projects/${url}/${project.id}`}>
                                 <div
                                     className={`flex items-center justify-center px-[.75rem] py-[1rem] rounded-[6.25rem] ${
                                         project.tasks.every((t) => t.status === "SUCCESS") ? "bg-[var(--color-green-noise)] text-[var(--color-green-peace)]" : "bg-[var(--color-gray-plus-50)] text-[var(--color-black)]"
