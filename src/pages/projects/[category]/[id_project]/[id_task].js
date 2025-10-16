@@ -67,24 +67,18 @@ const TaskPage = () => {
                     </Button>
                 </Header>
 
-                <div className="flex flex-col items-center p-[1.5rem] gap-[2.5rem] w-full">
-                    <div className="flex flex-col items-start gap-[1.25rem] w-[43.375rem]">
+                <div className="flex flex-col items-center p-6 gap-10 w-full">
+                    <div className="flex flex-col items-start gap-5 w-full max-w-4xl">
                         {/* Заголовок */}
-                        <div className="w-[60%] h-[2rem] bg-gray-200 rounded-lg animate-pulse">
-                            <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                        </div>
+                        <div className="w-3/5 py-4 bg-gray-200 rounded-lg animate-pulse" />
 
                         {/* Прогресс-бар */}
-                        <div className="w-full h-[0.75rem] bg-gray-200 rounded-full animate-pulse">
-                            <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                        </div>
+                        <div className="w-full py-1.5 bg-gray-200 rounded-full animate-pulse" />
 
                         {/* Карточки */}
-                        <div className="flex flex-col gap-[1rem] mt-[1rem] w-full">
+                        <div className="flex flex-col gap-4 mt-4 w-full">
                             {[1, 2, 3].map((i) => (
-                                <div key={i} className="h-[5rem] bg-gray-200 rounded-lg animate-pulse">
-                                    <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-                                </div>
+                                <div key={i} className="py-10 bg-gray-200 rounded-lg animate-pulse" />
                             ))}
                         </div>
                     </div>
@@ -104,10 +98,10 @@ const TaskPage = () => {
                     </Button>
                 </Header>
 
-                <div className="flex flex-col items-center justify-center w-full h-[80vh] gap-3">
-                    <h2 className="text-xl font-semibold text-gray-800">Задание не найдено</h2>
-                    <Link href="/projects" className="px-4 py-2 text-sm font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition">
-                        Вернуться
+                <div className="flex flex-col items-center justify-center w-full min-h-screen gap-3">
+                    <h2 className="text-xl font-semibold text-black">Задание не найдено</h2>
+                    <Link href="/projects">
+                        <Button>Вернуться</Button>
                     </Link>
                 </div>
             </Layout>
@@ -124,60 +118,56 @@ const TaskPage = () => {
                 </Button>
             </Header>
 
-            <div className="flex flex-col items-center p-[1.5rem] gap-[2.5rem] w-full">
-                <div className="flex flex-col items-start gap-[1.25rem] w-[43.375rem]">
-                    <h4 className="text-[1.5rem] font-medium text-[#08090A] whitespace-nowrap">{data.title}</h4>
+            <div className="flex flex-col items-center p-6 gap-10 w-full">
+                <div className="flex flex-col items-start gap-5 w-full max-w-4xl">
+                    <h4 className="text-2xl font-medium text-black">{data.title}</h4>
 
-                    <div className="flex justify-between items-center w-full">
-                        <div className="flex items-center gap-[0.5rem]">
-                            <div className="flex items-center justify-center px-[0.875rem] py-[0.5rem] w-[8rem] h-[2.5rem] bg-[#E0E8FF] rounded-[6.25rem]">
-                                <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-[#3A6BFF]">{data.prize_points} баллов</span>
+                    <div className="flex items-center w-full">
+                        <div className="flex items-center gap-2">
+                            <div className="flex items-center justify-center px-4 py-2 bg-blue-100 rounded-full">
+                                <span className="font-manrope font-semibold text-sm text-blue-600">{data.prize_points} баллов</span>
                             </div>
-                            <div className="flex items-center px-[0.875rem] py-[0.5rem] gap-[0.375rem] w-[8.5rem] h-[2.5rem] bg-[#F3F4F5] rounded-[6.25rem]">
-                                <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-[#909399]">{getCategoryName(data_project.star_category)}</span>
+                            <div className="flex items-center px-4 py-2 gap-2 bg-gray-100 rounded-full">
+                                <span className="font-manrope font-semibold text-sm text-gray-600">{getCategoryName(data_project.star_category)}</span>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-[0.5rem]">
-                            <Button className="blue roundeful small btn-submit gap-[0.375rem] px-[0.875rem] py-[0.5rem] transition-all duration-300 hover:shadow-lg">
-                                <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-center whitespace-nowrap">Сдать задание</span>
-                                <div className="w-[0.875rem] h-[0.875rem]">
-                                    <SubmitTask />
-                                </div>
+                        <div className="flex items-center gap-2 ml-50">
+                            <Button className="blue roundeful small px-4 py-2">
+                                <span className="font-manrope font-semibold text-xs whitespace-nowrap">Сдать задание</span>
+                                <SubmitTask />
                             </Button>
-                            <Button className="inverted roundeful small btn-start gap-[0.375rem] px-[0.875rem] py-[0.5rem] transition-all duration-300 hover:shadow-lg">
-                                <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] whitespace-nowrap">Начать работу</span>
-                                <div className="w-[0.875rem] h-[0.875rem]">
-                                    <StartWork />
-                                </div>
+                            <Button className="inverted roundeful small px-6 py-2 whitespace-nowrap min-w-fit">
+                                <span className="font-manrope font-medium text-sm">Начать работу</span>
+                                <StartWork />
                             </Button>
                         </div>
                     </div>
 
-                    <div className="flex items-start gap-[1.25rem] w-full">
-                        <div className="flex flex-col p-[1rem] gap-[0.75rem] w-1/2 bg-[#FAFBFC] rounded-[1rem]">
-                            <div className="flex flex-col gap-[0.5rem]">
-                                <h6 className="text-[1rem] font-medium text-[#909399]">Занятость</h6>
-                                <p className="text-[0.75rem] text-[#08090A]">Пока не подключено</p>
+                    <div className="flex items-start gap-5 w-full">
+                        <div className="flex flex-col p-4 gap-3 flex-1 bg-gray-50 rounded-2xl">
+                            <div className="flex flex-col gap-2">
+                                <h6 className="text-base font-medium text-gray-600">Занятость</h6>
+                                <p className="text-sm text-black">Пока не подключено</p>
                             </div>
-                            <hr className="border-[#EBEDF0]" />
-                            <div className="flex flex-col gap-[0.5rem]">
-                                <h6 className="text-[1rem] font-medium text-[#909399]">Заказчик</h6>
-                                <div className="flex items-center py-[0.625rem] px-[0.75rem] bg-[#E0E8FF] rounded-[0.625rem]">
-                                    <span className="text-[0.75rem] font-semibold text-[#3A6BFF]">Российское Содружество Колледжей</span>
+                            <hr className="border-gray-200" />
+                            <div className="flex flex-col gap-2">
+                                <h6 className="text-base font-medium text-gray-600">Заказчик</h6>
+                                <div className="flex items-center py-2 px-3 bg-blue-100 rounded-lg">
+                                    <span className="text-sm font-semibold text-blue-600">Российское Содружество Колледжей</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="flex flex-col gap-[1.25rem] w-1/2">
-                            <div className="flex flex-col gap-[0.25rem]">
-                                <h6 className="text-[1rem] font-medium text-[#08090A]">Описание задания</h6>
-                                <p className="text-[0.75rem] text-[#909399]">{data.description}</p>
+                        <div className="flex flex-col gap-5 flex-1">
+                            <div className="flex flex-col gap-1">
+                                <h6 className="text-base font-medium text-black">Описание задания</h6>
+                                <p className="text-sm text-gray-600">{data.description}</p>
                             </div>
 
-                            <div className="flex flex-col gap-[0.5rem]">
-                                <h6 className="text-[1rem] font-medium text-[#08090A]">Материалы</h6>
-                                <div className="flex flex-wrap gap-[4px]">
+                            <div className="flex flex-col gap-2">
+                                <h6 className="text-base font-medium text-black">Материалы</h6>
+                                <div className="flex flex-wrap gap-1">
                                     {data.materials && data.materials.length > 0 ? (
                                         data.materials.map((material, idx) => (
                                             <a
@@ -185,13 +175,13 @@ const TaskPage = () => {
                                                 href={material.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="flex items-center gap-[4px] px-[0.875rem] py-[0.5rem] bg-[#F3F4F5] rounded-full text-[0.625rem] font-manrope font-semibold text-[#08090A] whitespace-nowrap hover:bg-gray-200 transition">
+                                                className="flex items-center gap-1 px-4 py-2 bg-gray-100 rounded-full text-xs font-manrope font-semibold text-black whitespace-nowrap hover:bg-gray-200 transition">
                                                 <span>{material.name}</span>
                                                 <LinkArrow />
                                             </a>
                                         ))
                                     ) : (
-                                        <div className="flex items-center gap-[4px] px-[0.875rem] py-[0.5rem] bg-[#F3F4F5] rounded-[0.625rem] text-[0.625rem] font-manrope font-semibold text-(--color-gray-black) whitespace-nowrap">
+                                        <div className="flex items-center gap-1 px-4 py-2 bg-gray-100 rounded-lg text-xs font-manrope font-semibold text-gray-600">
                                             <span>Материалов нет</span>
                                         </div>
                                     )}

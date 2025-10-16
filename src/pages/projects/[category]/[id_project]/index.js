@@ -56,25 +56,25 @@ const AICourses = () => {
                     </Button>
                 </Header>
 
-                <div className="flex flex-col items-center gap-[2.5rem] p-[1.5rem] w-full animate-fade-in">
+                <div className="flex flex-col items-center gap-10 p-6 w-full animate-fade-in">
                     {/* Заголовок и прогресс */}
-                    <div className="flex flex-col items-start gap-[1.25rem] w-[43.375rem] animate-pulse">
-                        <div className="w-[60%] h-[1.875rem] bg-gray-200 rounded-lg" />
-                        <div className="w-full h-[0.75rem] bg-gray-200 rounded-full" />
+                    <div className="flex flex-col items-start gap-5 w-full max-w-4xl animate-pulse">
+                        <div className="w-3/5 h-8 bg-[var(--color-gray-plus-50)] rounded-lg" />
+                        <div className="w-full h-3 bg-[var(--color-gray-plus-50)] rounded-full" />
                     </div>
 
                     {/* Описание и индекс */}
-                    <div className="flex items-start gap-[1.25rem] w-[43.375rem] animate-pulse">
-                        <div className="w-[21.083rem] h-[6rem] bg-gray-200 rounded-lg" />
-                        <div className="w-[21.063rem] h-[8rem] bg-gray-200 rounded-lg mt-[1rem]" />
+                    <div className="flex items-start gap-5 w-full max-w-4xl animate-pulse">
+                        <div className="flex-1 h-24 bg-[var(--color-gray-plus-50)] rounded-lg" />
+                        <div className="flex-1 h-32 bg-[var(--color-gray-plus-50)] rounded-lg" />
                     </div>
 
                     {/* Список задач */}
-                    <div className="flex flex-col items-start gap-[0.75rem] w-[43.375rem] animate-pulse">
-                        <div className="w-full h-[2.5rem] bg-gray-200 rounded-lg" />
+                    <div className="flex flex-col items-start gap-3 w-full max-w-4xl animate-pulse">
+                        <div className="w-full h-10 bg-[var(--color-gray-plus-50)] rounded-lg" />
 
                         {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="w-full h-[5rem] bg-gray-200 rounded-[1rem]" />
+                            <div key={i} className="w-full h-20 bg-[var(--color-gray-plus-50)] rounded-2xl" />
                         ))}
                     </div>
                 </div>
@@ -93,10 +93,10 @@ const AICourses = () => {
                     </Button>
                 </Header>
 
-                <div className="flex flex-col items-center justify-center w-full h-[80vh] gap-3">
-                    <h2 className="text-xl font-semibold text-gray-800">Проект не найден</h2>
-                    <Link href="/projects" className="px-4 py-2 text-sm font-medium text-white bg-black rounded-lg hover:bg-gray-800 transition">
-                        Вернуться
+                <div className="flex flex-col items-center justify-center w-full h-screen gap-3">
+                    <h2 className="text-xl font-semibold text-[var(--color-black)]">Проект не найден</h2>
+                    <Link href="/projects">
+                        <Button>Вернуться</Button>
                     </Link>
                 </div>
             </Layout>
@@ -117,61 +117,59 @@ const AICourses = () => {
                 </Button>
             </Header>
 
-            <div className="flex flex-col items-center gap-[2.5rem] p-[1.5rem] w-full">
+            <div className="flex flex-col items-center gap-10 p-6 w-full">
                 {/* Title and Progress */}
-                <div className="flex flex-col items-start gap-[1.25rem] w-[43.375rem]">
-                    <h4 className="text-[1.5rem] leading-[2.0625rem] font-medium text-[var(--color-black)] w-full">{project.title}</h4>
-                    <div className="flex flex-col items-start w-full h-[0.75rem] bg-[var(--color-blue-noise)] rounded-full">
-                        <div className="h-[0.75rem] bg-[var(--color-blue)] rounded-full transition-all duration-500" style={{ width: `${calculateProgress(project.tasks)}%` }} />
+                <div className="flex flex-col items-start gap-5 w-full max-w-4xl">
+                    <h4 className="text-2xl font-medium text-[var(--color-black)] w-full">{project.title}</h4>
+                    <div className="flex flex-col items-start w-full h-3 bg-[var(--color-blue-noise)] rounded-full">
+                        <div className="h-3 bg-[var(--color-blue)] rounded-full transition-all duration-500" style={{ width: `${calculateProgress(project.tasks)}%` }} />
                     </div>
                 </div>
 
                 {/* Description and Index */}
-                <div className="flex items-start gap-[1.25rem] w-[43.375rem]">
+                <div className="flex items-start gap-5 w-full max-w-4xl">
                     {/* Description */}
-                    <div className="flex flex-col justify-start items-start gap-[1.25rem] w-[21.083rem]">
-                        <div className="flex flex-col items-start gap-[0.5rem] w-full">
-                            <h6 className="text-[1rem] font-medium text-[var(--color-black)]">Описание проекта</h6>
-                            <p className="text-[0.75rem] text-[var(--color-gray-black)]">{project.description}</p>
+                    <div className="flex flex-col justify-start items-start gap-5 flex-1">
+                        <div className="flex flex-col items-start gap-2 w-full">
+                            <h6 className="text-base font-medium text-[var(--color-black)]">Описание проекта</h6>
+                            <p className="text-sm text-[var(--color-gray-black)]">{project.description}</p>
                         </div>
                     </div>
 
                     {/* Index */}
-                    <div className="flex flex-col items-start p-[1rem] gap-[1rem] w-[21.063rem] bg-[var(--color-white-gray)] rounded-[1rem] mt-[1rem]">
-                        <h6 className="text-[1rem] font-medium text-[var(--color-black)]">Индексы звезды</h6>
-                        <div className="flex flex-col items-start gap-[0.5rem] w-full">
-                            <div className="flex justify-center items-center py-[0.625rem] px-[0.75rem] gap-[0.75rem] w-full bg-[var(--color-blue-noise)] rounded-[0.625rem]">
-                                <span className="text-[0.75rem] font-semibold text-[var(--color-blue-plus)] flex-grow">{getCategoryName(project.star_category)}</span>
-                                <span className="text-[0.75rem] font-semibold text-[var(--color-blue)]">{project.star_index}</span>
+                    <div className="flex flex-col items-start p-4 gap-4 flex-1 bg-[var(--color-white-gray)] rounded-2xl">
+                        <h6 className="text-base font-medium text-[var(--color-black)]">Индексы звезды</h6>
+                        <div className="flex flex-col items-start gap-2 w-full">
+                            <div className="flex justify-center items-center py-2 px-3 gap-3 w-full bg-[var(--color-blue-noise)] rounded-lg">
+                                <span className="text-sm font-semibold text-[var(--color-blue-plus)] flex-grow">{getCategoryName(project.star_category)}</span>
+                                <span className="text-sm font-semibold text-[var(--color-blue)]">{project.star_index}</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {/* Tasks List */}
-                <div className="flex flex-col items-start gap-[0.75rem] w-[43.375rem]">
-                    <div className="flex justify-center items-center py-[0.5rem] px-[0.875rem] w-full bg-[var(--color-white-gray)] rounded-[0.625rem]">
-                        <span className="text-[0.75rem] font-semibold text-[var(--color-black)]">Список дел проекта</span>
+                <div className="flex flex-col items-start gap-3 w-full max-w-4xl">
+                    <div className="flex justify-center items-center py-2 px-4 w-full bg-[var(--color-white-gray)] rounded-lg">
+                        <span className="text-sm font-semibold text-[var(--color-black)]">Список дел проекта</span>
                     </div>
 
                     {project.tasks.map((task) => (
-                        <div key={task.id} className="flex justify-between items-center p-[1.25rem] gap-[2rem] w-full border border-[var(--color-gray-plus-50)] rounded-[1rem]">
-                            <h5 className="text-[1.25rem] font-medium text-[var(--color-black)] whitespace-nowrap">{task.title}</h5>
+                        <div key={task.id} className="flex justify-between items-center p-5 gap-8 w-full border border-[var(--color-gray-plus-50)] rounded-2xl">
+                            <h5 className="text-xl font-medium text-[var(--color-black)]">{task.title}</h5>
 
                             {task.status === "SUCCESS" ? (
-                                <div className="flex justify-center items-center px-[1rem] py-[0.625rem] bg-[var(--color-green-noise)] rounded-[6.25rem]">
-                                    <span className="text-[0.75rem] font-semibold text-[var(--color-green-peace)]">Выполнено</span>
+                                <div className="flex justify-center items-center px-4 py-2 bg-[var(--color-green-noise)] rounded-full">
+                                    <span className="text-sm font-semibold text-[var(--color-green-peace)]">Выполнено</span>
                                 </div>
                             ) : (
-                                <div className="flex items-center gap-[0.5rem]">
-                                    <div className="flex justify-center items-center gap-[0.75rem] px-[1rem] py-[0.625rem] bg-[#E0E8FF] rounded-[6.25rem]">
-                                        <div className="w-[1rem] h-[1rem]">
-                                            <PointsIcon />
-                                        </div>
-                                        <span className="text-[0.75rem] font-semibold text-[#3A6BFF]">{task.prize_points}</span>
+                                <div className="flex items-center gap-2">
+                                    <div className="flex justify-center items-center gap-3 px-4 py-2 bg-[var(--color-blue-noise)] rounded-full">
+                                        <PointsIcon />
+                                        <span className="text-sm font-semibold text-[var(--color-blue)]">{task.prize_points}</span>
                                     </div>
                                     <Link href={`/projects/KNOWLEDGE/${id_project}/${task.id}`}>
-                                        <Button className="inverted roundeful small w-[5.1875rem] h-[2.5rem] font-manrope font-semibold text-[0.75rem]">Открыть</Button>
+                                        <Button className="inverted roundeful small">Открыть</Button>
                                     </Link>
                                 </div>
                             )}
