@@ -23,6 +23,58 @@ const TaskPage = () => {
     const [data_project, setDataProject] = useState(null);
     const [loading, setLoading] = useState([false, false]);
 
+    async function startTask() {
+        let json;
+        try {
+            const res = await fetch(`/api/projects/task/start/${id_task}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+            });
+            json = await res.json();
+        } catch (err) {
+            console.error("Ошибка начала задания:", err);
+            alert("Ошибка: " + err);
+        } finally {
+            if (json?.success) {
+                router.reload();
+                alert("Вы начали задание!")
+            }
+        }
+    }
+
+    async function endTask() {
+        let json;
+        const end_data = {
+            "text_description": "Супер задание тест",
+            "result_url": "https://youtube.com",
+            "id": 0,
+  "task_id": 0,
+  "team_id": 0,
+  "submitted_at": "2025-10-16T10:27:51.045Z",
+  "status": "NOT_STARTED",
+  "moderator_id": 0,
+  "reviewed_at": "2025-10-16T10:27:51.045Z"
+        }
+        try {
+            const res = await fetch(`/api/projects/task/end/${id_task}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(end_data),
+                credentials: "include",
+            });
+            json = await res.json();
+        } catch (err) {
+            console.error("Ошибка завершения задания:", err);
+            alert("Ошибка: " + err);
+        } finally {
+            if (json?.success) {
+                router.reload();
+                alert("Вы завершили задание!")
+            }
+        }
+    }
+
     useEffect(() => {
         const getTaskInfo = async () => {
             try {
@@ -30,7 +82,7 @@ const TaskPage = () => {
                 const json = await res.json();
                 setData(json.data);
             } catch (err) {
-                console.error("Ошибка:", err);
+                console.error("Ошибка получения задания:", err);
                 setData({ success: false });
             } finally {
                 setLoading((prev) => [true, prev[1]]);
@@ -45,7 +97,7 @@ const TaskPage = () => {
                 const json = await res.json();
                 setDataProject(json.data);
             } catch (err) {
-                console.error("Ошибка:", err);
+                console.error("Ошибка получения проектов:", err);
                 setDataProject({ success: false });
             } finally {
                 setLoading((prev) => [prev[0], true]);
@@ -139,18 +191,29 @@ const TaskPage = () => {
                         </div>
 
                         <div className="flex items-center gap-[0.5rem]">
-                            <Button className="blue roundeful small btn-submit gap-[0.375rem] px-[0.875rem] py-[0.5rem] transition-all duration-300 hover:shadow-lg">
-                                <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-center whitespace-nowrap">Сдать задание</span>
-                                <div className="w-[0.875rem] h-[0.875rem]">
-                                    <SubmitTask />
+                            {data.status == "NOT_STARTED" ? (
+                                <Button onClick={startTask} className="inverted roundeful small btn-start gap-[0.375rem] px-[0.875rem] py-[0.5rem] transition-all duration-300 hover:shadow-lg">
+                                    <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] whitespace-nowrap">Начать работу</span>
+                                    <div className="w-[0.875rem] h-[0.875rem]">
+                                        <StartWork />
+                                    </div>
+                                </Button>
+                            ) : data.status == "IN_PROGRESS" ? (
+                                <Button onClick={endTask} className="blue roundeful small btn-submit gap-[0.375rem] px-[0.875rem] py-[0.5rem] transition-all duration-300 hover:shadow-lg">
+                                    <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] text-center whitespace-nowrap">Сдать задание</span>
+                                    <div className="w-[0.875rem] h-[0.875rem]">
+                                        <SubmitTask />
+                                    </div>
+                                </Button>
+                            ) : data.status == "IN_PROGRESS" ? (
+                                <div className="flex items-center gap-[4px] px-[0.875rem] py-[0.5rem] bg-(--color-green-noise) rounded-[0.625rem] text-[0.625rem] font-manrope font-semibold text-(--color-green-black) whitespace-nowrap">
+                                    <span>Выполнено</span>
                                 </div>
-                            </Button>
-                            <Button className="inverted roundeful small btn-start gap-[0.375rem] px-[0.875rem] py-[0.5rem] transition-all duration-300 hover:shadow-lg">
-                                <span className="font-manrope font-semibold text-[0.8rem] leading-[1.2rem] whitespace-nowrap">Начать работу</span>
-                                <div className="w-[0.875rem] h-[0.875rem]">
-                                    <StartWork />
+                            ) : (
+                                <div className="flex items-center gap-[4px] px-[0.875rem] py-[0.5rem] bg-[#F3F4F5] rounded-[0.625rem] text-[0.625rem] font-manrope font-semibold text-(--color-gray-black) whitespace-nowrap">
+                                    <span>Неизвестная ошибка</span>
                                 </div>
-                            </Button>
+                            )}
                         </div>
                     </div>
 
