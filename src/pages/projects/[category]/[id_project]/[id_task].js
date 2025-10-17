@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Layout from "@/components/layout/Layout";
 import Header from "@/components/layout/Header";
 import Button from "@/components/ui/Button";
-import Link from "next/link";
 import Notify from "@/assets/general/notify.svg";
 import SubmitTask from "@/assets/general/submittask.svg";
 import StartWork from "@/assets/general/startwork.svg";
@@ -18,12 +17,15 @@ function getCategoryName(url) {
 
 const TaskPage = () => {
     const router = useRouter();
-    const { id_task, id_project } = router.query;
+    const { id_task, id_project, category } = router.query;
+
     const [data, setData] = useState(null);
     const [data_project, setDataProject] = useState(null);
     const [loading, setLoading] = useState([false, false]);
 
     useEffect(() => {
+        if (!id_task || !id_project) return;
+
         const getTaskInfo = async () => {
             try {
                 const res = await fetch(`/api/projects/task/${id_task}`);
@@ -36,8 +38,6 @@ const TaskPage = () => {
                 setLoading((prev) => [true, prev[1]]);
             }
         };
-
-        if (id_task) getTaskInfo();
 
         const getProjectInfo = async () => {
             try {
@@ -52,11 +52,12 @@ const TaskPage = () => {
             }
         };
 
-        if (id_project) getProjectInfo();
-    }, [id_project, id_task]);
+        getTaskInfo();
+        getProjectInfo();
+    }, [id_task, id_project]);
 
-    // === 1. Прелоадер ===
     const isLoaded = loading[0] && loading[1];
+
     if (!isLoaded) {
         return (
             <Layout>
@@ -66,16 +67,10 @@ const TaskPage = () => {
                         <Notify />
                     </Button>
                 </Header>
-
                 <div className="flex flex-col items-center p-6 gap-10 w-full">
                     <div className="flex flex-col items-start gap-5 w-full max-w-4xl">
-                        {/* Заголовок */}
                         <div className="w-3/5 py-4 bg-gray-200 rounded-lg animate-pulse" />
-
-                        {/* Прогресс-бар */}
                         <div className="w-full py-1.5 bg-gray-200 rounded-full animate-pulse" />
-
-                        {/* Карточки */}
                         <div className="flex flex-col gap-4 mt-4 w-full">
                             {[1, 2, 3].map((i) => (
                                 <div key={i} className="py-10 bg-gray-200 rounded-lg animate-pulse" />
@@ -87,7 +82,6 @@ const TaskPage = () => {
         );
     }
 
-    // === 2. Ошибка / не найдено ===
     if (!data || data.success === false) {
         return (
             <Layout>
@@ -97,18 +91,19 @@ const TaskPage = () => {
                         <Notify />
                     </Button>
                 </Header>
-
                 <div className="flex flex-col items-center justify-center w-full min-h-screen gap-3">
                     <h2 className="text-xl font-semibold text-black">Задание не найдено</h2>
-                    <Link href="/projects">
-                        <Button>Вернуться</Button>
-                    </Link>
+                    <Button onClick={() => router.push("/projects")}>Вернуться</Button>
                 </div>
             </Layout>
         );
     }
 
-    // === 3. Основная страница ===
+    const goToSubmit = () => {
+        if (!category || !id_project) return; // защита
+        router.push(`/projects/${category}/${id_project}/submit`);
+    };
+
     return (
         <Layout>
             <Header>
@@ -122,7 +117,7 @@ const TaskPage = () => {
                 <div className="flex flex-col items-start gap-5 w-full max-w-4xl">
                     <h4 className="text-2xl font-medium text-black">{data.title}</h4>
 
-                    <div className="flex items-center w-full">
+                    <div className="flex items-center w-full justify-between">
                         <div className="flex items-center gap-2">
                             <div className="flex items-center justify-center px-4 py-2 bg-blue-100 rounded-full">
                                 <span className="font-manrope font-semibold text-sm text-blue-600">{data.prize_points} баллов</span>
@@ -132,11 +127,15 @@ const TaskPage = () => {
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-2 ml-50">
-                            <Button className="blue roundeful small px-4 py-2">
-                                <span className="font-manrope font-semibold text-xs whitespace-nowrap">Сдать задание</span>
-                                <SubmitTask />
-                            </Button>
+                        <div className="flex items-center gap-2">
+                            {/* Кнопка с переходом на submit */}
+                            {category && id_project && (
+                                <Button className="blue roundeful small px-4 py-2" onClick={goToSubmit}>
+                                    <span className="font-manrope font-semibold text-xs whitespace-nowrap">Сдать задание</span>
+                                    <SubmitTask />
+                                </Button>
+                            )}
+
                             <Button className="inverted roundeful small px-6 py-2 whitespace-nowrap min-w-fit">
                                 <span className="font-manrope font-medium text-sm">Начать работу</span>
                                 <StartWork />
@@ -144,6 +143,7 @@ const TaskPage = () => {
                         </div>
                     </div>
 
+                    {/* Остальной контент страницы */}
                     <div className="flex items-start gap-5 w-full">
                         <div className="flex flex-col p-4 gap-3 flex-1 bg-gray-50 rounded-2xl">
                             <div className="flex flex-col gap-2">
@@ -175,7 +175,8 @@ const TaskPage = () => {
                                                 href={material.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="flex items-center gap-1 px-4 py-2 bg-gray-100 rounded-full text-xs font-manrope font-semibold text-black whitespace-nowrap hover:bg-gray-200 transition">
+                                                className="flex items-center gap-1 px-4 py-2 bg-gray-100 rounded-full text-xs font-manrope font-semibold text-black whitespace-nowrap hover:bg-gray-200 transition"
+                                            >
                                                 <span>{material.name}</span>
                                                 <LinkArrow />
                                             </a>
