@@ -24,6 +24,58 @@ const TaskPage = () => {
     const [data_project, setDataProject] = useState(null);
     const [loading, setLoading] = useState([false, false]);
 
+    async function startTask() {
+        let json;
+        try {
+            const res = await fetch(`/api/projects/task/start/${id_task}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+            });
+            json = await res.json();
+        } catch (err) {
+            console.error("Ошибка начала задания:", err);
+            alert("Ошибка: " + err);
+        } finally {
+            if (json?.success) {
+                router.reload();
+                alert("Вы начали задание!")
+            }
+        }
+    }
+
+    async function endTask() {
+        let json;
+        const end_data = {
+            "text_description": "Супер задание тест",
+            "result_url": "https://youtube.com",
+            "id": 0,
+  "task_id": 0,
+  "team_id": 0,
+  "submitted_at": "2025-10-16T10:27:51.045Z",
+  "status": "NOT_STARTED",
+  "moderator_id": 0,
+  "reviewed_at": "2025-10-16T10:27:51.045Z"
+        }
+        try {
+            const res = await fetch(`/api/projects/task/end/${id_task}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(end_data),
+                credentials: "include",
+            });
+            json = await res.json();
+        } catch (err) {
+            console.error("Ошибка завершения задания:", err);
+            alert("Ошибка: " + err);
+        } finally {
+            if (json?.success) {
+                router.reload();
+                alert("Вы завершили задание!")
+            }
+        }
+    }
+
     useEffect(() => {
         if (!id_task || !id_project) return;
 
@@ -33,7 +85,7 @@ const TaskPage = () => {
                 const json = await res.json();
                 setData(json.data);
             } catch (err) {
-                console.error("Ошибка:", err);
+                console.error("Ошибка получения задания:", err);
                 setData({ success: false });
             } finally {
                 setLoading((prev) => [true, prev[1]]);
@@ -46,7 +98,7 @@ const TaskPage = () => {
                 const json = await res.json();
                 setDataProject(json.data);
             } catch (err) {
-                console.error("Ошибка:", err);
+                console.error("Ошибка получения проектов:", err);
                 setDataProject({ success: false });
             } finally {
                 setLoading((prev) => [prev[0], true]);
@@ -129,19 +181,28 @@ const TaskPage = () => {
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-2">
-                            {/* Кнопка с переходом на submit */}
-                            {category && id_project && (
-                                <Button className="blue roundeful small" onClick={goToSubmit}>
-                                    <p className="whitespace-nowrap">Сдать задание</p>
-                                    <SubmitTask />
-                                </Button>
-                            )}
+                                                <div className="flex items-center gap-2">
+                                {data.status == "NOT_STARTED" ? (
+                                    <Button onClick={startTask} className="inverted roundeful small">
+                                        <p className="whitespace-nowrap">Начать работу</p>
+                                        <StartWork />
+                                    </Button>
+                                ) : data.status == "IN_PROGRESS" ? (
+                                    <Button onClick={endTask} className="blue roundeful small">
+                                        <p className="whitespace-nowrap">Сдать задание</p>
+                                        <SubmitTask />
+                                    </Button>
+                                ) : data.status == "IN_PROGRESS" ? (
+                                    <div className="flex items-center gap-2 px-4 py-2 bg-[var(--color-green-noise)] rounded-full">
+                                        <p className="whitespace-nowrap">Выполнено</p>
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center gap-2 px-4 py-2 bg-[var(--color-gray-plus)] rounded-full">
+                                        <p className="whitespace-nowrap">Неизвестная ошибка</p>
+                                    </div>
+                                )}
+                            </div>
 
-                            <Button className="inverted roundeful small">
-                                <p className="whitespace-nowrap">Начать работу</p>
-                                <StartWork />
-                            </Button>
                         </div>
                     </div>
 
@@ -192,7 +253,7 @@ const TaskPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            
         </Layout>
     );
 };
