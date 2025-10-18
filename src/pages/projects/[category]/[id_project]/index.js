@@ -59,22 +59,22 @@ const AICourses = () => {
                 <div className="flex flex-col items-center gap-10 p-6 w-1/2 mx-auto animate-fade-in">
                     {/* Заголовок и прогресс */}
                     <div className="flex flex-col items-start gap-5 w-full animate-pulse">
-                        <div className="w-3/5 py-4 bg-[var(--color-gray-plus)] rounded-lg" />
-                        <div className="w-full py-1.5 bg-[var(--color-gray-plus)] rounded-full" />
+                        <div className="w-3/5 py-4 bg-(--color-gray-plus) rounded-lg" />
+                        <div className="w-full py-1.5 bg-(--color-gray-plus) rounded-full" />
                     </div>
 
                     {/* Описание и индекс */}
                     <div className="flex items-start gap-5 w-full animate-pulse">
-                        <div className="flex-1 py-12 bg-[var(--color-gray-plus)] rounded-lg" />
-                        <div className="flex-1 py-16 bg-[var(--color-gray-plus)] rounded-lg" />
+                        <div className="flex-1 py-12 bg-(--color-gray-plus) rounded-lg" />
+                        <div className="flex-1 py-16 bg-(--color-gray-plus) rounded-lg" />
                     </div>
 
                     {/* Список задач */}
                     <div className="flex flex-col items-start gap-3 w-full animate-pulse">
-                        <div className="w-full py-5 bg-[var(--color-gray-plus)] rounded-lg" />
+                        <div className="w-full py-5 bg-(--color-gray-plus) rounded-lg" />
 
                         {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="w-full py-10 bg-[var(--color-gray-plus)] rounded-2xl" />
+                            <div key={i} className="w-full py-10 bg-(--color-gray-plus) rounded-2xl" />
                         ))}
                     </div>
                 </div>
@@ -119,8 +119,8 @@ const AICourses = () => {
                 {/* Title and Progress */}
                 <div className="flex flex-col items-start gap-5 w-full">
                     <h4 className="w-full">{project.title}</h4>
-                    <div className="flex items-start w-full bg-[var(--color-blue-noise)] rounded-full">
-                        <div className="py-1.5 rounded-full transition-all duration-500 w-1/2 bg-[var(--color-blue)]" />
+                    <div className="flex items-start w-full bg-(--color-blue-noise) rounded-full">
+                        <div className="py-1.5 rounded-full transition-all duration-500 w-1/2 bg-(--color-blue)" />
                     </div>
                 </div>
 
@@ -135,12 +135,12 @@ const AICourses = () => {
                     </div>
 
                     {/* Index */}
-                    <div className="flex flex-col items-start p-4 gap-4 w-1/2 bg-[var(--color-white-gray)] rounded-2xl">
+                    <div className="flex flex-col items-start p-4 gap-4 w-1/2 bg-(--color-white-gray) rounded-2xl">
                         <h6>Индексы звезды</h6>
                         <div className="flex flex-col items-start gap-2 w-full">
-                            <div className="flex justify-center items-center py-2 px-3 gap-3 w-full bg-[var(--color-blue-noise)] rounded-lg">
-                                <p className="flex-grow text-[var(--color-blue-minus)]">{getCategoryName(project.star_category)}</p>
-                                <p className="text-[var(--color-blue)]">{project.star_index}</p>
+                            <div className="flex justify-center items-center py-2 px-3 gap-3 w-full bg-(--color-blue-noise) rounded-lg">
+                                <p className="flex-grow text-(--color-blue-minus)">{getCategoryName(project.star_category)}</p>
+                                <p className="text-(--color-blue)">{project.star_index}</p>
                             </div>
                         </div>
                     </div>
@@ -148,23 +148,23 @@ const AICourses = () => {
 
                 {/* Tasks List */}
                 <div className="flex flex-col items-start gap-3 w-full">
-                    <div className="flex justify-center items-center py-2 px-4 w-full bg-[var(--color-white-gray)] rounded-lg">
+                    <div className="flex justify-center items-center py-2 px-4 w-full bg-(--color-white-gray) rounded-lg">
                         <p>Список дел проекта</p>
                     </div>
 
                     {project.tasks.map((task) => (
-                        <div key={task.id} className="flex justify-between items-center p-5 gap-8 w-full border border-[var(--color-gray-plus)] rounded-2xl">
+                        <div key={task.id} className="flex justify-between items-center p-5 gap-8 w-full border border-(--color-gray-plus) rounded-2xl">
                             <h5>{task.title}</h5>
 
                             {task.status === "SUCCESS" ? (
-                                <div className="flex justify-center items-center px-4 py-2 bg-[var(--color-green-noise)] rounded-full">
-                                    <p className="text-[var(--color-green-peace)]">Выполнено</p>
+                                <div className="flex justify-center items-center px-4 py-2 bg-(--color-green-noise) rounded-full">
+                                    <p className="text-(--color-green-peace)">Выполнено</p>
                                 </div>
                             ) : (
                                 <div className="flex items-center gap-2">
-                                    <div className="flex justify-center items-center gap-3 px-4 py-2 bg-[var(--color-blue-noise)] rounded-full">
+                                    <div className="flex justify-center items-center gap-3 px-4 py-2 bg-(--color-blue-noise) rounded-full">
                                         <PointsIcon />
-                                        <p className="text-[var(--color-blue)]">{task.prize_points}</p>
+                                        <p className="text-(--color-blue)">{task.prize_points}</p>
                                     </div>
                                     <Link href={`/projects/KNOWLEDGE/${id_project}/${task.id}`}>
                                         <Button className="inverted roundeful small">Открыть</Button>
