@@ -12,9 +12,6 @@ const SubmitTaskPage = () => {
     const { id_project, category } = router.query;
     const [textDescription, setTextDescription] = useState("");
     const [link, setLink] = useState("");
-    const [focusText, setFocusText] = useState(false);
-    const [focusLink, setFocusLink] = useState(false);
-
     const handleSubmit = () => {
         console.log("Text:", textDescription);
         console.log("Link:", link);
@@ -22,12 +19,6 @@ const SubmitTaskPage = () => {
         if (!category || !id_project) return; // защита
         router.push(`/projects/${category}/${id_project}/submitted`);
     };
-
-    const inputStyle = (focused) => ({
-        background: focused ? "var(--color-gray-plus-50)" : "transparent",
-        border: focused ? "none" : "1.5px solid var(--color-gray-plus-50)",
-        color: "var(--color-gray-black)",
-    });
 
     return (
         <Layout>
@@ -44,59 +35,39 @@ const SubmitTaskPage = () => {
             </Header>
 
             <div className="flex flex-col justify-center items-center p-6 gap-3 w-full flex-1">
-                <div className="flex flex-col items-center gap-6 w-full max-w-sm">
-                    <div className="flex flex-col items-start gap-2 w-full">
-                        <h4 className="font-manrope font-semibold text-2xl leading-9 text-center w-full" style={{color: 'var(--color-black)'}}>
-                            Завершение дела
-                        </h4>
-                        <p className="font-manrope text-xs leading-4 text-center w-full" style={{color: 'var(--color-gray-black)'}}>
+                <div className="flex flex-col items-center gap-6 w-1/4">
+                    <div className="flex flex-col items-stretch gap-2 w-full">
+                        <h3 className="text-center text-[var(--color-black)]">Завершение дела</h3>
+                        <p className="text-center text text-[var(--color-gray-black)]">
                             Загрузите результат работы. Это может быть ссылка или текстовое описание того, что изменилось и где это найти
                         </p>
                     </div>
 
                     <div className="flex flex-col items-start gap-3 w-full">
-                        <div
-                            className="flex flex-row items-center py-3 px-3.5 gap-3.5 w-full rounded-xl"
-                            style={{ background: focusText ? "var(--color-gray-plus-50)" : "transparent", border: focusText ? "none" : "1.5px solid var(--color-gray-plus-50)" }}
-                        >
+                        <div className="input-wrapper rounded-xl w-full">
                             <textarea
                                 value={textDescription}
                                 onChange={(e) => setTextDescription(e.target.value)}
-                                onFocus={() => setFocusText(true)}
-                                onBlur={() => setFocusText(false)}
-                                className="font-manrope text-xs leading-4 w-full bg-transparent border-none outline-none resize-none"
+                                className="w-full bg-transparent border-none outline-none resize-none"
                                 rows={1}
                                 placeholder="Текстовое описание"
-                                style={{ color: "var(--color-gray-black)" }}
                             />
                         </div>
 
-                        <div
-                            className="flex flex-row items-center py-3 px-3.5 gap-3.5 w-full rounded-xl"
-                            style={{ background: focusLink ? "var(--color-gray-plus-50)" : "transparent", border: focusLink ? "none" : "1.5px solid var(--color-gray-plus-50)" }}
-                        >
+                        <div className="input-wrapper rounded-xl w-full">
                             <input
                                 type="url"
                                 value={link}
                                 onChange={(e) => setLink(e.target.value)}
-                                onFocus={() => setFocusLink(true)}
-                                onBlur={() => setFocusLink(false)}
-                                className="font-manrope text-xs leading-4 w-full bg-transparent border-none outline-none"
+                                className="w-full bg-transparent border-none outline-none"
                                 placeholder="Ссылка"
-                                style={{ color: "var(--color-gray-black)" }}
                             />
                         </div>
                     </div>
 
-                    <button
-                        onClick={handleSubmit}
-                        className="flex flex-row justify-center items-center py-3 px-4 gap-3 w-full rounded-xl"
-                        style={{ background: 'var(--color-black)' }}
-                    >
-                        <span className="font-manrope font-semibold text-xs leading-4 text-center" style={{ color: 'var(--color-white)' }}>
-                            Завершить
-                        </span>
-                    </button>
+                    <Button onClick={handleSubmit} className="w-full">
+                        Завершить
+                    </Button>
                 </div>
             </div>
         </Layout>

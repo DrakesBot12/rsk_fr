@@ -60,3 +60,8 @@ button,
         font: 600 0.625rem var(--font-family);
     }
 }
+
+button p {
+    font: 400 0.75rem var(--font-family);
+    white-space: nowrap;
+}

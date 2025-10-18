@@ -8,6 +8,7 @@ import Notify from "@/assets/general/notify.svg";
 import SubmitTask from "@/assets/general/submittask.svg";
 import StartWork from "@/assets/general/startwork.svg";
 import LinkArrow from "@/assets/general/linkarrow.svg";
+import PointsIcon from "@/assets/general/pointsicons.svg";
 import { categories as staticCategories } from "@/pages/projects/_categories";
 
 function getCategoryName(url) {
@@ -67,13 +68,13 @@ const TaskPage = () => {
                         <Notify />
                     </Button>
                 </Header>
-                <div className="flex flex-col items-center p-6 gap-10 w-full">
-                    <div className="flex flex-col items-start gap-5 w-full max-w-4xl">
-                        <div className="w-3/5 py-4 bg-gray-200 rounded-lg animate-pulse" />
-                        <div className="w-full py-1.5 bg-gray-200 rounded-full animate-pulse" />
-                        <div className="flex flex-col gap-4 mt-4 w-full">
+                <div className="flex flex-col items-center p-6 gap-10 mx-auto">
+                    <div className="flex flex-col items-start gap-5">
+                        <div className="py-4 bg-[var(--color-gray-plus)] rounded-lg animate-pulse" />
+                        <div className="py-1.5 bg-[var(--color-gray-plus)] rounded-full animate-pulse" />
+                        <div className="flex flex-col gap-4 mt-4">
                             {[1, 2, 3].map((i) => (
-                                <div key={i} className="py-10 bg-gray-200 rounded-lg animate-pulse" />
+                                <div key={i} className="py-10 bg-[var(--color-gray-plus)] rounded-lg animate-pulse" />
                             ))}
                         </div>
                     </div>
@@ -91,8 +92,8 @@ const TaskPage = () => {
                         <Notify />
                     </Button>
                 </Header>
-                <div className="flex flex-col items-center justify-center w-full min-h-screen gap-3">
-                    <h2 className="text-xl font-semibold text-black">Задание не найдено</h2>
+                <div className="flex flex-col items-center justify-center gap-3 flex-1">
+                    <h2>Задание не найдено</h2>
                     <Button onClick={() => router.push("/projects")}>Вернуться</Button>
                 </div>
             </Layout>
@@ -113,31 +114,32 @@ const TaskPage = () => {
                 </Button>
             </Header>
 
-            <div className="flex flex-col items-center p-6 gap-10 w-full">
-                <div className="flex flex-col items-start gap-5 w-full max-w-4xl">
-                    <h4 className="text-2xl font-medium text-black">{data.title}</h4>
+            <div className="flex flex-col items-center p-6 gap-10 w-1/2 mx-auto">
+                <div className="flex flex-col items-start gap-5 w-full">
+                    <h4>{data.title}</h4>
 
                     <div className="flex items-center w-full justify-between">
                         <div className="flex items-center gap-2">
-                            <div className="flex items-center justify-center px-4 py-2 bg-blue-100 rounded-full">
-                                <span className="font-manrope font-semibold text-sm text-blue-600">{data.prize_points} баллов</span>
+                            <div className="flex items-center justify-center gap-3 px-4 py-2 bg-[var(--color-blue-noise)] rounded-full">
+                                <PointsIcon />
+                                <p className="text-[var(--color-blue)]">{data.prize_points} баллов</p>
                             </div>
-                            <div className="flex items-center px-4 py-2 gap-2 bg-gray-100 rounded-full">
-                                <span className="font-manrope font-semibold text-sm text-gray-600">{getCategoryName(data_project.star_category)}</span>
+                            <div className="flex items-center px-4 py-2 gap-2 bg-[var(--color-gray-plus)] rounded-full">
+                                <p className="text-[var(--color-gray-black)]">{getCategoryName(data_project.star_category)}</p>
                             </div>
                         </div>
 
                         <div className="flex items-center gap-2">
                             {/* Кнопка с переходом на submit */}
                             {category && id_project && (
-                                <Button className="blue roundeful small px-4 py-2" onClick={goToSubmit}>
-                                    <span className="font-manrope font-semibold text-xs whitespace-nowrap">Сдать задание</span>
+                                <Button className="blue roundeful small" onClick={goToSubmit}>
+                                    <p className="whitespace-nowrap">Сдать задание</p>
                                     <SubmitTask />
                                 </Button>
                             )}
 
-                            <Button className="inverted roundeful small px-6 py-2 whitespace-nowrap min-w-fit">
-                                <span className="font-manrope font-medium text-sm">Начать работу</span>
+                            <Button className="inverted roundeful small">
+                                <p className="whitespace-nowrap">Начать работу</p>
                                 <StartWork />
                             </Button>
                         </div>
@@ -145,28 +147,28 @@ const TaskPage = () => {
 
                     {/* Остальной контент страницы */}
                     <div className="flex items-start gap-5 w-full">
-                        <div className="flex flex-col p-4 gap-3 flex-1 bg-gray-50 rounded-2xl">
+                        <div className="flex flex-col p-4 gap-3 flex-1 bg-[var(--color-white-gray)] rounded-2xl">
                             <div className="flex flex-col gap-2">
-                                <h6 className="text-base font-medium text-gray-600">Занятость</h6>
-                                <p className="text-sm text-black">Пока не подключено</p>
+                                <h6>Занятость</h6>
+                                <p>Пока не подключено</p>
                             </div>
-                            <hr className="border-gray-200" />
+                            <hr className="border-[var(--color-gray-plus)]" />
                             <div className="flex flex-col gap-2">
-                                <h6 className="text-base font-medium text-gray-600">Заказчик</h6>
-                                <div className="flex items-center py-2 px-3 bg-blue-100 rounded-lg">
-                                    <span className="text-sm font-semibold text-blue-600">Российское Содружество Колледжей</span>
+                                <h6>Заказчик</h6>
+                                <div className="flex items-center py-2 px-3 bg-[var(--color-blue-noise)] rounded-lg">
+                                    <p>Российское Содружество Колледжей</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="flex flex-col gap-5 flex-1">
                             <div className="flex flex-col gap-1">
-                                <h6 className="text-base font-medium text-black">Описание задания</h6>
-                                <p className="text-sm text-gray-600">{data.description}</p>
+                                <h6>Описание задания</h6>
+                                <p>{data.description}</p>
                             </div>
 
                             <div className="flex flex-col gap-2">
-                                <h6 className="text-base font-medium text-black">Материалы</h6>
+                                <h6>Материалы</h6>
                                 <div className="flex flex-wrap gap-1">
                                     {data.materials && data.materials.length > 0 ? (
                                         data.materials.map((material, idx) => (
@@ -175,15 +177,15 @@ const TaskPage = () => {
                                                 href={material.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="flex items-center gap-1 px-4 py-2 bg-gray-100 rounded-full text-xs font-manrope font-semibold text-black whitespace-nowrap hover:bg-gray-200 transition"
+                                                className="flex items-center gap-1 px-4 py-2 bg-[var(--color-gray-plus)] rounded-full hover:bg-[var(--color-gray-plus-50)] transition"
                                             >
-                                                <span>{material.name}</span>
+                                                <p>{material.name}</p>
                                                 <LinkArrow />
                                             </a>
                                         ))
                                     ) : (
-                                        <div className="flex items-center gap-1 px-4 py-2 bg-gray-100 rounded-lg text-xs font-manrope font-semibold text-gray-600">
-                                            <span>Материалов нет</span>
+                                        <div className="flex items-center gap-1 px-4 py-2 bg-[var(--color-gray-plus)] rounded-lg">
+                                            <p>Материалов нет</p>
                                         </div>
                                     )}
                                 </div>
