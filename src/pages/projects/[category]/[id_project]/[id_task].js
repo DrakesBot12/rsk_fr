@@ -177,8 +177,7 @@ const TaskPage = () => {
                                                 href={material.link}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="flex items-center gap-1 px-4 py-2 bg-[var(--color-gray-plus)] rounded-full hover:bg-[var(--color-gray-plus-50)] transition"
-                                            >
+                                                className="flex items-center gap-1 px-4 py-2 bg-[var(--color-gray-plus)] rounded-full hover:bg-[var(--color-gray-plus-50)] transition">
                                                 <p>{material.name}</p>
                                                 <LinkArrow />
                                             </a>

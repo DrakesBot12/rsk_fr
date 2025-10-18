@@ -109,9 +109,7 @@ const AICourses = () => {
     return (
         <Layout>
             <Header>
-                <Header.Heading>
-                    Проекты / Знания и навыки / Курсы для студентов
-                </Header.Heading>
+                <Header.Heading>Проекты / Знания и навыки / Курсы для студентов</Header.Heading>
                 <Button icon>
                     <Notify />
                 </Button>

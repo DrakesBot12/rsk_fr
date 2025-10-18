@@ -8,7 +8,6 @@ import Notify from "@/assets/general/notify.svg";
 import Settings from "@/assets/general/setts.svg";
 
 const SubmittedTaskPage = () => {
-
     return (
         <Layout>
             <Header>
@@ -26,9 +25,7 @@ const SubmittedTaskPage = () => {
                 <div className="flex flex-col items-center gap-6 w-1/4">
                     <div className="flex flex-col items-stretch gap-2 w-full">
                         <h3 className="text-center">Завершение дела</h3>
-                        <p className="text-center w-full">
-                            Загрузите результат работы. Это может быть ссылка или текстовое описание того, что изменилось и где это найти
-                        </p>
+                        <p className="text-center w-full">Загрузите результат работы. Это может быть ссылка или текстовое описание того, что изменилось и где это найти</p>
                     </div>
 
                     <Link href="/projects" className="w-full">
@@ -36,7 +33,6 @@ const SubmittedTaskPage = () => {
                     </Link>
                 </div>
             </div>
-            
         </Layout>
     );
 };
